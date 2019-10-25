@@ -1,6 +1,12 @@
 #include <random>
+#include <iostream>
 
 #include "Accelerometer.hpp"
+
+void HelloWorld()
+{
+    std::cout << "Hello World" << std::endl;
+}
 
 bool Accelerometer::isRoomEmpty()
 {
