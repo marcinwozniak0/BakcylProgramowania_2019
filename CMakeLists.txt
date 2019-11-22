@@ -18,10 +18,14 @@ include(External_GTest.cmake)
 # SRC
 include_directories(Source)
 add_subdirectory(Source)
+include_directories(Map/Include)
+add_subdirectory(Map/Source)
 
 # TEST
 include_directories(Test)
 add_subdirectory(Test)
+include_directories(Map/Test)
+add_subdirectory(Map/Test)
 
 add_library(source_objects_lib OBJECT ${SOURCES})
 
@@ -37,4 +41,3 @@ target_link_libraries(bakcyl_programowania_UT 	${GTEST_MAIN_LIBRARY}
                                        		${GTEST_LIBRARY}
                                        		${GMOCK_MAIN_LIBRARY}
                                        		${GMOCK_LIBRARY})
-

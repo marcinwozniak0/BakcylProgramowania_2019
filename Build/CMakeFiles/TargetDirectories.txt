@@ -1,0 +1,14 @@
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/rebuild_cache.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/edit_cache.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/bakcyl_programowania_UT.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/googletest.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/bakcyl_programowania.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/source_objects_lib.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/Source/CMakeFiles/rebuild_cache.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/Source/CMakeFiles/edit_cache.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/Map/Source/CMakeFiles/rebuild_cache.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/Map/Source/CMakeFiles/edit_cache.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/Test/CMakeFiles/rebuild_cache.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/Test/CMakeFiles/edit_cache.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/Map/Test/CMakeFiles/rebuild_cache.dir
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/Map/Test/CMakeFiles/edit_cache.dir

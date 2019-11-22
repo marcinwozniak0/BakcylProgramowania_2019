@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -Werror -pedantic   CMakeFiles/bakcyl_programowania.dir/main.cpp.o CMakeFiles/source_objects_lib.dir/Map/Source/Field.cpp.o CMakeFiles/source_objects_lib.dir/Map/Source/MapPrinter.cpp.o CMakeFiles/source_objects_lib.dir/Map/Source/map.cpp.o  -o bin/bakcyl_programowania 

@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/googletest"
+		},
+		{
+			"file" : "/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/googletest.rule"
+		},
+		{
+			"file" : "/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/googletest-complete.rule"
+		},
+		{
+			"file" : "/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-install.rule"
+		},
+		{
+			"file" : "/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-mkdir.rule"
+		},
+		{
+			"file" : "/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-download.rule"
+		},
+		{
+			"file" : "/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-update.rule"
+		},
+		{
+			"file" : "/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-patch.rule"
+		},
+		{
+			"file" : "/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-configure.rule"
+		},
+		{
+			"file" : "/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"googletest"
+		],
+		"name" : "googletest"
+	}
+}

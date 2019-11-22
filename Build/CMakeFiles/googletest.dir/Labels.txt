@@ -1,0 +1,13 @@
+# Target labels
+ googletest
+# Source files and their labels
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/googletest
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/googletest.rule
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/CMakeFiles/googletest-complete.rule
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-install.rule
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-mkdir.rule
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-download.rule
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-update.rule
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-patch.rule
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-configure.rule
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Build/googletest-prefix/src/googletest-stamp/googletest-build.rule

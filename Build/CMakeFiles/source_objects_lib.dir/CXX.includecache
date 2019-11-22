@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../Map/Include/Field.hpp
+
+../Map/Include/MapPrinter.hpp
+Field.hpp
+../Map/Include/Field.hpp
+
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Map/Source/Field.cpp
+Field.hpp
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Map/Source/Field.hpp
+
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Map/Source/MapPrinter.cpp
+MapPrinter.hpp
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Map/Source/MapPrinter.hpp
+
+/home/bakcyl/Desktop/BakcylProgramowania_2019/Map/Source/map.cpp
+
