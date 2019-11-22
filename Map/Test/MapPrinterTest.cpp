@@ -16,3 +16,10 @@ TEST(MapPrinterTest, PrintFightFieldShouldReturnF)
     Field fieldFight('F');
     ASSERT_EQ('F', printer.printField(fieldFight));
 }
+
+TEST(MapPrinterTest, PrintTreasureFieldShouldReturnT)
+{
+    MapPrinter printer;
+    Field fieldTreasure('T');
+    ASSERT_EQ('T', printer.printField(fieldTreasure));
+}
