@@ -3,7 +3,8 @@
 
 using namespace ::testing;
 
-TEST(CardTest, CardEgsist)
+TEST(CardTest, ItshouldReturnString_useCard)
 {
-    Card Card;
+    Card card1;
+	ASSERT_EQ("useCard", card1.useCard());
 }
