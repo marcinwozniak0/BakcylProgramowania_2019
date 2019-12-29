@@ -6,6 +6,12 @@ std::string Card::useCard()
 	return "";
 }
 
+MonsterCard::MonsterCard(int h, int d)
+{
+	hp = h;
+	dmg = d;
+}
+
 std::string MonsterCard::useCard()
 {
 	return "useMonsterCard";

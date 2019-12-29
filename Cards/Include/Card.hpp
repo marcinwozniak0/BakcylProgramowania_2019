@@ -10,6 +10,8 @@ class Card
 class MonsterCard :public Card
 {
 	public:
+		int hp, dmg;
+		MonsterCard(int = 20,int = 10);
 		virtual std::string useCard();
 };
 
