@@ -4,5 +4,18 @@
 class Card
 {
 	public:
-	std::string useCard();
+		virtual std::string useCard();
 };
+
+class MonsterCard :public Card
+{
+	public:
+		virtual std::string useCard();
+};
+
+class SpellCard :public Card
+{
+	public:
+		virtual std::string useCard();
+};
+	

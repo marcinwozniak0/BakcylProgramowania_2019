@@ -3,5 +3,15 @@
 
 std::string Card::useCard()
 {
-	return "useCard";
+	return "";
+}
+
+std::string MonsterCard::useCard()
+{
+	return "useMonsterCard";
+}
+
+std::string SpellCard::useCard()
+{
+	return "useSpellCard";
 }
