@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
 
 set(LIBRARY_OUTPUT_PATH build/)
@@ -20,12 +20,16 @@ include_directories(Source)
 add_subdirectory(Source)
 include_directories(Map/Include)
 add_subdirectory(Map/Source)
+include_directories(zadania)
+add_subdirectory(zadania)
 
 # TEST
 include_directories(Test)
 add_subdirectory(Test)
 include_directories(Map/Test)
 add_subdirectory(Map/Test)
+include_directories(zadania/test)
+add_subdirectory(zadania/test)
 
 add_library(source_objects_lib OBJECT ${SOURCES})
 
