@@ -14,9 +14,10 @@ std::string Card::useCard()
     return "";
 }
 
-std::string MonsterCard::takeDamage()
+int MonsterCard::takeDamage(int damagePoints)
 {
-    return "someDamageTaken";
+    hp -= damagePoints;
+    return  hp;
 }
 
 std::string MonsterCard::useCard()
