@@ -1,23 +1,26 @@
 #include "Card.hpp"
 #include <iostream>
 
-std::string Card::useCard()
+MonsterCard::MonsterCard(int h, int s)
+    :
+    hp(h) ,
+    strength(s)
 {
-	return "";
+
 }
 
-MonsterCard::MonsterCard(int h, int d)
+std::string Card::useCard()
 {
-	hp = h;
-	dmg = d;
+    return "";
 }
+
 
 std::string MonsterCard::useCard()
 {
-	return "useMonsterCard";
+    return "useMonsterCard";
 }
 
 std::string SpellCard::useCard()
 {
-	return "useSpellCard";
+    return "useSpellCard";
 }

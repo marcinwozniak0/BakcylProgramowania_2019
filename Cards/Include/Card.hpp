@@ -3,21 +3,22 @@
 
 class Card
 {
-	public:
-		virtual std::string useCard();
+    public:
+        virtual std::string useCard() = 0;
 };
 
-class MonsterCard :public Card
+class MonsterCard : public Card
 {
-	public:
-		int hp, dmg;
-		MonsterCard(int = 20,int = 10);
-		virtual std::string useCard();
+    private:
+        int hp;
+        int strength;    
+    public:
+        MonsterCard(int = 20,int = 10);
+        std::string useCard() override;
 };
 
-class SpellCard :public Card
+class SpellCard : public Card
 {
-	public:
-		virtual std::string useCard();
+    public:
+        std::string useCard() override;
 };
-	
