@@ -14,6 +14,10 @@ std::string Card::useCard()
     return "";
 }
 
+std::string MonsterCard::takeDamage()
+{
+    return "someDamageTaken";
+}
 
 std::string MonsterCard::useCard()
 {

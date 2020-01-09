@@ -15,6 +15,7 @@ class MonsterCard : public Card
     public:
         MonsterCard(int = 20,int = 10);
         std::string useCard() override;
+        std::string takeDamage();
 };
 
 class SpellCard : public Card

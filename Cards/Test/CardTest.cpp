@@ -19,3 +19,9 @@ TEST(CardTest, ItShouldReturnString_useSpellCard)
 	cardType = &card3;
 	ASSERT_EQ("useSpellCard", cardType -> useCard());
 }
+
+TEST(CardTest, ItShouldReturnString_someDamageTaken)
+{
+    MonsterCard card4;
+	ASSERT_EQ("someDamageTaken", card4.takeDamage());
+}
