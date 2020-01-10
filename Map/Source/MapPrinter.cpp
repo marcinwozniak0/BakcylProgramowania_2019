@@ -2,5 +2,5 @@
 
 char MapPrinter::printField(const Field& field)
 {
-    return 0;
+    return field.getType();
 }
