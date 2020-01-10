@@ -1,11 +1,9 @@
 #pragma once
 #include "Field.hpp"
 
-class FightField : public Field
+class FightField :public Field
 {
-    public:
-        char getType();
-        void action();
-    private:
-        char fieldType = 'F';
+public:
+    void action();
+    char getType() const;
 };
