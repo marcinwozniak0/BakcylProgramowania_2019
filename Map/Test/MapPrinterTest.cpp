@@ -1,26 +1,27 @@
 #include "MapPrinter.hpp"
 #include "FightField.hpp"
+#include "EmptyField.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
 
-// TEST(MapPrinterTest, PrintStandardFieldShouldReturnDot)
-// {
-//     MapPrinter printer;
-//     Field fieldBasic('.');
-//     ASSERT_EQ('.', printer.printField(fieldBasic));
-// }
+TEST(MapPrinterTest, PrintStandardFieldShouldReturnDot)
+{
+    MapPrinter printer;
+    EmptyField emptyfield;
+    ASSERT_EQ('0', printer.printField(emptyfield));
+}
 
 TEST(MapPrinterTest, PrintFightFieldShouldReturnF)
 {
     MapPrinter printer;
-    FightField fieldFight;
-    ASSERT_EQ('F', printer.printField(fieldFight));
+    FightField fightfield;
+    ASSERT_EQ('F', printer.printField(fightfield));
 }
 
 // TEST(MapPrinterTest, PrintTreasureFieldShouldReturnT)
 // {
 //     MapPrinter printer;
-//     Field fieldTreasure('T');
+//     Field TreasureField;
 //     ASSERT_EQ('T', printer.printField(fieldTreasure));
 // }
