@@ -5,7 +5,7 @@ void FightField::action()
 
 }
 
-char FightField::getType() const
+FieldType FightField::getType() const
 {
-    return 'F';
+    return FieldType::Fight;
 }

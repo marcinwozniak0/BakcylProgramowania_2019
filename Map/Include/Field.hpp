@@ -1,4 +1,5 @@
 #pragma once
+#include "FieldTypes.hpp"
 #include <memory>
 
 class Field;
@@ -19,4 +20,5 @@ public:
 protected:
     Neighbours _neighbours;
     virtual Neighbours& getNeighbours() {return _neighbours;}
+    virtual FieldType getType() const = 0;
 };

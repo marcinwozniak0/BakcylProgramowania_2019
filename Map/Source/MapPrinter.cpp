@@ -1,6 +1,6 @@
 #include "MapPrinter.hpp"
 
-char MapPrinter::printField(const Field& field)
+FieldType MapPrinter::printField(const Field& field)
 {
     return field.getType();
 }

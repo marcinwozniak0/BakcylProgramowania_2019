@@ -3,10 +3,7 @@
 
 class TreasureField : public Field
 {
-    public:
-        char getType();
-        void action();
-    private:
-        char fieldType = 'T';
+public:
+    FieldType getType() const;
+    void action();
 };
-

@@ -4,5 +4,5 @@
 class MapPrinter
 {
 public:
-    char printField(const Field& field);
+    FieldType printField(const Field& field);
 };

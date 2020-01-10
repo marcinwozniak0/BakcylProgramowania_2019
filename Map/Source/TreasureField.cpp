@@ -1,8 +1,8 @@
 #include "TreasureField.hpp"
 
-char TreasureField::getType()
+FieldType TreasureField::getType() const
 {
-    return fieldType;
+    return FieldType::Treasure;
 }
 
 void TreasureField::action()

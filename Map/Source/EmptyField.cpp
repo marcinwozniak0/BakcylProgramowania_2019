@@ -5,7 +5,7 @@ void EmptyField::action()
 
 }
 
-char EmptyField::getType() const
+FieldType EmptyField::getType() const
 {
-    return '0';
+    return FieldType::Empty;
 }

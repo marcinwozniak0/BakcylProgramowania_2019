@@ -5,5 +5,5 @@ class EmptyField : public Field
 {
 public:
     void action();
-    char getType() const;
+    FieldType getType() const;
 };
