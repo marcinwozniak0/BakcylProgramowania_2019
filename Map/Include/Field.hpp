@@ -16,9 +16,9 @@ class Field
 {
 public:
     virtual void action() = 0;
-    virtual char getType() const = 0;
+    virtual FieldType getType() const = 0;
+
 protected:
     Neighbours _neighbours;
     virtual Neighbours& getNeighbours() {return _neighbours;}
-    virtual FieldType getType() const = 0;
 };
