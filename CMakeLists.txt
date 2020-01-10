@@ -20,16 +20,26 @@ include_directories(Source)
 add_subdirectory(Source)
 include_directories(Map/Include)
 add_subdirectory(Map/Source)
+<<<<<<< HEAD
 include_directories(Combat/Include)
 add_subdirectory(Combat/Source)
+=======
+include_directories(Cards/Include)
+add_subdirectory(Cards/Source)
+>>>>>>> 32cba4e7a8ad79ce154752f74686e95d0d88a499
 
 # TEST
 include_directories(Test)
 add_subdirectory(Test)
 include_directories(Map/Test)
 add_subdirectory(Map/Test)
+<<<<<<< HEAD
 include_directories(Combat/Test)
 add_subdirectory(Combat/Test)
+=======
+include_directories(Cards/Test)
+add_subdirectory(Cards/Test)
+>>>>>>> 32cba4e7a8ad79ce154752f74686e95d0d88a499
 
 add_library(source_objects_lib OBJECT ${SOURCES})
 
