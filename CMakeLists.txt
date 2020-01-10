@@ -20,12 +20,16 @@ include_directories(Source)
 add_subdirectory(Source)
 include_directories(Map/Include)
 add_subdirectory(Map/Source)
+include_directories(Cards/Include)
+add_subdirectory(Cards/Source)
 
 # TEST
 include_directories(Test)
 add_subdirectory(Test)
 include_directories(Map/Test)
 add_subdirectory(Map/Test)
+include_directories(Cards/Test)
+add_subdirectory(Cards/Test)
 
 add_library(source_objects_lib OBJECT ${SOURCES})
 
