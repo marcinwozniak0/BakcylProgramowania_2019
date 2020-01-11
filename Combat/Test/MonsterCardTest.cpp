@@ -6,7 +6,7 @@ using namespace ::testing;
 
 TEST(MonsterCardTest, ItShouldReturnString_useMonsterCard)
 {
-  MonsterCard card2;
+    MonsterCard card2;
 	Card *cardType;
 	cardType = &card2;
 	ASSERT_EQ("useMonsterCard", cardType -> useCard());
@@ -14,7 +14,7 @@ TEST(MonsterCardTest, ItShouldReturnString_useMonsterCard)
 
 TEST(MonsterCardTest, ItShouldReturnInt_15_numberOfYourHpPoints)
 {
-  MonsterCard card4;
+    MonsterCard card4;
 	ASSERT_EQ(15, card4.takeDamage(5));
 }
 
