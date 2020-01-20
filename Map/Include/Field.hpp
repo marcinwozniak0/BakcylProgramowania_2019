@@ -16,13 +16,13 @@ class Field
 {
 public:
     Field(){
-        printabilty = false;
+        printability = false;
     }
     bool isPrintable(){
-        return printabilty;
+        return printability;
     }
     void makePrintable(){
-        printabilty = true;
+        printability = true;
     }
     virtual void action() = 0;
     virtual FieldType getType() const = 0;
@@ -30,5 +30,5 @@ public:
 protected:
     Neighbours _neighbours;
     virtual Neighbours& getNeighbours() {return _neighbours;}
-    bool printabilty;
+    bool printability;
 };
