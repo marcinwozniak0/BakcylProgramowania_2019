@@ -15,10 +15,20 @@ struct Neighbours
 class Field
 {
 public:
+    Field(){
+        printabilty = false;
+    }
+    bool isPrintable(){
+        return printabilty;
+    }
+    void makePrintable(){
+        printabilty = true;
+    }
     virtual void action() = 0;
     virtual FieldType getType() const = 0;
 
 protected:
     Neighbours _neighbours;
     virtual Neighbours& getNeighbours() {return _neighbours;}
+    bool printabilty;
 };
