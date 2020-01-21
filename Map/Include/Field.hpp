@@ -16,8 +16,9 @@ class Field
 {
 public:
     Field();
-    bool isPrintable();
-    void makePrintable();
+    bool isVisible();
+    void makeVisible();
+
     virtual void action() = 0;
     virtual FieldType getType() const = 0;
 
@@ -26,5 +27,5 @@ protected:
     virtual Neighbours& getNeighbours() {return _neighbours;}
 
 private:
-    bool printability;
+    bool _isVisible;
 };

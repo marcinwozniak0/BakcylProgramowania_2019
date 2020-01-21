@@ -1,13 +1,13 @@
 #include "Field.hpp"
 
-Field::Field() : printability(false)
+Field::Field() : _isVisible(false)
 {
 }
-bool Field::isPrintable()
+bool Field::isVisible()
 {
-    return printability;
+    return _isVisible;
 }
-void Field::makePrintable()
+void Field::makeVisible()
 {
-    printability = true;
+    _isVisible = true;
 }

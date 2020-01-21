@@ -1,17 +1,29 @@
-#include "FieldTestClass.hpp"
+#include "Field.hpp"
 #include <gtest/gtest.h>
+
+class FieldTestClass : public Field
+{
+    void action()
+    {
+    }
+
+    FieldType getType() const
+    {
+        return FieldType::Empty;
+    }
+};
 
 using namespace ::testing;
 
-TEST(FieldTest, DefaultPrintabilityShouldBeFalse)
+TEST(FieldTest, fieldShouldBeInvisibleByDefault)
 {
     FieldTestClass testField;
-    ASSERT_FALSE(testField.isPrintable());
+    ASSERT_FALSE(testField.isVisible());
 }
 
-TEST(FieldTest, makePrintableShouldChangePrintabilityToTrue)
+TEST(FrintabilityieldTest, makeVisableShouldChangeVisilibityToTrue)
 {
     FieldTestClass testField;
-    testField.makePrintable();
-    ASSERT_TRUE(testField.isPrintable());
+    testField.makeVisible();
+    ASSERT_TRUE(testField.isVisible());
 }
