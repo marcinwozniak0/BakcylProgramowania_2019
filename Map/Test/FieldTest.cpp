@@ -1,12 +1,17 @@
-#include "EmptyField.hpp"
+#include "FieldTestClass.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
 
-TEST(FieldTest, makePrintable_ShouldChangePrintability)
+TEST(FieldTest, DefaultPrintabilityShouldBeFalse)
 {
-    EmptyField emptyfield;
-    ASSERT_FALSE(emptyfield.isPrintable());
-    emptyfield.makePrintable();
-    ASSERT_TRUE(emptyfield.isPrintable());
+    FieldTestClass testField;
+    ASSERT_FALSE(testField.isPrintable());
+}
+
+TEST(FieldTest, makePrintableShouldChangePrintabilityToTrue)
+{
+    FieldTestClass testField;
+    testField.makePrintable();
+    ASSERT_TRUE(testField.isPrintable());
 }
