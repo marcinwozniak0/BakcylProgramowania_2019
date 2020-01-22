@@ -15,10 +15,17 @@ struct Neighbours
 class Field
 {
 public:
+    Field();
+    bool isVisible();
+    void makeVisible();
+
     virtual void action() = 0;
     virtual FieldType getType() const = 0;
 
 protected:
     Neighbours _neighbours;
     virtual Neighbours& getNeighbours() {return _neighbours;}
+
+private:
+    bool _isVisible;
 };
