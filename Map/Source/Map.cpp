@@ -1,18 +1,24 @@
-// #include "Map.hpp"
-// #include "Room.hpp"
-// #include <vector>
+#include "Map.hpp"
+#include "EmptyField.hpp"
+#include "Field.hpp"
+#include <memory>
+#include <vector>
 
-//  std::vector<Room> Map::getRooms()
-//  {
-//     return rooms;
-//  }
+std::vector<std::vector<std::unique_ptr<Field>>> const &Map::getFields()
+{
+    return _fields;
+}
 
-//  Map::Map()
-//  {
+Map::Map(int mapSize)
+{
+    for (int x = 0; x < mapSize; x++)
+    {
+        std::vector<std::unique_ptr<Field>> column;
+        for (int y = 0; y < mapSize; y++)
+        {
+            column.push_back(std::move(std::make_unique<EmptyField>()));
+        }
 
-//  }
-
-//  Map::Map(int mapSize)
-//  {
-//     rooms = std::vector<Room>(mapSize, Room());
-//  }
+        _fields.push_back(std::move(column));
+    }
+}

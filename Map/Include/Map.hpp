@@ -1,13 +1,15 @@
 #pragma once
-#include "Room.hpp"
+#include "Field.hpp"
+#include <memory>
 #include <vector>
 
 class Map
 {
 public:
-    std::vector<Room> getRooms();
+    std::vector<std::vector<std::unique_ptr<Field>>> const &getFields();
     Map();
     Map(int mapSize);
+
 private:
-    std::vector<Room> rooms;
+    std::vector<std::vector<std::unique_ptr<Field>>> _fields;
 };
