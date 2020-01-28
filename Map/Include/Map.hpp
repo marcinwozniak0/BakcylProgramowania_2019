@@ -3,13 +3,13 @@
 #include <memory>
 #include <vector>
 
+using FieldList = std::vector<std::vector<std::unique_ptr<Field>>>;
+
 class Map
 {
 public:
-    std::vector<std::vector<std::unique_ptr<Field>>> const &getFields();
-    Map();
-    Map(int mapSize);
+    virtual FieldList const& getFields() = 0;
 
-private:
-    std::vector<std::vector<std::unique_ptr<Field>>> _fields;
+protected:
+    FieldList _fieldList;
 };
