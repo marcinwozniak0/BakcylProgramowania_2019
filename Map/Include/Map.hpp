@@ -8,8 +8,5 @@ using FieldList = std::vector<std::vector<std::unique_ptr<Field>>>;
 class Map
 {
 public:
-    virtual FieldList const& getFields() = 0;
-
-protected:
-    FieldList _fieldList;
+    virtual const FieldList& getFields() = 0;
 };

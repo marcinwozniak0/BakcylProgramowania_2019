@@ -4,27 +4,32 @@
 
 using namespace ::testing;
 
-TEST(Maptest, quantityOfMapColumnsShouldEqualMapSize)
+namespace
 {
-    constexpr auto mapSize = 8u;
-    SquareMap map(mapSize);
+constexpr auto mapSize = 8u;
+}
 
+class SquareMapTest : public Test
+{
+protected:
+    SquareMapTest() : map(mapSize)
+    {
+    }
+    SquareMap map;
+};
+
+TEST_F(SquareMapTest, quantityOfMapColumnsShouldEqualMapSize)
+{
     ASSERT_EQ(map.getFields().size(), mapSize);
 }
 
-TEST(Maptest, quantityOfFieldsInFirstColumnShouldEqualMapSize)
+TEST_F(SquareMapTest, quantityOfFieldsInFirstColumnShouldEqualMapSize)
 {
-    constexpr auto mapSize = 8u;
-    SquareMap map(mapSize);
-
     ASSERT_EQ(map.getFields().at(0).size(), mapSize);
 }
 
-TEST(Maptest, fieldShouldBeEmpty)
+TEST_F(SquareMapTest, fieldShouldBeEmpty)
 {
-    constexpr auto mapSize = 1u;
-    SquareMap map(mapSize);
-
-    auto& field = map.getFields().at(0).at(0);
+    const auto& field = map.getFields().at(0).at(0);
     ASSERT_EQ(field->getType(), FieldType::Empty);
 }
