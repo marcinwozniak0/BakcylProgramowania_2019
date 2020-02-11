@@ -2,7 +2,7 @@
 
 #include "Field.hpp"
 
-class WallField :public Field
+class WallField : public Field
 {
 public:
     void action();
