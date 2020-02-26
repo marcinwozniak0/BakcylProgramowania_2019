@@ -1,0 +1,1 @@
+bool secondTask(const int);
