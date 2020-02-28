@@ -1,5 +1,9 @@
 #include "FieldTypes.hpp"
 #include "SquareMap.hpp"
+#include "EmptyField.hpp"
+#include "FightField.hpp"
+#include "TreasureField.hpp"
+#include "WallField.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
@@ -90,4 +94,56 @@ TEST_F(SquareMapTest, CheckIfMapContainsFightFields)
     }
 
     ASSERT_EQ(2, numberOfFightFields);
+}
+
+TEST_F(SquareMapTest, emptyFieldVisiblePrint)
+{
+  EmptyField field;
+  field.makeVisible();
+  ASSERT_EQ('.',map.printField(field));
+}
+
+TEST_F(SquareMapTest, fightFieldVisiblePrint)
+{
+  FightField field;
+  field.makeVisible();
+  ASSERT_EQ('F',map.printField(field));
+}
+
+TEST_F(SquareMapTest, treasureFieldVisiblePrint)
+{
+  TreasureField field;
+  field.makeVisible();
+  ASSERT_EQ('T',map.printField(field));
+}
+
+TEST_F(SquareMapTest, wallFieldVisiblePrint)
+{
+  WallField field;
+  field.makeVisible();
+  ASSERT_EQ('#',map.printField(field));
+}
+
+TEST_F(SquareMapTest, emptyFieldInvisiblePrint)
+{
+  EmptyField field;
+  ASSERT_EQ(' ',map.printField(field));
+}
+
+TEST_F(SquareMapTest, fightFieldInvisiblePrint)
+{
+  FightField field;
+  ASSERT_EQ(' ',map.printField(field));
+}
+
+TEST_F(SquareMapTest, treasureFieldInvisiblePrint)
+{
+  TreasureField field;
+  ASSERT_EQ(' ',map.printField(field));
+}
+
+TEST_F(SquareMapTest, wallFieldInvisiblePrint)
+{
+  WallField field;
+  ASSERT_EQ(' ',map.printField(field));
 }

@@ -11,6 +11,30 @@ const FieldList& SquareMap::getFields()
     return _fieldList;
 }
 
+char SquareMap::printField(const Field& field)
+{
+  if(field.isVisible())
+  {
+    FieldType type = field.getType();
+    switch (type) {
+      case FieldType::Empty:
+        return '.';
+      case FieldType::Wall:
+        return '#';
+      case FieldType::Fight:
+        return 'F';
+      case FieldType::Treasure:
+        return 'T';
+      default:
+        return '?';
+    }
+  }
+  else
+  {
+    return ' ';
+  }
+}
+
 SquareMap::SquareMap(const int &mapSize)
 {
     for(int x = 0; x < mapSize; x++)
