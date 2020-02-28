@@ -2,10 +2,9 @@
 
 void DoorField::action()
 {
-
 }
 
 FieldType DoorField::getType() const
 {
-    return FieldType::Empty;
+    return FieldType::Door;
 }
