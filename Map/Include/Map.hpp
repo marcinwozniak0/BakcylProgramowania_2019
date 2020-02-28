@@ -9,4 +9,6 @@ class Map
 {
 public:
     virtual const FieldList& getFields() = 0;
+    
+    virtual FieldType printField(const Field& field) = 0;
 };

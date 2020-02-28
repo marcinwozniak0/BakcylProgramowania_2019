@@ -9,6 +9,11 @@ const FieldList& SquareMap::getFields()
     return _fieldList;
 }
 
+FieldType SquareMap::printField(const Field& field)
+{
+    return field.getType();
+}
+
 SquareMap::SquareMap(const int mapSize)
 {
     for (int x = 0; x < mapSize; x++)
