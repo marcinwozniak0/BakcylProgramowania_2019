@@ -9,9 +9,21 @@ const FieldList& SquareMap::getFields()
     return _fieldList;
 }
 
-FieldType SquareMap::printField(const Field& field)
+char SquareMap::printField(const Field& field)
 {
-    return field.getType();
+    FieldType type = field.getType();
+    switch (type) {
+      case FieldType::Empty:
+        return '.';
+      case FieldType::Wall:
+        return '#';
+      case FieldType::Fight:
+        return 'F';
+      case FieldType::Treasure:
+        return 'T';
+      default:
+        return '?';
+    }
 }
 
 SquareMap::SquareMap(const int mapSize)
