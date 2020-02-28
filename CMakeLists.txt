@@ -21,6 +21,7 @@ include_directories(Combat/Include)
 add_subdirectory(Combat/Source)
 include_directories(zadania)
 add_subdirectory(zadania)
+add_subdirectory(zadania/Test)
 
 # TEST
 include_directories(Test)
