@@ -11,6 +11,8 @@ const FieldList& SquareMap::getFields()
 
 char SquareMap::printField(const Field& field)
 {
+  if(field.isVisible())
+  {
     FieldType type = field.getType();
     switch (type) {
       case FieldType::Empty:
@@ -26,6 +28,11 @@ char SquareMap::printField(const Field& field)
       default:
         return '?';
     }
+  }
+  else
+  {
+    return ' ';
+  }
 }
 
 SquareMap::SquareMap(const int mapSize)

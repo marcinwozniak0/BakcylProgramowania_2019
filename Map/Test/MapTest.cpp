@@ -39,31 +39,60 @@ TEST_F(SquareMapTest, fieldShouldBeEmpty)
     ASSERT_EQ(field->getType(), FieldType::Empty);
 }
 
-TEST_F(SquareMapTest, emptyFieldPrint)
+TEST_F(SquareMapTest, emptyFieldVisiblePrint)
 {
-    EmptyField field;
-    ASSERT_EQ('.', map.printField(field));
+  EmptyField field;
+  field.makeVisible();
+  ASSERT_EQ('.',map.printField(field));
 }
 
-TEST_F(SquareMapTest, fightFieldPrint)
+TEST_F(SquareMapTest, fightFieldVisiblePrint)
 {
-    FightField field;
-    ASSERT_EQ('F', map.printField(field));
+  FightField field;
+  field.makeVisible();
+  ASSERT_EQ('F',map.printField(field));
 }
 
-TEST_F(SquareMapTest, treasureFieldPrint)
+TEST_F(SquareMapTest, treasureFieldVisiblePrint)
 {
-    TreasureField field;
-    ASSERT_EQ('T', map.printField(field));
+  TreasureField field;
+  field.makeVisible();
+  ASSERT_EQ('T',map.printField(field));
 }
 
-TEST_F(SquareMapTest, wallFieldPrint)
+TEST_F(SquareMapTest, wallFieldVisiblePrint)
 {
     WallField field;
+    field.makeVisible();
     ASSERT_EQ('#', map.printField(field));
 }
 TEST_F(SquareMapTest, doorFieldPrint)
 {
     DoorField field;
+    field.makeVisible();
     ASSERT_EQ('D', map.printField(field));
+}
+
+TEST_F(SquareMapTest, emptyFieldInvisiblePrint)
+{
+  EmptyField field;
+  ASSERT_EQ(' ',map.printField(field));
+}
+
+TEST_F(SquareMapTest, fightFieldInvisiblePrint)
+{
+  FightField field;
+  ASSERT_EQ(' ',map.printField(field));
+}
+
+TEST_F(SquareMapTest, treasureFieldInvisiblePrint)
+{
+  TreasureField field;
+  ASSERT_EQ(' ',map.printField(field));
+}
+
+TEST_F(SquareMapTest, wallFieldInvisiblePrint)
+{
+  WallField field;
+  ASSERT_EQ(' ',map.printField(field));
 }
