@@ -6,7 +6,7 @@ class Field
 {
 public:
     Field();
-    bool isVisible();
+    bool isVisible() const;
     void makeVisible();
 
     virtual void action() = 0;
