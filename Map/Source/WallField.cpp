@@ -2,7 +2,7 @@
 
 void WallField::action()
 {
-	
+
 }
 
 FieldType WallField::getType() const
