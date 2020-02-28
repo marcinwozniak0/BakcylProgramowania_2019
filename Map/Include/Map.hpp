@@ -10,5 +10,5 @@ class Map
 public:
     virtual const FieldList& getFields() = 0;
     
-    FieldType printField(const Field& field);
+    virtual FieldType printField(const Field& field) = 0;
 };
