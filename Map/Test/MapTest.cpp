@@ -1,7 +1,8 @@
-#include "FieldTypes.hpp"
-#include "SquareMap.hpp"
+#include "DoorField.hpp"
 #include "EmptyField.hpp"
+#include "FieldTypes.hpp"
 #include "FightField.hpp"
+#include "SquareMap.hpp"
 #include "TreasureField.hpp"
 #include "WallField.hpp"
 #include <gtest/gtest.h>
@@ -40,24 +41,29 @@ TEST_F(SquareMapTest, fieldShouldBeEmpty)
 
 TEST_F(SquareMapTest, emptyFieldPrint)
 {
-  EmptyField field;
-  ASSERT_EQ('.',map.printField(field));
+    EmptyField field;
+    ASSERT_EQ('.', map.printField(field));
 }
 
 TEST_F(SquareMapTest, fightFieldPrint)
 {
-  FightField field;
-  ASSERT_EQ('F',map.printField(field));
+    FightField field;
+    ASSERT_EQ('F', map.printField(field));
 }
 
 TEST_F(SquareMapTest, treasureFieldPrint)
 {
-  TreasureField field;
-  ASSERT_EQ('T',map.printField(field));
+    TreasureField field;
+    ASSERT_EQ('T', map.printField(field));
 }
 
 TEST_F(SquareMapTest, wallFieldPrint)
 {
-  WallField field;
-  ASSERT_EQ('#',map.printField(field));
+    WallField field;
+    ASSERT_EQ('#', map.printField(field));
+}
+TEST_F(SquareMapTest, doorFieldPrint)
+{
+    DoorField field;
+    ASSERT_EQ('D', map.printField(field));
 }

@@ -21,6 +21,8 @@ char SquareMap::printField(const Field& field)
         return 'F';
       case FieldType::Treasure:
         return 'T';
+      case FieldType::Door:
+        return 'D';
       default:
         return '?';
     }
