@@ -8,7 +8,7 @@ struct Week
     struct TimePoint
     {
         uint _hour;
-        uint _minute;T
+        uint _minute;
     };
 
     struct Event
@@ -17,11 +17,11 @@ struct Week
         TimePoint _end;
         std::string _name;
 
-        Event(TimePoint begin, TimePoint end, uint8_t name)
+        Event(TimePoint begin, TimePoint end, std::string name)
         {
             _begin = begin;
             _end = end;
-            _name = std::to_string(name);
+            _name = name;
         }
     };
 
@@ -38,21 +38,30 @@ struct Week
     std::vector<Day> _week  = {Day("Mon"), Day("Tue"), Day("Wed"), Day("Thu"), Day("Fri"), Day("Sat"), Day("Sun")};
 };
 
-bool ConverterToTimepoint(const uint8_t& input, TimePoint& output)
+bool ConverterToTimepoint(const uint8_t& input, Week::TimePoint& output)
 {
-    return TimePoint();
+    return true;
 }
 
 bool Decode(const std::vector<uint8_t>& input, Week& output)
 {
-    for(int dayNumber = 0; dayNumber < 168; dayNumber += 24)
+
+    for(int dayNumber = 0; dayNumber < 7; dayNumber++)
     {
-        for(int eventNumber = dayNumber; evntNumber < dayNumber + 3; eventNumber++)
+        for(int eventNumber = 0; eventNumber < 8; eventNumber++)
         {
-            output._week.at(dayNumber)._events.emplace_back()
-           output.Event(output._week.at(dayNumber)._events.at(eventNumber)._begin = ConverterToTimepoint(eventNumber) )
+            Week::TimePoint begin;
+            ConverterToTimepoint(input.at(dayNumber * 24 + eventNumber * 3 + 0), begin);
+
+            Week::TimePoint end;
+            ConverterToTimepoint(input.at(dayNumber * 24 + eventNumber * 3 + 1), end);
+
+            std::string name = std::to_string(input.at(dayNumber *  24 + eventNumber * 3 + 2));
+
+            output._week.at(dayNumber)._events.emplace_back(begin, end, name);
         }
     }
+    return true;
 }
 
 /*
