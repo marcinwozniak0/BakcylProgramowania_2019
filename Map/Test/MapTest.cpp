@@ -1,7 +1,8 @@
-#include "FieldTypes.hpp"
-#include "SquareMap.hpp"
+#include "DoorField.hpp"
 #include "EmptyField.hpp"
+#include "FieldTypes.hpp"
 #include "FightField.hpp"
+#include "SquareMap.hpp"
 #include "TreasureField.hpp"
 #include "WallField.hpp"
 #include <gtest/gtest.h>
@@ -61,9 +62,15 @@ TEST_F(SquareMapTest, treasureFieldVisiblePrint)
 
 TEST_F(SquareMapTest, wallFieldVisiblePrint)
 {
-  WallField field;
-  field.makeVisible();
-  ASSERT_EQ('#',map.printField(field));
+    WallField field;
+    field.makeVisible();
+    ASSERT_EQ('#', map.printField(field));
+}
+TEST_F(SquareMapTest, doorFieldPrint)
+{
+    DoorField field;
+    field.makeVisible();
+    ASSERT_EQ('D', map.printField(field));
 }
 
 TEST_F(SquareMapTest, emptyFieldInvisiblePrint)
