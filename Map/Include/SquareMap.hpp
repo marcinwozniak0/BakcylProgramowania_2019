@@ -5,7 +5,7 @@ class SquareMap : public Map
 {
 public:
     const FieldList& getFields();
-    SquareMap(const int &mapSize);
+    SquareMap(const int mapSize);
     char printField(const Field& field);
 
 private:

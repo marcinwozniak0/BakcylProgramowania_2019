@@ -35,7 +35,7 @@ char SquareMap::printField(const Field& field)
   }
 }
 
-SquareMap::SquareMap(const int &mapSize)
+SquareMap::SquareMap(const int mapSize)
 {
     for(int x = 0; x < mapSize; x++)
     {
