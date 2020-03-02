@@ -48,7 +48,8 @@ SquareMap::SquareMap(const int &mapSize)
         _fieldList.emplace_back(std::move(column));
     }
 
-    int numberOfTreasureFields = mapSize / 2, numberOfFightFields = mapSize / 2;
+    const int numberOfTreasureFields = mapSize / 2;
+    const int numberOfFightFields = mapSize / 2;
 
     for(int i = 1; i <= numberOfTreasureFields; i++)
     {
