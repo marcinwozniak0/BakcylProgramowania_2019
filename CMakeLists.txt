@@ -31,8 +31,6 @@ add_subdirectory(Map/Test)
 include_directories(Combat/Test)
 add_subdirectory(Combat/Test)
 
-add_library(source_objects_lib OBJECT ${SOURCES} Map/Source/Map.cpp)
-
 add_executable(bakcyl_programowania $<TARGET_OBJECTS:source_objects_lib>
                              "main.cpp")
 
