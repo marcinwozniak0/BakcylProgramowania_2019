@@ -13,3 +13,6 @@ struct Points
    void alignMaxTo (const uint amount);
    void resetCurrent();
 };
+
+//Operators
+bool operator == (const Points& lhs, const Points& rhs);

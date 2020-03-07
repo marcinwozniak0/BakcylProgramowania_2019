@@ -35,3 +35,9 @@ void Points::resetCurrent()
 {
    _currentPoints = _maxPoints;
 }
+
+//Operators
+bool operator == (const Points& lhs, const Points& rhs)
+{
+   return lhs._currentPoints == rhs._currentPoints && lhs._maxPoints == rhs._maxPoints;
+}
