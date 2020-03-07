@@ -19,3 +19,20 @@ TEST(PointsTest, EqualOperator_ReturnsFalseWhenAreNotTheSame)
 
     ASSERT_FALSE(p1 == p2);
 }
+
+TEST(PointsTest, NotEqualOperator_ReturnsTrueWhenAreNotTheSame)
+{
+    Points p1(100);
+    Points p2(1);
+
+    ASSERT_TRUE(p1 != p2);
+}
+
+
+TEST(PointsTest, NotEqualOperator_ReturnsFalseWhenAreTheSame)
+{
+    Points p1(100);
+    Points p2(100);
+
+    ASSERT_FALSE(p1 != p2);
+}
