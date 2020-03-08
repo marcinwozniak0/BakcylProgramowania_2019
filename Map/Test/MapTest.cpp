@@ -33,10 +33,74 @@ TEST_F(SquareMapTest, quantityOfFieldsInFirstColumnShouldEqualMapSize)
     ASSERT_EQ(map.getFields().at(0).size(), mapSize);
 }
 
-TEST_F(SquareMapTest, fieldShouldBeEmpty)
+TEST_F(SquareMapTest, MapWithSize2ShouldContain1TreasureField)
 {
-    const auto& field = map.getFields().at(0).at(0);
-    ASSERT_EQ(field->getType(), FieldType::Empty);
+    SquareMap map(2);
+    constexpr int expectedNumberOfTreasureFields = 1;
+
+    auto &list = map.getFields();
+
+    int numberOfTreasureFields = 0;
+
+    for(auto column : list)
+    {
+        numberOfTreasureFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field -> getType() == FieldType::Treasure; });
+    }
+
+    ASSERT_EQ(expectedNumberOfTreasureFields, numberOfTreasureFields);
+}
+
+TEST_F(SquareMapTest, MapWithSize4ShouldContain2TreasureFields)
+{
+    SquareMap map(4);
+    constexpr int expectedNumberOfTreasureFields = 2;
+
+    auto &list = map.getFields();
+
+    int numberOfTreasureFields = 0;
+
+    for(auto column : list)
+    {
+        numberOfTreasureFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field -> getType() == FieldType::Treasure; });
+    }
+
+    ASSERT_EQ(expectedNumberOfTreasureFields, numberOfTreasureFields);
+}
+
+TEST_F(SquareMapTest, MapWithSize2ShouldContain1FightField)
+{
+    SquareMap map(2);
+    constexpr int expectedNumberOfFightFields = 1;
+    auto &list = map.getFields();
+
+    int numberOfFightFields = 0;
+
+    for(auto column : list)
+    {
+        numberOfFightFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field -> getType() == FieldType::Fight; });
+    }
+
+    ASSERT_EQ(expectedNumberOfFightFields, numberOfFightFields);
+}
+
+TEST_F(SquareMapTest, MapWithSize4ShouldContain2FightFields)
+{
+    SquareMap map(4);
+    constexpr int expectedNumberOfFightFields = 2;
+    auto &list = map.getFields();
+
+    int numberOfFightFields = 0;
+
+    for(auto column : list)
+    {
+        numberOfFightFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field -> getType() == FieldType::Fight; });
+    }
+
+    ASSERT_EQ(expectedNumberOfFightFields, numberOfFightFields);
 }
 
 TEST_F(SquareMapTest, emptyFieldVisiblePrint)
