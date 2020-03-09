@@ -23,53 +23,50 @@ SquareMap::SquareMap(const int mapSize)
     }
 }
 
-bool SquareMap::isMovePossible(const char pressedKey, int &x, int &y)
+bool SquareMap::isMoveUpPossible(const int x, const int y)
 {
-    switch(pressedKey)
+    if(y + 1u < _fieldList.size())
     {
-        case 'w':
+        if(_fieldList.at(x).at(y + 1) -> getType() != FieldType::Wall)
         {
-            if(y + 1 < _fieldList.size() && _fieldList.at(x).at(y + 1) -> getType() != FieldType::Wall)
-            {
-                //zmienić typ pola, na którym stoi gracz
-                //zmienić typ pola, na które wchodzi gracz
-                ++y;
-            }
-            break;
-        }
-        case 'a':
-        {
-            if(x - 1 >= 0 && _fieldList.at(x - 1).at(y) -> getType() != FieldType::Wall)
-            {
-                //zmienić typ pola, na którym stoi gracz
-                //zmienić typ pola, na które wchodzi gracz
-                --x;
-            }
-            break;
-        }
-        case 's':
-        {
-            if(y - 1 >= 0 && _fieldList.at(x).at(y - 1) -> getType() != FieldType::Wall)
-            {
-                //zmienić typ pola, na którym stoi gracz
-                //zmienić typ pola, na które wchodzi gracz
-                --y;
-            }
-            break;
-        }
-        case 'd':
-        {
-            if(x + 1 < _fieldList.size() && _fieldList.at(x + 1).at(y) -> getType() != FieldType::Wall)
-            {
-                //zmienić typ pola, na którym stoi gracz
-                //zmienić typ pola, na które wchodzi gracz
-                ++x;
-            }
-            break;
-        }
-        default:
-        {
-            break;
+            return true;
         }
     }
+    return false;
+}
+
+bool SquareMap::isMoveDownPossible(const int x, const int y)
+{
+    if(y - 1 >= 0)
+    {
+        if(_fieldList.at(x).at(y - 1) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool SquareMap::isMoveRightPossible(const int x, const int y)
+{
+    if(x + 1u < _fieldList.size())
+    {
+        if(_fieldList.at(x + 1).at(y) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool SquareMap::isMoveLeftPossible(const int x, const int y)
+{
+    if(x - 1 >= 0)
+    {
+        if(_fieldList.at(x - 1).at(y) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
 }
