@@ -124,19 +124,6 @@ TEST_F(SquareMapTest, treasureFieldVisiblePrint)
   ASSERT_EQ('T',map.printField(field));
 }
 
-TEST_F(SquareMapTest, wallFieldVisiblePrint)
-{
-    WallField field;
-    field.makeVisible();
-    ASSERT_EQ('#', map.printField(field));
-}
-TEST_F(SquareMapTest, doorFieldPrint)
-{
-    DoorField field;
-    field.makeVisible();
-    ASSERT_EQ('D', map.printField(field));
-}
-
 TEST_F(SquareMapTest, emptyFieldInvisiblePrint)
 {
   EmptyField field;
@@ -155,10 +142,16 @@ TEST_F(SquareMapTest, treasureFieldInvisiblePrint)
   ASSERT_EQ(' ',map.printField(field));
 }
 
-TEST_F(SquareMapTest, wallFieldInvisiblePrint)
+TEST_F(SquareMapTest, wallFieldVisiblePrint)
 {
-  WallField field;
-  ASSERT_EQ(' ',map.printField(field));
+    WallField field;
+    ASSERT_EQ('#', map.printField(field));
+}
+
+TEST_F(SquareMapTest, doorFieldVisiblePrint)
+{
+    DoorField field;
+    ASSERT_EQ('D', map.printField(field));
 }
 
 // Visilibity Updater

@@ -4,6 +4,7 @@
 class TreasureField : public Field
 {
 public:
+    TreasureField();
     FieldType getType() const;
     void action();
 };
