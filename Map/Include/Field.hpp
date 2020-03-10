@@ -11,8 +11,6 @@ public:
     virtual void action() = 0;
     virtual FieldType getType() const = 0;
 
+protected:
     bool _isVisible;
-
-/* protected: */
-/*     bool _isVisible; */
 };
