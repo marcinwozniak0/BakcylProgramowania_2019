@@ -4,6 +4,7 @@
 #include "FightField.hpp"
 #include "Field.hpp"
 #include <memory>
+#include <stdexcept>
 #include <vector>
 
 const FieldList& SquareMap::getFields()
@@ -61,5 +62,91 @@ SquareMap::SquareMap(const int mapSize)
     for(int i = 1; i <= numberOfFightFields; i++)
     {
         _fieldList.at(i).at(0) = std::make_unique<FightField>();
+    }
+}
+
+bool SquareMap::isFieldAccessible(const Position& position)
+{
+    try
+    {
+        if (getField(position)->getType() == FieldType::Wall)
+        {
+            return false;
+        }
+    }
+    catch (std::out_of_range&)
+    {
+        return false;
+    }
+    return true;
+}
+
+const std::unique_ptr<Field>& SquareMap::getField(const Position& position)
+{
+    return _fieldList.at(position._x).at(position._y);
+}
+
+void SquareMap::updateVisilibity(const Position& playerPos)
+{
+    if (getField(playerPos)->getType() == FieldType::Door)
+    {
+        makeRoomVisible(Position(playerPos._x + 1, playerPos._y));
+        makeRoomVisible(Position(playerPos._x - 1, playerPos._y));
+        makeRoomVisible(Position(playerPos._x, playerPos._y + 1));
+        makeRoomVisible(Position(playerPos._x, playerPos._y - 1));
+    }
+    else
+    {
+        makeRoomVisible(playerPos);
+    }
+}
+
+void SquareMap::makeRoomVisible(const Position& startPos)
+{
+    if (!isFieldAccessible(startPos))
+    {
+        return;
+    }
+
+    Position tempPos = startPos;
+
+    while (isFieldAccessible(tempPos) && getField(tempPos)->getType() != FieldType::Door)
+    {
+        makeRowVisible(tempPos);
+        ++tempPos._y;
+    }
+
+    tempPos = startPos;
+    --tempPos._y;
+
+    while (isFieldAccessible(tempPos) && getField(tempPos)->getType() != FieldType::Door)
+    {
+        makeRowVisible(tempPos);
+        --tempPos._y;
+    }
+}
+
+void SquareMap::makeRowVisible(const Position& startPos)
+{
+    if (!isFieldAccessible(startPos) || getField(startPos)->getType() == FieldType::Door)
+    {
+        return;
+    }
+
+    Position tempPos = startPos;
+
+    while (isFieldAccessible(tempPos) && getField(tempPos)->getType() != FieldType::Door)
+    {
+        getField(tempPos)->makeVisible();
+        ++tempPos._x;
+    }
+
+    tempPos = startPos;
+    --tempPos._x;
+
+    while (isFieldAccessible(tempPos) && getField(tempPos)->getType() != FieldType::Door)
+    {
+        getField(tempPos)->makeVisible();
+        --tempPos._x;
     }
 }

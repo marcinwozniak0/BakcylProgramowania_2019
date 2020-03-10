@@ -160,3 +160,41 @@ TEST_F(SquareMapTest, wallFieldInvisiblePrint)
   WallField field;
   ASSERT_EQ(' ',map.printField(field));
 }
+
+// Visilibity Updater
+
+TEST_F(SquareMapTest, roomShouldBeInvisibleByDefault)
+{
+    SquareMap map(mapSize);
+    constexpr int expectedNumberOfVisibleFields = 0;
+    auto &fieldList = map.getFields();
+
+    int numberOfVisibleFields = 0;
+
+    for(const auto& column : fieldList)
+    {
+        numberOfVisibleFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field->isVisible(); });
+    }
+
+    ASSERT_EQ(expectedNumberOfVisibleFields, numberOfVisibleFields);
+}
+
+TEST_F(SquareMapTest, roomShouldBeVisibleAfterUpdate)
+{
+    SquareMap map(mapSize);
+    constexpr int expectedNumberOfVisibleFields = 64;
+
+    int numberOfVisibleFields = 0;
+
+    map.updateVisilibity(Position(0,0));
+
+    auto &fieldList = map.getFields();
+    for(const auto& column : fieldList)
+    {
+        numberOfVisibleFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field->isVisible(); });
+    }
+
+    ASSERT_EQ(expectedNumberOfVisibleFields, numberOfVisibleFields);
+}
