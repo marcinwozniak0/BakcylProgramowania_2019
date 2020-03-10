@@ -42,7 +42,7 @@ TEST_F(SquareMapTest, MapWithSize2ShouldContain1TreasureField)
 
     int numberOfTreasureFields = 0;
 
-    for(auto column : list)
+    for(const auto& column : list)
     {
         numberOfTreasureFields += std::count_if(column.begin(), column.end(),
             [&](const auto &field){ return field -> getType() == FieldType::Treasure; });
@@ -60,7 +60,7 @@ TEST_F(SquareMapTest, MapWithSize4ShouldContain2TreasureFields)
 
     int numberOfTreasureFields = 0;
 
-    for(auto column : list)
+    for(const auto& column : list)
     {
         numberOfTreasureFields += std::count_if(column.begin(), column.end(),
             [&](const auto &field){ return field -> getType() == FieldType::Treasure; });
@@ -77,7 +77,7 @@ TEST_F(SquareMapTest, MapWithSize2ShouldContain1FightField)
 
     int numberOfFightFields = 0;
 
-    for(auto column : list)
+    for(const auto& column : list)
     {
         numberOfFightFields += std::count_if(column.begin(), column.end(),
             [&](const auto &field){ return field -> getType() == FieldType::Fight; });
@@ -94,7 +94,7 @@ TEST_F(SquareMapTest, MapWithSize4ShouldContain2FightFields)
 
     int numberOfFightFields = 0;
 
-    for(auto column : list)
+    for(const auto& column : list)
     {
         numberOfFightFields += std::count_if(column.begin(), column.end(),
             [&](const auto &field){ return field -> getType() == FieldType::Fight; });
