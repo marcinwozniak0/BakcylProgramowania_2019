@@ -1,15 +1,6 @@
 #include <iostream>
 #include <cstdint>
 #include "Points.hpp"
-/*
-enum class Result
-{
-   ADDED_SUCCESSFULLY,
-   ADDED_TO_MAX,
-   REMOVED_SUCESSFULLY,
-   REMOVED_TO_ZERO
-};
-*/
 
 using HP = Points;
 using MP = Points;

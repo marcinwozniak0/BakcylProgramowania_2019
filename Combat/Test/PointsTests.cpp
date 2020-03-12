@@ -36,3 +36,39 @@ TEST(PointsTest, NotEqualOperator_ReturnsFalseWhenAreTheSame)
 
     ASSERT_FALSE(p1 != p2);
 }
+
+TEST(PointsTest, SubtractOperator_SubtractsMaxpoints)
+{
+   Points p1(100);
+   Points p2(50);
+
+   auto result = p1 - p2;
+   ASSERT_EQ(result._maxPoints, 50);
+}
+
+TEST(PointsTest, SubtractOperator_SubtractsCurrentpoints)
+{
+   Points p1(100, 100);
+   Points p2(50, 40);
+
+   auto result = p1 - p2;
+   ASSERT_EQ(result._currentPoints, 60);
+}
+
+TEST(PointsTest, SubtractOperator_SetsCurrentpointsToZeroWhenNeeded)
+{
+   Points p1(100, 10);
+   Points p2(50, 40);
+
+   auto result = p1 - p2;
+   ASSERT_EQ(result._currentPoints, 0);
+}
+
+TEST(PointsTest, SubtractOperator_SetsMaxpointsToZeroWhenNeeded)
+{
+   Points p1(10);
+   Points p2(50);
+
+   auto result = p1 - p2;
+   ASSERT_EQ(result._maxPoints, 0);
+}
