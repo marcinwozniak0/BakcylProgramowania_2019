@@ -1,5 +1,10 @@
+#include "DoorField.hpp"
+#include "EmptyField.hpp"
 #include "FieldTypes.hpp"
+#include "FightField.hpp"
 #include "SquareMap.hpp"
+#include "TreasureField.hpp"
+#include "WallField.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
@@ -28,8 +33,130 @@ TEST_F(SquareMapTest, quantityOfFieldsInFirstColumnShouldEqualMapSize)
     ASSERT_EQ(map.getFields().at(0).size(), mapSize);
 }
 
-TEST_F(SquareMapTest, fieldShouldBeEmpty)
+TEST_F(SquareMapTest, MapWithSize2ShouldContain1TreasureField)
 {
-    const auto& field = map.getFields().at(0).at(0);
-    ASSERT_EQ(field->getType(), FieldType::Empty);
+    SquareMap map(2);
+    constexpr int expectedNumberOfTreasureFields = 1;
+
+    auto &list = map.getFields();
+
+    int numberOfTreasureFields = 0;
+
+    for(auto column : list)
+    {
+        numberOfTreasureFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field -> getType() == FieldType::Treasure; });
+    }
+
+    ASSERT_EQ(expectedNumberOfTreasureFields, numberOfTreasureFields);
+}
+
+TEST_F(SquareMapTest, MapWithSize4ShouldContain2TreasureFields)
+{
+    SquareMap map(4);
+    constexpr int expectedNumberOfTreasureFields = 2;
+
+    auto &list = map.getFields();
+
+    int numberOfTreasureFields = 0;
+
+    for(auto column : list)
+    {
+        numberOfTreasureFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field -> getType() == FieldType::Treasure; });
+    }
+
+    ASSERT_EQ(expectedNumberOfTreasureFields, numberOfTreasureFields);
+}
+
+TEST_F(SquareMapTest, MapWithSize2ShouldContain1FightField)
+{
+    SquareMap map(2);
+    constexpr int expectedNumberOfFightFields = 1;
+    auto &list = map.getFields();
+
+    int numberOfFightFields = 0;
+
+    for(auto column : list)
+    {
+        numberOfFightFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field -> getType() == FieldType::Fight; });
+    }
+
+    ASSERT_EQ(expectedNumberOfFightFields, numberOfFightFields);
+}
+
+TEST_F(SquareMapTest, MapWithSize4ShouldContain2FightFields)
+{
+    SquareMap map(4);
+    constexpr int expectedNumberOfFightFields = 2;
+    auto &list = map.getFields();
+
+    int numberOfFightFields = 0;
+
+    for(auto column : list)
+    {
+        numberOfFightFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field -> getType() == FieldType::Fight; });
+    }
+
+    ASSERT_EQ(expectedNumberOfFightFields, numberOfFightFields);
+}
+
+TEST_F(SquareMapTest, emptyFieldVisiblePrint)
+{
+  EmptyField field;
+  field.makeVisible();
+  ASSERT_EQ('.',map.printField(field));
+}
+
+TEST_F(SquareMapTest, fightFieldVisiblePrint)
+{
+  FightField field;
+  field.makeVisible();
+  ASSERT_EQ('F',map.printField(field));
+}
+
+TEST_F(SquareMapTest, treasureFieldVisiblePrint)
+{
+  TreasureField field;
+  field.makeVisible();
+  ASSERT_EQ('T',map.printField(field));
+}
+
+TEST_F(SquareMapTest, wallFieldVisiblePrint)
+{
+    WallField field;
+    field.makeVisible();
+    ASSERT_EQ('#', map.printField(field));
+}
+TEST_F(SquareMapTest, doorFieldPrint)
+{
+    DoorField field;
+    field.makeVisible();
+    ASSERT_EQ('D', map.printField(field));
+}
+
+TEST_F(SquareMapTest, emptyFieldInvisiblePrint)
+{
+  EmptyField field;
+  ASSERT_EQ(' ',map.printField(field));
+}
+
+TEST_F(SquareMapTest, fightFieldInvisiblePrint)
+{
+  FightField field;
+  ASSERT_EQ(' ',map.printField(field));
+}
+
+TEST_F(SquareMapTest, treasureFieldInvisiblePrint)
+{
+  TreasureField field;
+  ASSERT_EQ(' ',map.printField(field));
+}
+
+TEST_F(SquareMapTest, wallFieldInvisiblePrint)
+{
+  WallField field;
+  ASSERT_EQ(' ',map.printField(field));
 }

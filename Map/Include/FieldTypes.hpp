@@ -4,5 +4,6 @@ enum class FieldType
     Fight,
     Empty,
     Treasure,
-    Wall
+    Wall,
+    Door
 };

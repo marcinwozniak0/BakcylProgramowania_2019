@@ -3,7 +3,7 @@
 Field::Field() : _isVisible(false)
 {
 }
-bool Field::isVisible()
+bool Field::isVisible() const
 {
     return _isVisible;
 }
