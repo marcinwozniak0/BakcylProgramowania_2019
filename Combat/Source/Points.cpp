@@ -10,7 +10,15 @@ Points::Points(const uint maxPoints)
 Points::Points(const uint maxPoints, const uint currentPoints)
 {
       _maxPoints = maxPoints;
-      _currentPoints = currentPoints;
+
+      if(currentPoints > maxPoints)
+      {
+         _currentPoints = maxPoints;
+      }
+      else
+      {
+         _currentPoints = currentPoints;
+      }
 }
 
 // Sprawdzanie na karcie czy currentMP >= amount
