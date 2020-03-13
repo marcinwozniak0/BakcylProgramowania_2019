@@ -73,12 +73,12 @@ bool SquareMap::isFieldAccessible(const Position& position)
         {
             return false;
         }
+        return true;
     }
     catch (std::out_of_range&)
     {
         return false;
     }
-    return true;
 }
 
 const std::unique_ptr<Field>& SquareMap::getField(const Position& position)
