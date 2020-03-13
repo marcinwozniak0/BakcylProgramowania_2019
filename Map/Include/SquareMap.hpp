@@ -9,7 +9,7 @@ public:
     SquareMap(const int mapSize);
 
     char printField(const Field& field);
-    void updateVisilibity(const Position& playerPos);
+    void updateVisilibity(const Position& playerPosition);
 
 private:
     FieldList _fieldList;
@@ -17,6 +17,6 @@ private:
     bool isFieldAccessible(const Position& position);
     const std::unique_ptr<Field>& getField(const Position& position);
 
-    void makeRoomVisible(const Position& startPos);
-    void makeRowVisible(const Position& startPos);
+    void makeRoomVisible(const Position& startPosition);
+    void makeRowVisible(const Position& startPosition);
 };
