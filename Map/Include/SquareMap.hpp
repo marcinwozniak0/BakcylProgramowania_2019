@@ -9,8 +9,9 @@ public:
 
 private:
     FieldList _fieldList;
-    bool isMoveUpPossible(int, int);
-    bool isMoveDownPossible(int, int);
-    bool isMoveRightPossible(int, int);
-    bool isMoveLeftPossible(int, int);
+    bool isMovePossible(std::pair<int, int>, char);
+    bool isMoveUpPossible(std::pair<int, int>);
+    bool isMoveDownPossible(std::pair<int, int>);
+    bool isMoveRightPossible(std::pair<int, int>);
+    bool isMoveLeftPossible(std::pair<int, int>);
 };
