@@ -10,7 +10,7 @@ class Player
   class Profession
   {
    public:
-    virtual void useUlt(Player& p1, Player& p2) = 0;
+    virtual void useUlt(this, Player& p2) = 0;
   };
 
   class Paladin : public Profession
@@ -22,13 +22,13 @@ class Player
   class Mage : public Profession
   {
    public:
-    void useUlt(Player& p1, Player& p2) override;
+    void useUlt(this, Player& p2) override;
   };
 
   class Rogue : public Profession
   {
    public:
-    void useUlt(Player& p1, Player& p2) override;
+    void useUlt(this, Player& p2) override;
   };
 
 };

@@ -33,6 +33,7 @@ TEST(RogueUsingUltCardSteal, ItShouldReturnChangedHandDecks)
 	Player :: Profession *ProfType;
 	ProfType = &rg1;
   ProfType -> useUlt(p1, p2);
-	ASSERT_EQ("karta1", p1.handdeck.at(3));
   ASSERT_EQ(2, p2.handdeck.size());
+  ASSERT_EQ(4, p1.handdeck.size());
+  ASSERT_EQ(1 || 2 || 3, rng;
 }
