@@ -5,11 +5,13 @@
 
 void Player :: Paladin :: useUlt(Player& p1, Player& p2)
 {
+  uint power = 1;
   p1.currentHp += p1.power;
 }
 
 void Player :: Mage :: useUlt(Player& p1, Player& p2)
 {
+  uint power = 1;
   p2.currentHp -= p1.power;
 }
 

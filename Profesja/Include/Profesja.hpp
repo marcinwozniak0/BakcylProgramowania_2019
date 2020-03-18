@@ -3,11 +3,10 @@
 #include <vector>
 #include <string>
 
-struct Player
+class Player
 {
-  unsigned int currentHp = 20;
-  unsigned int power = 1;
-  std::vector <std::string> handdeck = {"karta1", "karta2", "karta3"};
+  uint currentHp = 20;
+  std::vector<std::string> handdeck = {"karta1", "karta2", "karta3"};
   class Profession
   {
    public:
