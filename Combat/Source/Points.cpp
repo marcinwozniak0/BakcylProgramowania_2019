@@ -42,7 +42,7 @@ void Points::add(const uint amount)
    }
    else
    {
-   _currentPoints += amount;
+      _currentPoints += amount;
    }
 }
 

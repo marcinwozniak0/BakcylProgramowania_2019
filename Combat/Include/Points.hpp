@@ -17,5 +17,9 @@ struct Points
 //Operators
 bool operator == (const Points& lhs, const Points& rhs);
 bool operator != (const Points& lhs, const Points& rhs);
+bool operator > (const Points& lhs, const Points& rhs);
+bool operator >= (const Points& lhs, const Points& rhs);
+bool operator < (const Points& lhs, const Points& rhs);
+bool operator <= (const Points& lhs, const Points& rhs);
 Points operator + (const Points& lhs, const Points& rhs);
 Points operator - (const Points& lhs, const Points& rhs);
