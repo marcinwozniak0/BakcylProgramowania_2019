@@ -1,34 +1,41 @@
 #pragma once
 #include <iostream>
-#include <vector>
 #include <string>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <optional>
 
 class Player
 {
+protected:
   uint currentHp = 20;
   std::vector<std::string> handdeck = {"karta1", "karta2", "karta3"};
-  class Profession
-  {
-   public:
-    virtual void useUlt(this, Player& p2) = 0;
-  };
+};
 
-  class Paladin : public Profession
-  {
-   public:
-    void useUlt(Player& p1, Player& p2) override;
-  };
+class Profession
+{
+ public:
+  virtual void useUlt(std::optional<Player>& p1, std::optional<Player>& p2) = 0;
+};
 
-  class Mage : public Profession
-  {
-   public:
-    void useUlt(this, Player& p2) override;
-  };
+class Paladin : public Profession
+{
+ public:
+  uint power;
+  void useUlt(std::optional<Player>& p1, std::optional<Player>& p2) override;
+};
 
-  class Rogue : public Profession
-  {
-   public:
-    void useUlt(this, Player& p2) override;
-  };
+class Mage : public Profession
+{
+ public:
+  uint power;
+  void useUlt(std::optional<Player>& p1, std::optional<Player>& p2) override;
+};
 
+class Rogue : public Profession
+{
+ public:
+  uint rng = 0;
+  void useUlt(std::optional<Player>& p1, std::optional<Player>& p2) override;
 };

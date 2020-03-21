@@ -1,26 +1,21 @@
 #include "Profesja.hpp"
-#include <iostream>
-#include <string>
-#include <vector>
-#include <cstdlib>
-#include <ctime>
 
-void Player :: Paladin :: useUlt(this, Player& p2)
+void Paladin :: useUlt(std::optional<Player>& p1, std::optional<Player>& p2)
 {
   uint power = 1;
-  p1.currentHp += p1.power;
+  p1.currentHp += power;
 }
 
-void Player :: Mage :: useUlt(this, Player& p2)
+void Mage :: useUlt(std::optional<Player>& p1, std::optional<Player>& p2)
 {
   uint power = 1;
-  p2.currentHp -= p1.power;
+  p2.currentHp -= power;
 }
 
-void Player :: Rogue :: useUlt(this, Player& p2)
+void Rogue :: useUlt(std::optional<Player>& p1, std::optional<Player>& p2)
 {
   srand( time( NULL ) );
-  uint rng = ( std::rand() % 3 );
-  p1.handdeck.push_back(p2.handdeck.at(rng));
-  p2.handdeck.erase(p2.handdeck.at(rng));
+  rng = ( std::rand() % p2.handdeck.size());
+  p1.handdeck.push_back(std::move(p2.handdeck.at(rng)));
+  p2.handdeck.erase(p2.handdeck.begin() + rng);
 }
