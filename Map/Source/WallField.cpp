@@ -1,9 +1,5 @@
 #include "WallField.hpp"
 
-WallField::WallField()
-{
-    _isVisible = true;
-}
 void WallField::action()
 {
 
