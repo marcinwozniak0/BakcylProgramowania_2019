@@ -18,6 +18,7 @@ private:
     bool isField(const Position& position);
     const std::unique_ptr<Field>& getField(const Position& position);
 
+    void makeNonBarrierFieldsInvisible();
     void makeRoomVisible(const Position& startPosition);
     void makeRowVisible(const Position& startPosition);
 };

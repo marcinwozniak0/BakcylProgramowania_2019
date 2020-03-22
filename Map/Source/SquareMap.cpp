@@ -97,6 +97,7 @@ const std::unique_ptr<Field>& SquareMap::getField(const Position& position)
 
 void SquareMap::updateVisilibity(const Position& playerPosition)
 {
+    makeNonBarrierFieldsInvisible();
     if (getField(playerPosition)->getType() == FieldType::Door)
     {
         makeRoomVisible(Position(playerPosition._x + 1, playerPosition._y));
@@ -107,6 +108,20 @@ void SquareMap::updateVisilibity(const Position& playerPosition)
     else
     {
         makeRoomVisible(playerPosition);
+    }
+}
+
+void SquareMap::makeNonBarrierFieldsInvisible()
+{
+    for(const auto& column : _fieldList)
+    {
+        for(const auto& field : column)
+        {
+            if(field->getType() != FieldType::Wall and field->getType() != FieldType::Door)
+            {
+                field->makeInvisible();
+            }
+        }
     }
 }
 
