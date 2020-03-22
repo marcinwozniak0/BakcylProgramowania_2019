@@ -15,6 +15,7 @@ private:
     FieldList _fieldList;
 
     bool isFieldAccessible(const Position& position);
+    bool isField(const Position& position);
     const std::unique_ptr<Field>& getField(const Position& position);
 
     void makeRoomVisible(const Position& startPosition);
