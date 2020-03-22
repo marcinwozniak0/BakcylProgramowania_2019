@@ -105,6 +105,10 @@ void SquareMap::updateVisilibity(const Position& playerPosition)
         makeRoomVisible(Position(playerPosition._x, playerPosition._y + 1));
         makeRoomVisible(Position(playerPosition._x, playerPosition._y - 1));
     }
+    else if(not isFieldAccessible(playerPosition))
+    {
+        return;
+    }
     else
     {
         makeRoomVisible(playerPosition);
