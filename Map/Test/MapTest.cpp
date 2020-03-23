@@ -161,10 +161,20 @@ TEST_F(SquareMapTest, wallFieldInvisiblePrint)
   ASSERT_EQ(' ',map.printField(field));
 }
 
-FieldList buildSimpleTwoRoomsMap()
+FieldList buildSimpleThreeRoomsMap()
 {
     FieldList fieldList;
     std::vector<std::unique_ptr<Field>> column;
+
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<DoorField>());
+    column.emplace_back(std::make_unique<WallField>());
+    fieldList.emplace_back(std::move(column));
 
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
@@ -187,7 +197,7 @@ FieldList buildSimpleTwoRoomsMap()
 
 TEST_F(SquareMapTest, mapShouldBeInvisibleByDefault)
 {
-    SquareMap map(buildSimpleTwoRoomsMap());
+    SquareMap map(buildSimpleThreeRoomsMap());
     constexpr int expectedNumberOfVisibleFields = 0;
     auto &fieldList = map.getFields();
 
@@ -204,7 +214,7 @@ TEST_F(SquareMapTest, mapShouldBeInvisibleByDefault)
 
 TEST_F(SquareMapTest, RoomWithPlayerShouldBeVisible)
 {
-    SquareMap map(buildSimpleTwoRoomsMap());
+    SquareMap map(buildSimpleThreeRoomsMap());
     constexpr int expectedNumberOfVisibleFields = 6;
 
     int numberOfVisibleFields = 0;
@@ -223,8 +233,8 @@ TEST_F(SquareMapTest, RoomWithPlayerShouldBeVisible)
 
 TEST_F(SquareMapTest, WhenPlayerOnDoorBothRoomsShouldBeVisible)
 {
-    SquareMap map(buildSimpleTwoRoomsMap());
-    constexpr int expectedNumberOfVisibleFields = 9;
+    SquareMap map(buildSimpleThreeRoomsMap());
+    constexpr int expectedNumberOfVisibleFields = 12;
 
     int numberOfVisibleFields = 0;
 
@@ -240,10 +250,10 @@ TEST_F(SquareMapTest, WhenPlayerOnDoorBothRoomsShouldBeVisible)
     ASSERT_EQ(expectedNumberOfVisibleFields, numberOfVisibleFields);
 }
 
-TEST_F(SquareMapTest, WhenPlayerMoveFromDoorToRoomOnlyThatRoomShouldBeVisible)
+TEST_F(SquareMapTest, seenDoorsAndWallsShouldStayVisible)
 {
-    SquareMap map(buildSimpleTwoRoomsMap());
-    constexpr int expectedNumberOfVisibleFields = 6;
+    SquareMap map(buildSimpleThreeRoomsMap());
+    constexpr int expectedNumberOfVisibleFields = 9;
 
     int numberOfVisibleFields = 0;
 
