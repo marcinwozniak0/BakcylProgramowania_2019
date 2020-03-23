@@ -4,6 +4,7 @@
 #include "FightField.hpp"
 #include "Field.hpp"
 #include <memory>
+#include <stdexcept>
 #include <vector>
 
 const FieldList& SquareMap::getFields()
@@ -150,4 +151,133 @@ bool SquareMap::isMoveLeftPossible(std::pair<int, int> coordinates)
         }
     }
     return false;
+}
+
+SquareMap::SquareMap(FieldList&& fieldList) : _fieldList(std::move(fieldList))
+{
+}
+
+bool SquareMap::isFieldAccessible(const Position& position)
+{
+    if (not isField(position) or getField(position)->getType() == FieldType::Wall)
+    {
+        return false;
+    }
+    return true;
+}
+
+bool SquareMap::isField(const Position& position)
+{
+    try
+    {
+        if (getField(position))
+        {
+            return true;
+        }
+        return false;
+    }
+    catch (std::out_of_range&)
+    {
+        return false;
+    }
+}
+
+const std::unique_ptr<Field>& SquareMap::getField(const Position& position)
+{
+    return _fieldList.at(position._x).at(position._y);
+}
+
+void SquareMap::updateVisilibity(const Position& playerPosition)
+{
+    makeNonBarrierFieldsInvisible();
+    if (getField(playerPosition)->getType() == FieldType::Door)
+    {
+        makeRoomVisible(Position(playerPosition._x + 1, playerPosition._y));
+        makeRoomVisible(Position(playerPosition._x - 1, playerPosition._y));
+        makeRoomVisible(Position(playerPosition._x, playerPosition._y + 1));
+        makeRoomVisible(Position(playerPosition._x, playerPosition._y - 1));
+    }
+    else if(not isFieldAccessible(playerPosition))
+    {
+        return;
+    }
+    else
+    {
+        makeRoomVisible(playerPosition);
+    }
+}
+
+void SquareMap::makeNonBarrierFieldsInvisible()
+{
+    for(const auto& column : _fieldList)
+    {
+        for(const auto& field : column)
+        {
+            if(field->getType() != FieldType::Wall and field->getType() != FieldType::Door)
+            {
+                field->makeInvisible();
+            }
+        }
+    }
+}
+
+void SquareMap::makeRoomVisible(const Position& startPosition)
+{
+    if (not isField(startPosition))
+    {
+        return;
+    }
+
+    Position tempPosition = startPosition;
+    makeRowVisible(tempPosition);
+
+    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
+    {
+        ++tempPosition._y;
+        makeRowVisible(tempPosition);
+    }
+
+    tempPosition = startPosition;
+
+    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
+    {
+        --tempPosition._y;
+        makeRowVisible(tempPosition);
+    }
+}
+
+void SquareMap::makeRowVisible(const Position& startPosition)
+{
+    if (not isField(startPosition))
+    {
+        return;
+    }
+
+    getField(startPosition)->makeVisible();
+    if (not isFieldAccessible(startPosition) or getField(startPosition)->getType() == FieldType::Door)
+    {
+        return;
+    }
+
+    Position tempPosition = startPosition;
+
+    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
+    {
+        ++tempPosition._x;
+        if (isField(tempPosition))
+        {
+            getField(tempPosition)->makeVisible();
+        }
+    }
+
+    tempPosition = startPosition;
+
+    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
+    {
+        --tempPosition._x;
+        if (isField(tempPosition))
+        {
+        getField(tempPosition)->makeVisible();
+        }
+    }
 }
