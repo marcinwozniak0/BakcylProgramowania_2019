@@ -11,3 +11,7 @@ void Field::makeVisible()
 {
     _isVisible = true;
 }
+void Field::makeInvisible()
+{
+    _isVisible = false;
+}
