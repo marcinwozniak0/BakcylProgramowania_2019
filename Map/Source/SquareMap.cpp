@@ -65,6 +65,94 @@ SquareMap::SquareMap(const int mapSize)
     }
 }
 
+bool SquareMap::isMovePossible(std::pair<int, int> coordinates, const char pressedKey)
+{
+    switch(pressedKey)
+    {
+        case 'w':
+        {
+            if(isMoveUpPossible(coordinates))
+            {
+                return true;
+            };
+            break;
+        }
+        case 'a':
+        {
+            if(isMoveLeftPossible(coordinates))
+            {
+                return true;
+            };
+            break;
+        }
+        case 's':
+        {
+            if(isMoveDownPossible(coordinates))
+            {
+                return true;
+            }
+            break;
+        }
+        case 'd':
+        {
+            if(isMoveRightPossible(coordinates))
+            {
+                return true;
+            }
+            break;
+        }
+    }
+    return false;
+}
+
+bool SquareMap::isMoveUpPossible(std::pair<int, int> coordinates)
+{
+    if(std::get<1>(coordinates) + 1u < _fieldList.size())
+    {
+        if(_fieldList.at(std::get<0>(coordinates)).at(std::get<1>(coordinates) + 1) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool SquareMap::isMoveDownPossible(std::pair<int, int> coordinates)
+{
+    if(std::get<1>(coordinates) - 1 >= 0)
+    {
+        if(_fieldList.at(std::get<0>(coordinates)).at(std::get<1>(coordinates) - 1) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool SquareMap::isMoveRightPossible(std::pair<int, int> coordinates)
+{
+    if(std::get<0>(coordinates) + 1u < _fieldList.size())
+    {
+        if(_fieldList.at(std::get<0>(coordinates) + 1).at(std::get<1>(coordinates)) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool SquareMap::isMoveLeftPossible(std::pair<int, int> coordinates)
+{
+    if(std::get<0>(coordinates) - 1 >= 0)
+    {
+        if(_fieldList.at(std::get<0>(coordinates) - 1).at(std::get<1>(coordinates)) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 SquareMap::SquareMap(FieldList&& fieldList) : _fieldList(std::move(fieldList))
 {
 }
