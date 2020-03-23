@@ -7,6 +7,7 @@ class SquareMap : public Map
 public:
     const FieldList& getFields();
     SquareMap(const int mapSize);
+    SquareMap(FieldList&& fieldList);
 
     char printField(const Field& field);
     void updateVisilibity(const Position& playerPosition);

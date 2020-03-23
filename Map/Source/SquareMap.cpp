@@ -65,6 +65,10 @@ SquareMap::SquareMap(const int mapSize)
     }
 }
 
+SquareMap::SquareMap(FieldList&& fieldList) : _fieldList(std::move(fieldList))
+{
+}
+
 bool SquareMap::isFieldAccessible(const Position& position)
 {
     if (not isField(position) or getField(position)->getType() == FieldType::Wall)

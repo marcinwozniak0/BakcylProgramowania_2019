@@ -161,11 +161,33 @@ TEST_F(SquareMapTest, wallFieldInvisiblePrint)
   ASSERT_EQ(' ',map.printField(field));
 }
 
-// Visilibity Updater
-
-TEST_F(SquareMapTest, roomShouldBeInvisibleByDefault)
+FieldList buildSimpleTwoRoomsMap()
 {
-    SquareMap map(mapSize);
+    FieldList fieldList;
+    std::vector<std::unique_ptr<Field>> column;
+
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<DoorField>());
+    column.emplace_back(std::make_unique<WallField>());
+    fieldList.emplace_back(std::move(column));
+
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+
+    return fieldList;
+
+}
+
+TEST_F(SquareMapTest, mapShouldBeInvisibleByDefault)
+{
+    SquareMap map(buildSimpleTwoRoomsMap());
     constexpr int expectedNumberOfVisibleFields = 0;
     auto &fieldList = map.getFields();
 
@@ -180,13 +202,52 @@ TEST_F(SquareMapTest, roomShouldBeInvisibleByDefault)
     ASSERT_EQ(expectedNumberOfVisibleFields, numberOfVisibleFields);
 }
 
-TEST_F(SquareMapTest, roomShouldBeVisibleAfterUpdate)
+TEST_F(SquareMapTest, RoomWithPlayerShouldBeVisible)
 {
-    SquareMap map(mapSize);
-    constexpr int expectedNumberOfVisibleFields = 64;
+    SquareMap map(buildSimpleTwoRoomsMap());
+    constexpr int expectedNumberOfVisibleFields = 6;
 
     int numberOfVisibleFields = 0;
 
+    map.updateVisilibity(Position(0,0));
+
+    auto &fieldList = map.getFields();
+    for(const auto& column : fieldList)
+    {
+        numberOfVisibleFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field->isVisible(); });
+    }
+
+    ASSERT_EQ(expectedNumberOfVisibleFields, numberOfVisibleFields);
+}
+
+TEST_F(SquareMapTest, WhenPlayerOnDoorBothRoomsShouldBeVisible)
+{
+    SquareMap map(buildSimpleTwoRoomsMap());
+    constexpr int expectedNumberOfVisibleFields = 9;
+
+    int numberOfVisibleFields = 0;
+
+    map.updateVisilibity(Position(1,1));
+
+    auto &fieldList = map.getFields();
+    for(const auto& column : fieldList)
+    {
+        numberOfVisibleFields += std::count_if(column.begin(), column.end(),
+            [&](const auto &field){ return field->isVisible(); });
+    }
+
+    ASSERT_EQ(expectedNumberOfVisibleFields, numberOfVisibleFields);
+}
+
+TEST_F(SquareMapTest, WhenPlayerMoveFromDoorToRoomOnlyThatRoomShouldBeVisible)
+{
+    SquareMap map(buildSimpleTwoRoomsMap());
+    constexpr int expectedNumberOfVisibleFields = 6;
+
+    int numberOfVisibleFields = 0;
+
+    map.updateVisilibity(Position(1,1));
     map.updateVisilibity(Position(0,0));
 
     auto &fieldList = map.getFields();
