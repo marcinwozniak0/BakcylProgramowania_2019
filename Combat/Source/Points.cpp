@@ -2,15 +2,12 @@
 #include <cstdlib>
 
 Points::Points(const uint maxPoints)
-{
-   _maxPoints = maxPoints;
-   _currentPoints = maxPoints;
-}
+   : _maxPoints(maxPoints), _currentPoints(maxPoints)
+{}
 
 Points::Points(const uint maxPoints, const uint currentPoints)
+   : _maxPoints(maxPoints)
 {
-      _maxPoints = maxPoints;
-
       if(currentPoints > maxPoints)
       {
          //TODO throw exception
