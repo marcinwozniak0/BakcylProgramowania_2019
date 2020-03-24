@@ -13,6 +13,7 @@ Points::Points(const uint maxPoints, const uint currentPoints)
 
       if(currentPoints > maxPoints)
       {
+         //TODO throw exception
          _currentPoints = maxPoints;
       }
       else
@@ -21,7 +22,6 @@ Points::Points(const uint maxPoints, const uint currentPoints)
       }
 }
 
-// Sprawdzanie na karcie czy currentMP >= amount
 void Points::remove(const uint amount)
 {
    if(amount > _currentPoints)
@@ -36,13 +36,10 @@ void Points::remove(const uint amount)
 
 void Points::add(const uint amount)
 {
-   if(_currentPoints + amount > _maxPoints)
+   _currentPoints += amount;
+   if(_currentPoints > _maxPoints)
    {
       _currentPoints = _maxPoints;
-   }
-   else
-   {
-      _currentPoints += amount;
    }
 }
 
@@ -56,43 +53,42 @@ void Points::resetCurrent()
    _currentPoints = _maxPoints;
 }
 
-//Operators
-bool operator == (const Points& lhs, const Points& rhs)
+const bool operator == (const Points& lhs, const Points& rhs)
 {
    return lhs._currentPoints == rhs._currentPoints;
 }
 
-bool operator != (const Points& lhs, const Points& rhs)
+const bool operator != (const Points& lhs, const Points& rhs)
 {
    return !(lhs == rhs);
 }
 
-bool operator > (const Points& lhs, const Points& rhs)
+const bool operator > (const Points& lhs, const Points& rhs)
 {
    return lhs._currentPoints > rhs._currentPoints;
 }
 
-bool operator >= (const Points& lhs, const Points& rhs)
+const bool operator >= (const Points& lhs, const Points& rhs)
 {
    return lhs._currentPoints >= rhs._currentPoints;
 }
 
-bool operator < (const Points& lhs, const Points& rhs)
+const bool operator < (const Points& lhs, const Points& rhs)
 {
    return !(lhs >= rhs);
 }
 
-bool operator <= (const Points& lhs, const Points& rhs)
+const bool operator <= (const Points& lhs, const Points& rhs)
 {
    return !(lhs > rhs);
 }
 
-Points operator + (const Points& lhs, const Points& rhs)
+const Points operator + (const Points& lhs, const Points& rhs)
 {
    return Points(lhs._maxPoints + rhs._maxPoints, lhs._currentPoints + rhs._currentPoints);
 }
 
-Points operator - (const Points& lhs, const Points& rhs)
+const Points operator - (const Points& lhs, const Points& rhs)
 {
    uint maxPoints = 0;
    uint currentPoints = 0;
