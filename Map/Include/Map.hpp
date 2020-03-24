@@ -1,13 +1,14 @@
 #pragma once
-#include "Room.hpp"
+#include "Field.hpp"
+#include <memory>
 #include <vector>
+
+using FieldList = std::vector<std::vector<std::unique_ptr<Field>>>;
 
 class Map
 {
 public:
-    std::vector<Room> getRooms();
-    Map();
-    Map(int mapSize);
-private:
-    std::vector<Room> rooms;
+    virtual const FieldList& getFields() = 0;
+
+    virtual char printField(const Field& field) = 0;
 };

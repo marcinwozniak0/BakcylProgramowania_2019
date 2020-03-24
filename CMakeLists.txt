@@ -16,16 +16,12 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 include(External_GTest.cmake)
 
 # SRC
-include_directories(Source)
-add_subdirectory(Source)
 include_directories(Map/Include)
 add_subdirectory(Map/Source)
 include_directories(Combat/Include)
 add_subdirectory(Combat/Source)
 
 # TEST
-include_directories(Test)
-add_subdirectory(Test)
 include_directories(Map/Test)
 add_subdirectory(Map/Test)
 include_directories(Combat/Test)

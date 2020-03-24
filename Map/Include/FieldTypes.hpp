@@ -3,5 +3,7 @@ enum class FieldType
 {
     Fight,
     Empty,
-    Treasure
+    Treasure,
+    Wall,
+    Door
 };

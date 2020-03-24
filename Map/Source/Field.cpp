@@ -3,11 +3,15 @@
 Field::Field() : _isVisible(false)
 {
 }
-bool Field::isVisible()
+bool Field::isVisible() const
 {
     return _isVisible;
 }
 void Field::makeVisible()
 {
     _isVisible = true;
+}
+void Field::makeInvisible()
+{
+    _isVisible = false;
 }
