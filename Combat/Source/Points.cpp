@@ -82,23 +82,17 @@ const bool operator <= (const Points& lhs, const Points& rhs)
 
 const Points operator + (const Points& lhs, const Points& rhs)
 {
-   return Points(lhs._maxPoints + rhs._maxPoints, lhs._currentPoints + rhs._currentPoints);
+   return Points(lhs._currentPoints + rhs._currentPoints);
 }
 
 const Points operator - (const Points& lhs, const Points& rhs)
 {
-   uint maxPoints = 0;
    uint currentPoints = 0;
-
-   if(lhs._maxPoints > rhs._maxPoints)
-   {
-      maxPoints = lhs._maxPoints - rhs._maxPoints;
-   }
 
    if(lhs._currentPoints > rhs._currentPoints)
    {
       currentPoints = lhs._currentPoints - rhs._currentPoints;
    }
 
-   return Points(maxPoints, currentPoints);
+   return Points(lhs._maxPoints, currentPoints);
 }
