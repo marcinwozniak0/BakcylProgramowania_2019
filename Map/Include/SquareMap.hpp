@@ -14,11 +14,11 @@ public:
 
 private:
     FieldList _fieldList;
-    bool isMovePossible(std::pair<int, int>, char);
-    bool isMoveUpPossible(std::pair<int, int>);
-    bool isMoveDownPossible(std::pair<int, int>);
-    bool isMoveRightPossible(std::pair<int, int>);
-    bool isMoveLeftPossible(std::pair<int, int>);
+    bool isMovePossible(const Position&, const char);
+    bool isMoveUpPossible(const Position&);
+    bool isMoveDownPossible(const Position&);
+    bool isMoveRightPossible(const Position&);
+    bool isMoveLeftPossible(const Position&);
     bool isFieldAccessible(const Position& position);
     bool isField(const Position& position);
     void makeNonBarrierFieldsInvisible();

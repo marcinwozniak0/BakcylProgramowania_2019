@@ -65,7 +65,7 @@ SquareMap::SquareMap(const int mapSize)
     }
 }
 
-bool SquareMap::isMovePossible(std::pair<int, int> coordinates, const char pressedKey)
+bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKey)
 {
     switch(pressedKey)
     {
@@ -105,11 +105,11 @@ bool SquareMap::isMovePossible(std::pair<int, int> coordinates, const char press
     return false;
 }
 
-bool SquareMap::isMoveUpPossible(std::pair<int, int> coordinates)
+bool SquareMap::isMoveUpPossible(const Position& coordinates)
 {
-    if(std::get<1>(coordinates) + 1u < _fieldList.size())
+    if(coordinates._y + 1u < _fieldList.size())
     {
-        if(_fieldList.at(std::get<0>(coordinates)).at(std::get<1>(coordinates) + 1) -> getType() != FieldType::Wall)
+        if(_fieldList.at(coordinates._x).at(coordinates._y + 1) -> getType() != FieldType::Wall)
         {
             return true;
         }
@@ -117,11 +117,11 @@ bool SquareMap::isMoveUpPossible(std::pair<int, int> coordinates)
     return false;
 }
 
-bool SquareMap::isMoveDownPossible(std::pair<int, int> coordinates)
+bool SquareMap::isMoveDownPossible(const Position& coordinates)
 {
-    if(std::get<1>(coordinates) - 1 >= 0)
+    if(coordinates._y - 1 >= 0)
     {
-        if(_fieldList.at(std::get<0>(coordinates)).at(std::get<1>(coordinates) - 1) -> getType() != FieldType::Wall)
+        if(_fieldList.at(coordinates._x).at(coordinates._y - 1) -> getType() != FieldType::Wall)
         {
             return true;
         }
@@ -129,11 +129,11 @@ bool SquareMap::isMoveDownPossible(std::pair<int, int> coordinates)
     return false;
 }
 
-bool SquareMap::isMoveRightPossible(std::pair<int, int> coordinates)
+bool SquareMap::isMoveRightPossible(const Position& coordinates)
 {
-    if(std::get<0>(coordinates) + 1u < _fieldList.size())
+    if(coordinates._x + 1u < _fieldList.size())
     {
-        if(_fieldList.at(std::get<0>(coordinates) + 1).at(std::get<1>(coordinates)) -> getType() != FieldType::Wall)
+        if(_fieldList.at(coordinates._x + 1).at(coordinates._y) -> getType() != FieldType::Wall)
         {
             return true;
         }
@@ -141,11 +141,11 @@ bool SquareMap::isMoveRightPossible(std::pair<int, int> coordinates)
     return false;
 }
 
-bool SquareMap::isMoveLeftPossible(std::pair<int, int> coordinates)
+bool SquareMap::isMoveLeftPossible(const Position& coordinates)
 {
-    if(std::get<0>(coordinates) - 1 >= 0)
+    if(coordinates._x - 1 >= 0)
     {
-        if(_fieldList.at(std::get<0>(coordinates) - 1).at(std::get<1>(coordinates)) -> getType() != FieldType::Wall)
+        if(_fieldList.at(coordinates._x - 1).at(coordinates._y) -> getType() != FieldType::Wall)
         {
             return true;
         }
