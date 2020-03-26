@@ -14,7 +14,7 @@ public:
 
 private:
     FieldList _fieldList;
-    bool isMovePossible(const Position&, const char);
+    bool isMovePossible(const Position&, const Direction);
     bool isMoveUpPossible(const Position&);
     bool isMoveDownPossible(const Position&);
     bool isMoveRightPossible(const Position&);

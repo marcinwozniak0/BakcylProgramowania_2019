@@ -65,11 +65,11 @@ SquareMap::SquareMap(const int mapSize)
     }
 }
 
-bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKey)
+bool SquareMap::isMovePossible(const Position& coordinates, const Direction direction)
 {
-    switch(pressedKey)
+    switch(direction)
     {
-        case 'w':
+        case Direction::Up:
         {
             if(isMoveUpPossible(coordinates))
             {
@@ -77,7 +77,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
             };
             break;
         }
-        case 'a':
+        case Direction::Left:
         {
             if(isMoveLeftPossible(coordinates))
             {
@@ -85,7 +85,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
             };
             break;
         }
-        case 's':
+        case Direction::Down:
         {
             if(isMoveDownPossible(coordinates))
             {
@@ -93,7 +93,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
             }
             break;
         }
-        case 'd':
+        case Direction::Right:
         {
             if(isMoveRightPossible(coordinates))
             {
