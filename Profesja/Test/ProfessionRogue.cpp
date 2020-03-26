@@ -1,31 +1,9 @@
-#include "Profesja.hpp"
+#include "ProfessionRogue.hpp"
 #include <gtest/gtest.h>
 #include <iostream>
 #include <optional>
 
 using namespace ::testing;
-
-TEST(PaladinUsingUltHeal, ItShouldReturn21)
-{
-  std::optional<Player> p1 = Player();
-  std::optional<Player> p2 = Player();
-  Paladin pl1;
-  Profession *ProfType;
-  ProfType = &pl1;
-  ProfType -> useUlt(p1, p2);
-  ASSERT_EQ(21, p1.value().currentHp);
-}
-
-TEST(MageUsingUltAttack, ItShouldReturn19)
-{
-  std::optional<Player> p1 = Player();
-  std::optional<Player> p2 = Player();
-  Mage mg1;
-  Profession *ProfType;
-  ProfType = &mg1;
-  ProfType -> useUlt(p1, p2);
-  ASSERT_EQ(19, p2.value().currentHp);
-}
 
 TEST(RogueUsingUltCardSteal, ItShouldReturnChangedHandDecks)
 {
