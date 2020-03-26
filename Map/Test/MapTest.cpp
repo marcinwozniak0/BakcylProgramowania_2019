@@ -269,3 +269,31 @@ TEST_F(SquareMapTest, seenDoorsAndWallsShouldStayVisible)
 
     ASSERT_EQ(expectedNumberOfVisibleFields, numberOfVisibleFields);
 }
+
+TEST_F(SquareMapTest, isMoveRightPossibleShouldReturnTrue)
+{
+    SquareMap map(4);
+    Position position(0, 0);
+    ASSERT_EQ(true, map.isMovePossible(position, Direction::Right));
+}
+
+TEST_F(SquareMapTest, isMoveLeftPossibleShouldReturnFalse)
+{
+    SquareMap map(4);
+    Position position(0, 0);
+    ASSERT_EQ(false, map.isMovePossible(position, Direction::Left));
+}
+
+TEST_F(SquareMapTest, isMoveUpPossibleShouldReturnTrue)
+{
+    SquareMap map(4);
+    Position position(2, 2);
+    ASSERT_EQ(true, map.isMovePossible(position, Direction::Up));
+}
+
+TEST_F(SquareMapTest, isMoveDownPossibleShouldReturnTrue)
+{
+    SquareMap map(4);
+    Position position(2, 2);
+    ASSERT_EQ(true, map.isMovePossible(position, Direction::Down));
+}
