@@ -1,25 +1,22 @@
-#include "MonsterCard.hpp"
+#include "Monster.hpp"
+#include "Points.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
 
 
-TEST(MonsterCardTest, ItShouldReturnString_useMonsterCard)
+TEST(MonsterTest, ItShouldSetStateToActive)
 {
-    MonsterCard card2;
-	Card *cardType;
-	cardType = &card2;
-	ASSERT_EQ("useMonsterCard", cardType -> useCard());
+   Monster card(Points(1), Points(1), 0);
+   card.activateCard();
+	ASSERT_EQ(Monster::State::active, card._state);
 }
 
-TEST(MonsterCardTest, ItShouldReturnInt_15_numberOfYourHpPoints)
+TEST(MonsterTest, ItShouldReturnInt_15_numberOfYourHpPoints)
 {
-    MonsterCard card4;
-	ASSERT_EQ(15, card4.takeDamage(5));
+    Monster card4(Points(20), Points(0), 0);
+    card4.dealDamage(card4._hp,5);
+	ASSERT_EQ(15, card4._hp._currentPoints);
 }
 
-TEST(MonsterCardTest, ItShouldReturnInt_10_numberOfYourHpPoints)
-{
-    MonsterCard card5(25,10);
-	ASSERT_EQ(10, card5.takeDamage(15));
-}
+//TODO write more tests
