@@ -1,14 +1,19 @@
 #include "ProfessionPaladin.hpp"
 
-void Paladin :: useUlt(std::optional<Player>& p1, std::optional<Player>& p2)
+void Paladin :: useUlt(std::optional<Player>& player1, std::optional<Player>& player2) try
 {
-  if(p1.has_value())
+  if(player1.has_value())
   {
-    constexpr uint heal_power = 1;
-    p1.value().currentHp += heal_power;
+    constexpr uint healPower = 1;
+    player1.value().currentHp += healPower;
   }
   else
   {
-    std::cerr << "P1 has no value(Paladin)";
+    throw std::out_of_range("Invalid value");
   }
+}
+
+catch(std::out_of_range exception)
+{
+  std::cout << exception.what();
 }

@@ -1,16 +1,21 @@
 #include "ProfessionRogue.hpp"
 
-void Rogue :: useUlt(std::optional<Player>& p1, std::optional<Player>& p2)
+void Rogue :: useUlt(std::optional<Player>& player1, std::optional<Player>& player2) try
 {
-  if(p1.has_value()&& p2.has_value())
+  if(player1.has_value()&& player2.has_value())
   {
     srand( time( NULL ) );
-    rng = ( std::rand() % p2.value().handdeck.size());
-    p1.value().handdeck.push_back(std::move(p2.value().handdeck.at(rng)));
-    p2.value().handdeck.erase(p2.value().handdeck.begin() + rng);
+    rng = ( std::rand() % player2.value().handdeck.size());
+    player1.value().handdeck.push_back(std::move(player2.value().handdeck.at(rng)));
+    player2.value().handdeck.erase(player2.value().handdeck.begin() + rng);
   }
   else
   {
-    std::cerr << "P1/P2 has no value(Rogue)";
+    throw std::out_of_range("Invalid value");
   }
+}
+
+catch(std::out_of_range exception)
+{
+  std::cout << exception.what();
 }

@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <optional>
+#include <exception>
+#include <stdexcept>
 #include "Player.hpp"
 
 class Profession

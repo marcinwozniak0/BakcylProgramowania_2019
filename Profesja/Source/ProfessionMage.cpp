@@ -1,14 +1,19 @@
 #include "ProfessionMage.hpp"
 
-void Mage :: useUlt(std::optional<Player>& p1, std::optional<Player>& p2)
+void Mage :: useUlt(std::optional<Player>& player1, std::optional<Player>& player2) try
 {
-  if(p2.has_value())
+  if(player2.has_value())
   {
-    constexpr uint damage_power = 1;
-    p2.value().currentHp -= damage_power;
+    constexpr uint damagePower = 1;
+    player2.value().currentHp -= damagePower;
   }
   else
   {
-    std::cerr << "P2 has no value(Mage)";
+    throw std::out_of_range("Invalid value");
   }
+}
+
+catch(std::out_of_range exception)
+{
+  std::cout << exception.what();
 }
