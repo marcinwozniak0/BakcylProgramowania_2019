@@ -15,7 +15,7 @@ void Rogue :: useUlt(std::optional<Player>& player1, std::optional<Player>& play
   }
 }
 
-catch(std::out_of_range exception)
+catch(const std::out_of_range& exception)
 {
   std::cout << exception.what();
 }
