@@ -7,8 +7,8 @@ using namespace ::testing;
 
 TEST(PaladinUsingUltHeal, ItShouldReturn21)
 {
-  std::optional<Player> p1 = Player();
-  std::optional<Player> p2 = Player();
+  std::optional<Player> p1 = Player(20);
+  std::optional<Player> p2 = Player(20);
   Paladin pl1;
   Profession *ProfType;
   ProfType = &pl1;

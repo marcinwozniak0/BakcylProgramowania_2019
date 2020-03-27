@@ -7,8 +7,8 @@ using namespace ::testing;
 
 TEST(RogueUsingUltCardSteal, ItShouldReturnChangedHandDecks)
 {
-  std::optional<Player> p1 = Player();
-  std::optional<Player> p2 = Player();
+  std::optional<Player> p1 = Player(20);
+  std::optional<Player> p2 = Player(20);
   Rogue rg1;
 
   bool rng_in_range = true;

@@ -2,9 +2,13 @@
 
 void Mage :: useUlt(std::optional<Player>& p1, std::optional<Player>& p2)
 {
-  if(p2.has_value() == true)
+  if(p2.has_value())
   {
-    uint power = 1;
-    p2.value().currentHp -= power;
+    constexpr uint damage_power = 1;
+    p2.value().currentHp -= damage_power;
+  }
+  else
+  {
+    std::cerr << "P2 has no value(Mage)";
   }
 }

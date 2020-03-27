@@ -1,9 +1,11 @@
 #pragma once
 #include <vector>
+#include <string>
 
 class Player
 {
 public:
-  uint currentHp = 20;
-  std::vector<std::string> handdeck = {"karta1", "karta2", "karta3"};
+  uint currentHp;
+  std::vector<std::string> handdeck;
+  Player(uint Hp);
 };

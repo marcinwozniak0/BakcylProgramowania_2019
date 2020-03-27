@@ -7,8 +7,8 @@ using namespace ::testing;
 
 TEST(MageUsingUltAttack, ItShouldReturn19)
 {
-  std::optional<Player> p1 = Player();
-  std::optional<Player> p2 = Player();
+  std::optional<Player> p1 = Player(20);
+  std::optional<Player> p2 = Player(20);
   Mage mg1;
   Profession *ProfType;
   ProfType = &mg1;
