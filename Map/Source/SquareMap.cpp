@@ -71,14 +71,14 @@ SquareMap::SquareMap(FieldList&& fieldList) : _fieldList(std::move(fieldList))
 
 bool SquareMap::isFieldAccessible(const Position& position)
 {
-    if (not isField(position) or getField(position)->getType() == FieldType::Wall)
+    if (not isFieldBelongToMap(position) or getField(position)->getType() == FieldType::Wall)
     {
         return false;
     }
     return true;
 }
 
-bool SquareMap::isField(const Position& position)
+bool SquareMap::isFieldBelongToMap(const Position& position)
 try
 {
     if (getField(position))
@@ -133,7 +133,7 @@ void SquareMap::makeNonBarrierFieldsInvisible()
 
 void SquareMap::makeRoomVisible(const Position& startPosition)
 {
-    if (not isField(startPosition))
+    if (not isFieldBelongToMap(startPosition))
     {
         return;
     }
@@ -158,7 +158,7 @@ void SquareMap::makeRoomVisible(const Position& startPosition)
 
 void SquareMap::makeRowVisible(const Position& startPosition)
 {
-    if (not isField(startPosition))
+    if (not isFieldBelongToMap(startPosition))
     {
         return;
     }
@@ -174,7 +174,7 @@ void SquareMap::makeRowVisible(const Position& startPosition)
     while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
     {
         ++tempPosition._x;
-        if (isField(tempPosition))
+        if (isFieldBelongToMap(tempPosition))
         {
             getField(tempPosition)->makeVisible();
         }
@@ -185,9 +185,9 @@ void SquareMap::makeRowVisible(const Position& startPosition)
     while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
     {
         --tempPosition._x;
-        if (isField(tempPosition))
+        if (isFieldBelongToMap(tempPosition))
         {
-        getField(tempPosition)->makeVisible();
+            getField(tempPosition)->makeVisible();
         }
     }
 }
