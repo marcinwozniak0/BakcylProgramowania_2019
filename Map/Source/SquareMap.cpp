@@ -65,6 +65,94 @@ SquareMap::SquareMap(const int mapSize)
     }
 }
 
+bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKey)
+{
+    switch(pressedKey)
+    {
+        case 'w':
+        {
+            if(isMoveUpPossible(coordinates))
+            {
+                return true;
+            };
+            break;
+        }
+        case 'a':
+        {
+            if(isMoveLeftPossible(coordinates))
+            {
+                return true;
+            };
+            break;
+        }
+        case 's':
+        {
+            if(isMoveDownPossible(coordinates))
+            {
+                return true;
+            }
+            break;
+        }
+        case 'd':
+        {
+            if(isMoveRightPossible(coordinates))
+            {
+                return true;
+            }
+            break;
+        }
+    }
+    return false;
+}
+
+bool SquareMap::isMoveUpPossible(const Position& coordinates)
+{
+    if(coordinates._y + 1u < _fieldList.size())
+    {
+        if(_fieldList.at(coordinates._x).at(coordinates._y + 1) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool SquareMap::isMoveDownPossible(const Position& coordinates)
+{
+    if(coordinates._y - 1 >= 0)
+    {
+        if(_fieldList.at(coordinates._x).at(coordinates._y - 1) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool SquareMap::isMoveRightPossible(const Position& coordinates)
+{
+    if(coordinates._x + 1u < _fieldList.size())
+    {
+        if(_fieldList.at(coordinates._x + 1).at(coordinates._y) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool SquareMap::isMoveLeftPossible(const Position& coordinates)
+{
+    if(coordinates._x - 1 >= 0)
+    {
+        if(_fieldList.at(coordinates._x - 1).at(coordinates._y) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 SquareMap::SquareMap(FieldList&& fieldList) : _fieldList(std::move(fieldList))
 {
 }
