@@ -20,12 +20,16 @@ include_directories(Map/Include)
 add_subdirectory(Map/Source)
 include_directories(Combat/Include)
 add_subdirectory(Combat/Source)
+include_directories(Profesja/Include)
+add_subdirectory(Profesja/Source)
 
 # TEST
 include_directories(Map/Test)
 add_subdirectory(Map/Test)
 include_directories(Combat/Test)
 add_subdirectory(Combat/Test)
+include_directories(Profesja/Test)
+add_subdirectory(Profesja/Test)
 
 add_library(source_objects_lib OBJECT ${SOURCES})
 
