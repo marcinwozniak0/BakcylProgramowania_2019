@@ -6,6 +6,7 @@
 #include <memory>
 #include <stdexcept>
 #include <vector>
+#include <sstream>
 
 const FieldList& SquareMap::getFields()
 {
@@ -36,6 +37,50 @@ char SquareMap::printField(const Field& field)
   {
     return ' ';
   }
+}
+
+std::string SquareMap::getMapToPrint(const Position& playerPosition)
+{
+	std::stringstream output;
+	
+	const unsigned int mapSize = _fieldList.size();
+	
+	output << "   ";
+	for(unsigned int ite = 0; ite < mapSize; ++ite)
+	{
+		output << ' ' << (ite + 1) % 10;
+	}
+	output << '\n';
+	
+	output << "  ";
+	for(unsigned int ite = 0; ite < mapSize * 2 + 3; ++ite)
+	{
+		output << '#';
+	}
+	output << '\n';
+	
+	for(unsigned int row; row < mapSize; ++row)
+	{
+		output << (row + 1) % 10 << " #";
+		for(unsigned int column = 0; column < mapSize; ++column)
+		{
+			output << ' ' << printField(_fieldList.at(column).at(row));
+		}
+		output << " #\n";
+	}
+	
+	output << "  ";
+	for(unsigned int ite = 0; ite < mapSize * 2 + 3; ++ite)
+	{
+		output << '#';
+	}
+	
+	const unsigned int playerPosOnScreen = 14 + 4 * mapSize + playerPosition._y * ( 2 * mapSize + 6 ) + 2 * playerPosition._x;
+	
+	std::string outputString = output.str();
+	outputString[playerPosOnScreen] = 'P';
+	
+	return outputString;
 }
 
 SquareMap::SquareMap(const int mapSize)

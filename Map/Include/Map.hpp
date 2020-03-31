@@ -11,4 +11,5 @@ public:
     virtual const FieldList& getFields() = 0;
 
     virtual char printField(const Field& field) = 0;
+	virtual std::string getMapToPrint(const Position& playerPosition) = 0;
 };
