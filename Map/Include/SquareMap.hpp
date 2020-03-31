@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Map.hpp"
 #include "Position.hpp"
 
@@ -13,16 +14,22 @@ public:
     void updateVisilibity(const Position& playerPosition);
 
 private:
-    FieldList _fieldList;
     bool isMovePossible(const Position&, const char);
     bool isMoveUpPossible(const Position&);
     bool isMoveDownPossible(const Position&);
     bool isMoveRightPossible(const Position&);
     bool isMoveLeftPossible(const Position&);
     bool isFieldAccessible(const Position& position);
-    bool isField(const Position& position);
+    bool isFieldBelongToMap(const Position& position);
+    bool isFieldBarrier(const Position& position);
     void makeNonBarrierFieldsInvisible();
     void makeRoomVisible(const Position& startPosition);
     void makeRowVisible(const Position& startPosition);
+    void makeUpperRowsVisible(Position position);
+    void makeLowerRowsVisible(Position position);
+    void makeLeftHandFieldsVisible(Position position);
+    void makeRightHandFieldsVisible(Position position);
     const std::unique_ptr<Field>& getField(const Position& position);
+    
+    FieldList _fieldList;
 };

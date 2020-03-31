@@ -159,27 +159,38 @@ SquareMap::SquareMap(FieldList&& fieldList) : _fieldList(std::move(fieldList))
 
 bool SquareMap::isFieldAccessible(const Position& position)
 {
-    if (not isField(position) or getField(position)->getType() == FieldType::Wall)
+    if (not isFieldBelongToMap(position) or getField(position)->getType() == FieldType::Wall)
     {
         return false;
     }
     return true;
 }
 
-bool SquareMap::isField(const Position& position)
+bool SquareMap::isFieldBelongToMap(const Position& position)
+try
 {
-    try
+    if (getField(position))
     {
-        if (getField(position))
-        {
-            return true;
-        }
+        return true;
+    }
+    return false;
+}
+catch (std::out_of_range&)
+{
+    return false;
+}
+
+bool SquareMap::isFieldBarrier(const Position& position)
+{
+    if (not isFieldBelongToMap(position))
+    {
         return false;
     }
-    catch (std::out_of_range&)
+    else if (getField(position)->getType() != FieldType::Wall and getField(position)->getType() != FieldType::Door)
     {
         return false;
     }
+    return true;
 }
 
 const std::unique_ptr<Field>& SquareMap::getField(const Position& position)
@@ -223,61 +234,81 @@ void SquareMap::makeNonBarrierFieldsInvisible()
 
 void SquareMap::makeRoomVisible(const Position& startPosition)
 {
-    if (not isField(startPosition))
+    if (not isFieldBelongToMap(startPosition))
     {
         return;
     }
 
-    Position tempPosition = startPosition;
-    makeRowVisible(tempPosition);
+    makeRowVisible(startPosition);
 
-    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
+    makeUpperRowsVisible(startPosition);
+    makeLowerRowsVisible(startPosition);
+}
+
+void SquareMap::makeUpperRowsVisible(Position position)
+{
+    while (not isFieldBarrier(position))
     {
-        ++tempPosition._y;
-        makeRowVisible(tempPosition);
+        ++position._y;
+        if (not isFieldBelongToMap(position))
+        {
+            return;
+        }
+        makeRowVisible(position);
     }
-
-    tempPosition = startPosition;
-
-    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
+}
+void SquareMap::makeLowerRowsVisible(Position position)
+{
+    while (not isFieldBarrier(position))
     {
-        --tempPosition._y;
-        makeRowVisible(tempPosition);
+        --position._y;
+        if (not isFieldBelongToMap(position))
+        {
+            return;
+        }
+        makeRowVisible(position);
     }
 }
 
 void SquareMap::makeRowVisible(const Position& startPosition)
 {
-    if (not isField(startPosition))
+    if (not isFieldBelongToMap(startPosition))
     {
         return;
     }
 
     getField(startPosition)->makeVisible();
-    if (not isFieldAccessible(startPosition) or getField(startPosition)->getType() == FieldType::Door)
+    if (isFieldBarrier(startPosition))
     {
         return;
     }
 
-    Position tempPosition = startPosition;
+    makeLeftHandFieldsVisible(startPosition);
+    makeRightHandFieldsVisible(startPosition);
+}
 
-    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
+void SquareMap::makeLeftHandFieldsVisible(Position position)
+{
+    while (not isFieldBarrier(position))
     {
-        ++tempPosition._x;
-        if (isField(tempPosition))
+        ++position._x;
+        if (not isFieldBelongToMap(position))
         {
-            getField(tempPosition)->makeVisible();
+            return;
         }
+        getField(position)->makeVisible();
     }
+}
 
-    tempPosition = startPosition;
-
-    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
+void SquareMap::makeRightHandFieldsVisible(Position position)
+{
+    while (not isFieldBarrier(position))
     {
-        --tempPosition._x;
-        if (isField(tempPosition))
+        --position._x;
+        if (not isFieldBelongToMap(position))
         {
-        getField(tempPosition)->makeVisible();
+            return;
         }
+        getField(position)->makeVisible();
     }
 }
