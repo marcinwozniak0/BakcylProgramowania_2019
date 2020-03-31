@@ -12,6 +12,7 @@ public:
 
     char printField(const Field& field);
     void updateVisilibity(const Position& playerPosition);
+	std::string getMapToPrint(const Position& playerPosition);
 
 private:
     bool isMovePossible(const Position&, const char);
