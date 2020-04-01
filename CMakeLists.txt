@@ -32,8 +32,8 @@ include_directories(Combat/Test)
 add_subdirectory(Combat/Test)
 include_directories(Profesja/Test)
 add_subdirectory(Profesja/Test)
-include_directories(Handdeck/Include)
-add_subdirectory(Handdeck/Source)
+include_directories(Handdeck/Test)
+add_subdirectory(Handdeck/Test)
 
 add_library(source_objects_lib OBJECT ${SOURCES})
 
