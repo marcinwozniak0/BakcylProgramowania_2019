@@ -269,3 +269,10 @@ TEST_F(SquareMapTest, seenDoorsAndWallsShouldStayVisible)
 
     ASSERT_EQ(expectedNumberOfVisibleFields, numberOfVisibleFields);
 }
+
+TEST_F(SquareMapTest, mapPrint)
+{
+	SquareMap map(2);
+	
+	ASSERT_EQ(map.getMapToPrint(Position(1,1)),"    1 2\n  #######\n1 # . F #\n2 # T P #\n  #######");
+}
