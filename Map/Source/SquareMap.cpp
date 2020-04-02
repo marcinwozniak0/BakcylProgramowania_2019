@@ -65,11 +65,11 @@ SquareMap::SquareMap(const int mapSize)
     }
 }
 
-bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKey)
+bool SquareMap::isMovePossible(const Position& coordinates, const Direction direction)
 {
-    switch(pressedKey)
+    switch(direction)
     {
-        case 'w':
+        case Direction::Up:
         {
             if(isMoveUpPossible(coordinates))
             {
@@ -77,7 +77,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
             };
             break;
         }
-        case 'a':
+        case Direction::Left:
         {
             if(isMoveLeftPossible(coordinates))
             {
@@ -85,7 +85,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
             };
             break;
         }
-        case 's':
+        case Direction::Down:
         {
             if(isMoveDownPossible(coordinates))
             {
@@ -93,7 +93,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
             }
             break;
         }
-        case 'd':
+        case Direction::Right:
         {
             if(isMoveRightPossible(coordinates))
             {
@@ -107,19 +107,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
 
 bool SquareMap::isMoveUpPossible(const Position& coordinates)
 {
-    if(coordinates._y + 1u < _fieldList.size())
-    {
-        if(_fieldList.at(coordinates._x).at(coordinates._y + 1) -> getType() != FieldType::Wall)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool SquareMap::isMoveDownPossible(const Position& coordinates)
-{
-    if(coordinates._y - 1 >= 0)
+    if(coordinates._y > 0)
     {
         if(_fieldList.at(coordinates._x).at(coordinates._y - 1) -> getType() != FieldType::Wall)
         {
@@ -129,9 +117,21 @@ bool SquareMap::isMoveDownPossible(const Position& coordinates)
     return false;
 }
 
+bool SquareMap::isMoveDownPossible(const Position& coordinates)
+{
+    if(coordinates._y + 1 < _fieldList.size())
+    {
+        if(_fieldList.at(coordinates._x).at(coordinates._y + 1) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool SquareMap::isMoveRightPossible(const Position& coordinates)
 {
-    if(coordinates._x + 1u < _fieldList.size())
+    if(coordinates._x + 1 < _fieldList.size())
     {
         if(_fieldList.at(coordinates._x + 1).at(coordinates._y) -> getType() != FieldType::Wall)
         {
@@ -143,7 +143,7 @@ bool SquareMap::isMoveRightPossible(const Position& coordinates)
 
 bool SquareMap::isMoveLeftPossible(const Position& coordinates)
 {
-    if(coordinates._x - 1 >= 0)
+    if(coordinates._x > 0)
     {
         if(_fieldList.at(coordinates._x - 1).at(coordinates._y) -> getType() != FieldType::Wall)
         {

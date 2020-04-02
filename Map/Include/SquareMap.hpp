@@ -12,9 +12,9 @@ public:
 
     char printField(const Field& field);
     void updateVisilibity(const Position& playerPosition);
+    bool isMovePossible(const Position&, const Direction);
 
 private:
-    bool isMovePossible(const Position&, const char);
     bool isMoveUpPossible(const Position&);
     bool isMoveDownPossible(const Position&);
     bool isMoveRightPossible(const Position&);
