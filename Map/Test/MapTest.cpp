@@ -324,8 +324,8 @@ TEST_F(SquareMapTest, mapPrint5x5_1)
                                                "1 #     # . . #\n"
                                                "2 #     D P . #\n"
                                                "3 #     #######\n"
-                                               "4 #     D     #\n"
-                                               "5 #     #     #\n"
+                                               "4 #           #\n"
+                                               "5 #           #\n"
                                                "  #############\n"
     );
 }
@@ -340,7 +340,7 @@ TEST_F(SquareMapTest, mapPrint5x5_2)
                                                "  #############\n"
                                                "1 # P . #     #\n"
                                                "2 # . . D     #\n"
-                                               "3 # . . #######\n"
+                                               "3 # . . #     #\n"
                                                "4 # . F D     #\n"
                                                "5 # . . #     #\n"
                                                "  #############\n"
@@ -355,8 +355,8 @@ TEST_F(SquareMapTest, mapPrint5x5_3)
 	
     ASSERT_EQ(map.getMapToPrint(Position(3,3)),"    1 2 3 4 5\n"
                                                "  #############\n"
-                                               "1 #     #     #\n"
-                                               "2 #     D     #\n"
+                                               "1 #           #\n"
+                                               "2 #           #\n"
                                                "3 #     #######\n"
                                                "4 #     D P T #\n"
                                                "5 #     # T . #\n"
@@ -405,8 +405,8 @@ TEST_F(SquareMapTest, mapPrint4x4_1)
     
     ASSERT_EQ(map.getMapToPrint(Position(0,3)),"    1 2 3 4\n"
                                                "  ###########\n"
-                                               "1 #     D   #\n"
-                                               "2 #     #   #\n"
+                                               "1 #         #\n"
+                                               "2 #         #\n"
                                                "3 ########D##\n"
                                                "4 # P . F . #\n"
                                                "  ###########\n"
@@ -423,7 +423,7 @@ TEST_F(SquareMapTest, mapPrint4x4_2)
                                                "  ###########\n"
                                                "1 # T P D   #\n"
                                                "2 # . T #   #\n"
-                                               "3 ########D##\n"
+                                               "3 #######   #\n"
                                                "4 #         #\n"
                                                "  ###########\n"
     );
@@ -439,7 +439,7 @@ TEST_F(SquareMapTest, mapPrint4x4_3)
                                                "  ###########\n"
                                                "1 #     D P #\n"
                                                "2 #     # F #\n"
-                                               "3 ########D##\n"
+                                               "3 #     ##D##\n"
                                                "4 #         #\n"
                                                "  ###########\n"
     );
