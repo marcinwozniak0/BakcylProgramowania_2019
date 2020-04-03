@@ -30,6 +30,10 @@ private:
     void makeLowerRowsVisible(Position position);
     void makeLeftHandFieldsVisible(Position position);
     void makeRightHandFieldsVisible(Position position);
+    void printColumnNumbers(std::ostream& str, const int mapSize);
+    void printFrameHorizontal(std::ostream& str, const int mapSize);
+    void printFieldRows(std::ostream& str, const int mapSize);
+    void markPlayerPosition(std::string& str, const Position& playerPosition)
     const std::unique_ptr<Field>& getField(const Position& position);
     
     FieldList _fieldList;

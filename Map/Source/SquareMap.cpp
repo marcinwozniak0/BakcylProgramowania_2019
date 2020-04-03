@@ -45,22 +45,45 @@ std::string SquareMap::getMapToPrint(const Position& playerPosition)
     
     const unsigned int mapSize = _fieldList.size();
     
-    output << "   ";
+    printColumnNumbers(output, mapSize);
+    
+    printFrameHorizontal(output, mapSize);
+    
+    printFieldRows(output, mapSize);
+    
+    printFrameHorizontal(output, mapSize);
+    
+    std::string outputString = output.str();
+    
+    markPlayerPosition(outputString, playerPosition)
+    
+    return outputString;
+}
+
+void SquareMap::printColumnNumbers(std::ostream& str, const int mapSize)
+{
+    str << "   ";
     for(unsigned int ite = 0; ite < mapSize; ++ite)
     {
-        output << ' ' << (ite + 1) % 10;
+        str << ' ' << (ite + 1) % 10;
     }
-    output << '\n';
-    
+    str << '\n';
+}
+
+void SquareMap::printFrameHorizontal(std::ostream& str, const int mapSize)
+{
     const auto mapFrameWidth = mapSize * 2 + 3;
     
-    output << "  ";
+    str << "  ";
     for(unsigned int ite = 0; ite < mapFrameWidth; ++ite)
     {
-        output << '#';
+        str << '#';
     }
-    output << '\n';
-    
+    str << '\n';
+}
+
+void SquareMap::printFieldRows(std::ostream& str, const int mapSize)
+{
     for(unsigned int row; row < mapSize; ++row)
     {
         output << (row + 1) % 10 << " #";
@@ -70,22 +93,15 @@ std::string SquareMap::getMapToPrint(const Position& playerPosition)
         }
         output << " #\n";
     }
-    
-    output << "  ";
-    for(unsigned int ite = 0; ite < mapFrameWidth; ++ite)
-    {
-        output << '#';
-    }
-    
+}
+
+void SquareMap::markPlayerPosition(std::string& str, const Position& playerPosition)
+{
     const auto leadingCharsCount = 14u + mapSize * 4u;
     const auto rowCharCount = 6u + mapSize * 2u;
     constexpr auto fieldWidth = 2u;
     const auto playerPosOnScreen = leadingCharsCount + playerPosition._y * rowCharCount + fieldWidth * playerPosition._x;
-    
-    std::string outputString = output.str();
-    outputString.at(playerPosOnScreen) = 'P';
-    
-    return outputString;
+    str.at(playerPosOnScreen) = 'P';
 }
 
 SquareMap::SquareMap(const int mapSize)
