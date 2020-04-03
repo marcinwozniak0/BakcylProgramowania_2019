@@ -314,7 +314,7 @@ FieldList buildSimple5x5Map()
     return fieldList;
 }
 
-TEST_F(SquareMapTest, mapPrint)
+TEST_F(SquareMapTest, mapPrint5x5)
 {
 	SquareMap map(buildSimple5x5Map);
 	
@@ -326,5 +326,52 @@ TEST_F(SquareMapTest, mapPrint)
                                                "4 # . F D . T #\n"
                                                "5 # . . # T . #\n"
                                                "  #############\n"
+    );
+}
+
+FieldList buildSimple4x4Map()
+{
+    FieldList fieldList;
+    std::vector<std::unique_ptr<Field>> column;
+
+    column.emplace_back(std::make_unique<TreasureField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+    
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<TreasureField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+    
+    column.emplace_back(std::make_unique<DoorField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<FightField>());
+    fieldList.emplace_back(std::move(column));
+
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<FightField>());
+    column.emplace_back(std::make_unique<DoorField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+
+
+    return fieldList;
+}
+
+TEST_F(SquareMapTest, mapPrint4x4)
+{
+	SquareMap map(buildSimple4x4Map);
+	
+	ASSERT_EQ(map.getMapToPrint(Position(0,3)),"    1 2 3 4\n"
+                                               "  ###########\n"
+                                               "1 # T . D . #\n"
+                                               "2 # . T # F #\n"
+                                               "3 ########D##\n"
+                                               "4 # P . F . #\n"
+                                               "  ###########\n"
     );
 }
