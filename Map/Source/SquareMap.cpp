@@ -89,15 +89,11 @@ void SquareMap::printFieldRows(std::ostream& str, const int mapSize)
         output << (row + 1) % 10 << " #";
         for(unsigned int column = 0; column < mapSize; ++column)
         {
-            if(_fieldList.at(column).at(row)->getType() == FieldType::Wall)
+            if(isFieldBarrier(Position(column,row)))
             {
-                if(column == 0)
+                if(isFieldBarrier(Position(column - 1,row)))
                 {
-                    output << "##";
-                }
-                else if(_fieldList.at(column - 1).at(row)->getType() == FieldType::Wall)
-                {
-                    output << "##";
+                    output << '#' << printField(_fieldList.at(column).at(row));
                 }
             }
             else
@@ -105,7 +101,7 @@ void SquareMap::printFieldRows(std::ostream& str, const int mapSize)
                 output << ' ' << printField(_fieldList.at(column).at(row));
             }
         }
-        if(_fieldList.at(mapSize - 1).at(row)->getType() == FieldType::Wall)
+        if(isFieldBarrier(Position(mapSize - 1,row)))
         {
             output << "##\n";
         }
