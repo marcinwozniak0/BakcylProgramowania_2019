@@ -13,30 +13,30 @@ const FieldList& SquareMap::getFields()
     return _fieldList;
 }
 
-char SquareMap::printField(const Field& field)
+char SquareMap::printField(const std::unique_ptr<Field>& field)
 {
-  if(field.isVisible())
-  {
-    FieldType type = field.getType();
-    switch (type) {
-      case FieldType::Empty:
-        return '.';
-      case FieldType::Wall:
-        return '#';
-      case FieldType::Fight:
-        return 'F';
-      case FieldType::Treasure:
-        return 'T';
-      case FieldType::Door:
-        return 'D';
-      default:
-        return '?';
+    if(field->isVisible())
+    {
+        FieldType type = field->getType();
+        switch (type) {
+            case FieldType::Empty:
+                return '.';
+            case FieldType::Wall:
+                return '#';
+            case FieldType::Fight:
+                return 'F';
+            case FieldType::Treasure:
+                return 'T';
+            case FieldType::Door:
+                return 'D';
+            default:
+                return '?';
+        }
     }
-  }
-  else
-  {
-    return ' ';
-  }
+    else
+    {
+        return ' ';
+    }
 }
 
 std::string SquareMap::getMapToPrint(const Position& playerPosition)
@@ -55,12 +55,12 @@ std::string SquareMap::getMapToPrint(const Position& playerPosition)
     
     std::string outputString = output.str();
     
-    markPlayerPosition(outputString, playerPosition)
+    markPlayerPosition(outputString, playerPosition, mapSize);
     
     return outputString;
 }
 
-void SquareMap::printColumnNumbers(std::ostream& str, const int mapSize)
+void SquareMap::printColumnNumbers(std::ostream& str, const unsigned int mapSize)
 {
     str << "   ";
     for(unsigned int ite = 0; ite < mapSize; ++ite)
@@ -70,7 +70,7 @@ void SquareMap::printColumnNumbers(std::ostream& str, const int mapSize)
     str << '\n';
 }
 
-void SquareMap::printFrameHorizontal(std::ostream& str, const int mapSize)
+void SquareMap::printFrameHorizontal(std::ostream& str, const unsigned int mapSize)
 {
     const auto mapFrameWidth = mapSize * 2 + 3;
     
@@ -82,41 +82,41 @@ void SquareMap::printFrameHorizontal(std::ostream& str, const int mapSize)
     str << '\n';
 }
 
-void SquareMap::printFieldRows(std::ostream& str, const int mapSize)
+void SquareMap::printFieldRows(std::ostream& str, const unsigned int mapSize)
 {
     for(unsigned int row; row < mapSize; ++row)
     {
-        output << (row + 1) % 10 << " #";
+        str << (row + 1) % 10 << " #";
         for(unsigned int column = 0; column < mapSize; ++column)
         {
             if(_fieldList.at(column).at(row)->getType() == FieldType::Wall)
             {
                 if(column == 0)
                 {
-                    output << "##";
+                    str << "##";
                 }
                 else if(_fieldList.at(column - 1).at(row)->getType() == FieldType::Wall)
                 {
-                    output << "##";
+                    str << "##";
                 }
             }
             else
             {
-                output << ' ' << printField(_fieldList.at(column).at(row));
+                str << ' ' << printField(_fieldList.at(column).at(row));
             }
         }
         if(_fieldList.at(mapSize - 1).at(row)->getType() == FieldType::Wall)
-        {
-            output << "##\n";
+        { 
+            str << "##\n";
         }
         else
         {
-            output << " #\n";
+            str << " #\n";
         }
     }
 }
 
-void SquareMap::markPlayerPosition(std::string& str, const Position& playerPosition)
+void SquareMap::markPlayerPosition(std::string& str, const Position& playerPosition, const unsigned int mapSize)
 {
     const auto leadingCharsCount = 14u + mapSize * 4u;
     const auto rowCharCount = 6u + mapSize * 2u;

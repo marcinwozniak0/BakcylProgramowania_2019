@@ -105,59 +105,59 @@ TEST_F(SquareMapTest, MapWithSize4ShouldContain2FightFields)
 
 TEST_F(SquareMapTest, emptyFieldVisiblePrint)
 {
-  EmptyField field;
-  field.makeVisible();
+  std::unique_ptr<Field> field = std::make_unique<EmptyField>();
+  field->makeVisible();
   ASSERT_EQ('.',map.printField(field));
 }
 
 TEST_F(SquareMapTest, fightFieldVisiblePrint)
 {
-  FightField field;
-  field.makeVisible();
+  std::unique_ptr<Field> field = std::make_unique<FightField>();
+  field->makeVisible();
   ASSERT_EQ('F',map.printField(field));
 }
 
 TEST_F(SquareMapTest, treasureFieldVisiblePrint)
 {
-  TreasureField field;
-  field.makeVisible();
+  std::unique_ptr<Field> field = std::make_unique<TreasureField>();
+  field->makeVisible();
   ASSERT_EQ('T',map.printField(field));
 }
 
 TEST_F(SquareMapTest, wallFieldVisiblePrint)
 {
-    WallField field;
-    field.makeVisible();
+    std::unique_ptr<Field> field = std::make_unique<WallField>();
+    field->makeVisible();
     ASSERT_EQ('#', map.printField(field));
 }
 TEST_F(SquareMapTest, doorFieldPrint)
 {
-    DoorField field;
-    field.makeVisible();
+    std::unique_ptr<Field> field = std::make_unique<DoorField>();
+    field->makeVisible();
     ASSERT_EQ('D', map.printField(field));
 }
 
 TEST_F(SquareMapTest, emptyFieldInvisiblePrint)
 {
-  EmptyField field;
+  std::unique_ptr<Field> field = std::make_unique<EmptyField>();
   ASSERT_EQ(' ',map.printField(field));
 }
 
 TEST_F(SquareMapTest, fightFieldInvisiblePrint)
 {
-  FightField field;
+  std::unique_ptr<Field> field = std::make_unique<FightField>();
   ASSERT_EQ(' ',map.printField(field));
 }
 
 TEST_F(SquareMapTest, treasureFieldInvisiblePrint)
 {
-  TreasureField field;
+  std::unique_ptr<Field> field = std::make_unique<TreasureField>();
   ASSERT_EQ(' ',map.printField(field));
 }
 
 TEST_F(SquareMapTest, wallFieldInvisiblePrint)
 {
-  WallField field;
+  std::unique_ptr<Field> field = std::make_unique<WallField>();
   ASSERT_EQ(' ',map.printField(field));
 }
 
@@ -316,9 +316,9 @@ FieldList buildSimple5x5Map()
 
 TEST_F(SquareMapTest, mapPrint)
 {
-	SquareMap map(buildSimple5x5Map);
+    SquareMap map(buildSimple5x5Map());
 	
-	ASSERT_EQ(map.getMapToPrint(Position(3,1)),"    1 2 3 4 5\n"
+    ASSERT_EQ(map.getMapToPrint(Position(3,1)),"    1 2 3 4 5\n"
                                                "  #############\n"
                                                "1 # . . # . . #\n"
                                                "2 # . . D P . #\n"
