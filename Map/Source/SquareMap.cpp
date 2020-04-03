@@ -52,8 +52,10 @@ std::string SquareMap::getMapToPrint(const Position& playerPosition)
     }
     output << '\n';
     
+    const auto mapFrameWidth = mapSize * 2 + 3;
+    
     output << "  ";
-    for(unsigned int ite = 0; ite < mapSize * 2 + 3; ++ite)
+    for(unsigned int ite = 0; ite < mapFrameWidth; ++ite)
     {
         output << '#';
     }
@@ -70,12 +72,15 @@ std::string SquareMap::getMapToPrint(const Position& playerPosition)
     }
     
     output << "  ";
-    for(unsigned int ite = 0; ite < mapSize * 2 + 3; ++ite)
+    for(unsigned int ite = 0; ite < mapFrameWidth; ++ite)
     {
         output << '#';
     }
     
-    const unsigned int playerPosOnScreen = 14 + 4 * mapSize + playerPosition._y * ( 2 * mapSize + 6 ) + 2 * playerPosition._x;
+    const auto leadingCharsCount = 14u + mapSize * 4u;
+    const auto rowCharCount = 6u + mapSize * 2u;
+    constexpr auto fieldWidth = 2u;
+    const auto playerPosOnScreen = leadingCharsCount + playerPosition._y * rowCharCount + fieldWidth * playerPosition._x;
     
     std::string outputString = output.str();
     outputString[playerPosOnScreen] = 'P';
