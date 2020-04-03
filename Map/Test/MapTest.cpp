@@ -277,38 +277,39 @@ FieldList buildSimple5x5Map()
 
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<WallField>());
-    column.emplace_back(std::make_unique<TreasureField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
     fieldList.emplace_back(std::move(column));
-
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<WallField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<TreasureField>());
-    fieldList.emplace_back(std::move(column));
-
-    column.emplace_back(std::make_unique<WallField>());
-    column.emplace_back(std::make_unique<DoorField>());
-    column.emplace_back(std::make_unique<WallField>());
-    column.emplace_back(std::make_unique<DoorField>());
-    column.emplace_back(std::make_unique<WallField>());
-    fieldList.emplace_back(std::move(column));
-
+    
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<FightField>());
     column.emplace_back(std::make_unique<EmptyField>());
     fieldList.emplace_back(std::move(column));
+    
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<DoorField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<DoorField>());
+    column.emplace_back(std::make_unique<WallField>());
+    fieldList.emplace_back(std::move(column));
 
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<TreasureField>());
+    fieldList.emplace_back(std::move(column));
+
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<TreasureField>());
     column.emplace_back(std::make_unique<EmptyField>());
     fieldList.emplace_back(std::move(column));
+
 
     return fieldList;
 }
@@ -317,13 +318,13 @@ TEST_F(SquareMapTest, mapPrint)
 {
 	SquareMap map(buildSimple5x5Map);
 	
-	ASSERT_EQ(map.getMapToPrint(Position(1,1)),"    1 2 3 4 5\n"
+	ASSERT_EQ(map.getMapToPrint(Position(3,1)),"    1 2 3 4 5\n"
                                                "  #############\n"
                                                "1 # . . # . . #\n"
-                                               "2 # . P D . . #\n"
-                                               "3 ####### . . #\n"
-                                               "4 # T . D F . #\n"
-                                               "5 # . T # . . #\n"
+                                               "2 # . . D P . #\n"
+                                               "3 # . . #######\n"
+                                               "4 # . F D . T #\n"
+                                               "5 # . . # T . #\n"
                                                "  #############\n"
     );
 }
