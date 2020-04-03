@@ -313,7 +313,7 @@ FieldList buildSimple5x5Map()
     return fieldList;
 }
 
-TEST_F(SquareMapTest, mapPrint5x5)
+TEST_F(SquareMapTest, mapPrint5x5_1)
 {
     SquareMap map(buildSimple5x5Map());
 
@@ -326,6 +326,40 @@ TEST_F(SquareMapTest, mapPrint5x5)
                                                "3 #     #######\n"
                                                "4 #     D     #\n"
                                                "5 #     #     #\n"
+                                               "  #############\n"
+    );
+}
+
+TEST_F(SquareMapTest, mapPrint5x5_2)
+{
+    SquareMap map(buildSimple5x5Map());
+
+    map.updateVisilibity(Position(0,0));
+	
+    ASSERT_EQ(map.getMapToPrint(Position(0,0)),"    1 2 3 4 5\n"
+                                               "  #############\n"
+                                               "1 # P . #     #\n"
+                                               "2 # . . D     #\n"
+                                               "3 # . . #######\n"
+                                               "4 # . F D     #\n"
+                                               "5 # . . #     #\n"
+                                               "  #############\n"
+    );
+}
+
+TEST_F(SquareMapTest, mapPrint5x5_3)
+{
+    SquareMap map(buildSimple5x5Map());
+
+    map.updateVisilibity(Position(0,0));
+	
+    ASSERT_EQ(map.getMapToPrint(Position(0,0)),"    1 2 3 4 5\n"
+                                               "  #############\n"
+                                               "1 #     #     #\n"
+                                               "2 #     D     #\n"
+                                               "3 #     #######\n"
+                                               "4 #     D P T #\n"
+                                               "5 #     # T . #\n"
                                                "  #############\n"
     );
 }
@@ -363,7 +397,7 @@ FieldList buildSimple4x4Map()
     return fieldList;
 }
 
-TEST_F(SquareMapTest, mapPrint4x4)
+TEST_F(SquareMapTest, mapPrint4x4_1)
 {
     SquareMap map(buildSimple4x4Map());
 
@@ -375,6 +409,38 @@ TEST_F(SquareMapTest, mapPrint4x4)
                                                "2 #     #   #\n"
                                                "3 ########D##\n"
                                                "4 # P . F . #\n"
+                                               "  ###########\n"
+    );
+}
+
+TEST_F(SquareMapTest, mapPrint4x4_2)
+{
+    SquareMap map(buildSimple4x4Map());
+
+    map.updateVisilibity(Position(1,0));
+    
+    ASSERT_EQ(map.getMapToPrint(Position(1,0)),"    1 2 3 4\n"
+                                               "  ###########\n"
+                                               "1 # T P D   #\n"
+                                               "2 # . T #   #\n"
+                                               "3 ########D##\n"
+                                               "4 #         #\n"
+                                               "  ###########\n"
+    );
+}
+
+TEST_F(SquareMapTest, mapPrint4x4_3)
+{
+    SquareMap map(buildSimple4x4Map());
+
+    map.updateVisilibity(Position(3,0));
+    
+    ASSERT_EQ(map.getMapToPrint(Position(3,0)),"    1 2 3 4\n"
+                                               "  ###########\n"
+                                               "1 #     D P #\n"
+                                               "2 #     # F #\n"
+                                               "3 ########D##\n"
+                                               "4 #         #\n"
                                                "  ###########\n"
     );
 }
