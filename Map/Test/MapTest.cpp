@@ -351,9 +351,9 @@ TEST_F(SquareMapTest, mapPrint5x5_3)
 {
     SquareMap map(buildSimple5x5Map());
 
-    map.updateVisilibity(Position(0,0));
+    map.updateVisilibity(Position(3,3));
 	
-    ASSERT_EQ(map.getMapToPrint(Position(0,0)),"    1 2 3 4 5\n"
+    ASSERT_EQ(map.getMapToPrint(Position(3,3)),"    1 2 3 4 5\n"
                                                "  #############\n"
                                                "1 #     #     #\n"
                                                "2 #     D     #\n"
