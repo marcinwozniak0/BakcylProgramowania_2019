@@ -13,7 +13,7 @@ void Mage :: useUlt(std::optional<Player>& player1, std::optional<Player>& playe
   }
 }
 
-catch(std::out_of_range exception)
+catch (std::out_of_range& exception)
 {
   std::cout << exception.what();
 }
