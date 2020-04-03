@@ -89,27 +89,27 @@ void SquareMap::printFieldRows(std::ostream& str, const unsigned int mapSize)
         str << (row + 1) % 10 << " #";
         for(unsigned int column = 0; column < mapSize; ++column)
         {
-            if(isFieldBarrier(Position(column,row)))
+            if(isFieldBarrier(Position(column,row)) && _fieldList.at(column).at(row)->isVisible())
             {
-		if(column == 0)
-		{
-                    str << '#' << printField(_fieldList.at(column).at(row));
-		}
-		else if(isFieldBarrier(Position(column - 1,row)))
+                if(column == 0)
                 {
                     str << '#' << printField(_fieldList.at(column).at(row));
                 }
-		else
+                else if(isFieldBarrier(Position(column - 1,row)) && getField(Position(column - 1,row))->isVisible())
+                {
+                    str << '#' << printField(_fieldList.at(column).at(row));
+                }
+                else
                 {
                     str << ' ' << printField(_fieldList.at(column).at(row));
-		}
+                }
             }
             else
             {
                 str << ' ' << printField(_fieldList.at(column).at(row));
             }
         }
-        if(isFieldBarrier(Position(mapSize - 1,row)))
+        if(isFieldBarrier(Position(mapSize - 1,row)) && getField(Position(mapSize - 1,row))->isVisible())
         {
             str << "##\n";
         }
