@@ -83,7 +83,7 @@ std::string SquareMap::getMapToPrint(const Position& playerPosition)
     const auto playerPosOnScreen = leadingCharsCount + playerPosition._y * rowCharCount + fieldWidth * playerPosition._x;
     
     std::string outputString = output.str();
-    outputString[playerPosOnScreen] = 'P';
+    outputString.at(playerPosOnScreen) = 'P';
     
     return outputString;
 }
