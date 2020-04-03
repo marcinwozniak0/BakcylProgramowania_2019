@@ -310,21 +310,22 @@ FieldList buildSimple5x5Map()
     column.emplace_back(std::make_unique<EmptyField>());
     fieldList.emplace_back(std::move(column));
 
-
     return fieldList;
 }
 
 TEST_F(SquareMapTest, mapPrint5x5)
 {
     SquareMap map(buildSimple5x5Map());
+
+    map.updateVisilibity(Position(3,1));
 	
     ASSERT_EQ(map.getMapToPrint(Position(3,1)),"    1 2 3 4 5\n"
                                                "  #############\n"
-                                               "1 # . . # . . #\n"
-                                               "2 # . . D P . #\n"
-                                               "3 # . . #######\n"
-                                               "4 # . F D . T #\n"
-                                               "5 # . . # T . #\n"
+                                               "1 #     # . . #\n"
+                                               "2 #     D P . #\n"
+                                               "3 #     #######\n"
+                                               "4 #           #\n"
+                                               "5 #           #\n"
                                                "  #############\n"
     );
 }
@@ -365,11 +366,13 @@ FieldList buildSimple4x4Map()
 TEST_F(SquareMapTest, mapPrint4x4)
 {
     SquareMap map(buildSimple4x4Map());
+
+    map.updateVisilibity(Position(0,3));
     
     ASSERT_EQ(map.getMapToPrint(Position(0,3)),"    1 2 3 4\n"
-                                                "  ###########\n"
-                                               "1 # T . D . #\n"
-                                               "2 # . T # F #\n"
+                                               "  ###########\n"
+                                               "1 #         #\n"
+                                               "2 #         #\n"
                                                "3 ########D##\n"
                                                "4 # P . F . #\n"
                                                "  ###########\n"
