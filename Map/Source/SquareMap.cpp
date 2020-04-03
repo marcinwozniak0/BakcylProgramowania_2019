@@ -91,14 +91,18 @@ void SquareMap::printFieldRows(std::ostream& str, const unsigned int mapSize)
         {
             if(isFieldBarrier(Position(column,row)))
             {
+		if(column == 0)
+		{
+                    str << '#' << printField(_fieldList.at(column).at(row));
+		}
                 if(isFieldBarrier(Position(column - 1,row)))
                 {
-                    str << "##";
+                    str << '#' << printField(_fieldList.at(column).at(row));
                 }
-                else if(_fieldList.at(column - 1).at(row)->getType() == FieldType::Wall)
+		else
                 {
-                    str << "##";
-                }
+                    str << ' ' << printField(_fieldList.at(column).at(row));
+		}
             }
             else
             {

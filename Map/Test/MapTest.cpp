@@ -364,10 +364,10 @@ FieldList buildSimple4x4Map()
 
 TEST_F(SquareMapTest, mapPrint4x4)
 {
-	SquareMap map(buildSimple4x4Map());
-	
-	ASSERT_EQ(map.getMapToPrint(Position(0,3)),"    1 2 3 4\n"
-                                               "  ###########\n"
+    SquareMap map(buildSimple4x4Map());
+    
+    ASSERT_EQ(map.getMapToPrint(Position(0,3)),"    1 2 3 4\n"
+                                                "  ###########\n"
                                                "1 # T . D . #\n"
                                                "2 # . T # F #\n"
                                                "3 ########D##\n"
