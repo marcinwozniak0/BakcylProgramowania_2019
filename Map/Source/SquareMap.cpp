@@ -45,13 +45,13 @@ std::string SquareMap::getMapToPrint(const Position& playerPosition)
     
     const unsigned int mapSize = _fieldList.size();
     
-    printColumnNumbers(output, mapSize);
+    output << getMapColumnNumbersToPrint(mapSize);
     
-    printFrameHorizontal(output, mapSize);
+    output << getMapHorizontalFrameToPrint(mapSize);
     
-    printFieldRows(output, mapSize);
+    output << getFieldsToPrint(mapSize);
     
-    printFrameHorizontal(output, mapSize);
+    output << getMapHorizontalFrameToPrint(mapSize);
     
     std::string outputString = output.str();
     
@@ -60,18 +60,24 @@ std::string SquareMap::getMapToPrint(const Position& playerPosition)
     return outputString;
 }
 
-void SquareMap::printColumnNumbers(std::ostream& str, const unsigned int mapSize)
+std::string SquareMap::getMapColumnNumbersToPrint(const unsigned int mapSize)
 {
+    std::stringstream str;
+    
     str << "   ";
     for(unsigned int ite = 0; ite < mapSize; ++ite)
     {
         str << ' ' << (ite + 1) % 10;
     }
     str << '\n';
+    
+    return str.str();
 }
 
-void SquareMap::printFrameHorizontal(std::ostream& str, const unsigned int mapSize)
+std::string SquareMap::getMapHorizontalFrameToPrint(const unsigned int mapSize)
 {
+    std::stringstream str;
+    
     const auto mapFrameWidth = mapSize * 2 + 3;
     
     str << "  ";
@@ -80,10 +86,14 @@ void SquareMap::printFrameHorizontal(std::ostream& str, const unsigned int mapSi
         str << '#';
     }
     str << '\n';
+    
+    return str.str();
 }
 
-void SquareMap::printFieldRows(std::ostream& str, const unsigned int mapSize)
+std::string SquareMap::getFieldsToPrint(const unsigned int mapSize)
 {
+    std::stringstream str;
+    
     for(unsigned int row; row < mapSize; ++row)
     {
         str << (row + 1) % 10 << " #";
@@ -118,6 +128,8 @@ void SquareMap::printFieldRows(std::ostream& str, const unsigned int mapSize)
             str << " #\n";
         }
     }
+    
+    return str.str();
 }
 
 void SquareMap::markPlayerPosition(std::string& str, const Position& playerPosition, const unsigned int mapSize)

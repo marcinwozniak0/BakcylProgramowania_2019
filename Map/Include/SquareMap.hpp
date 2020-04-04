@@ -30,9 +30,9 @@ private:
     void makeLowerRowsVisible(Position position);
     void makeLeftHandFieldsVisible(Position position);
     void makeRightHandFieldsVisible(Position position);
-    void printColumnNumbers(std::ostream& str, const unsigned int mapSize);
-    void printFrameHorizontal(std::ostream& str, const unsigned int mapSize);
-    void printFieldRows(std::ostream& str, const unsigned int mapSize);
+    std::string getMapColumnNumbersToPrint(const unsigned int mapSize);
+    std::string getMapHorizontalFrameToPrint(const unsigned int mapSize);
+    std::string getFieldsToPrint(const unsigned int mapSize);
     void markPlayerPosition(std::string& str, const Position& playerPosition, const unsigned int mapSize);
     const std::unique_ptr<Field>& getField(const Position& position);
     
