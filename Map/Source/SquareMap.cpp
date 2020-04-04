@@ -94,7 +94,7 @@ std::string SquareMap::getFieldsToPrint(const unsigned int mapSize)
 {
     std::stringstream str;
     
-    for(unsigned int row; row < mapSize; ++row)
+    for(unsigned int row = 0; row < mapSize; ++row)
     {
         str << (row + 1) % 10 << " #";
         for(unsigned int column = 0; column < mapSize; ++column)
