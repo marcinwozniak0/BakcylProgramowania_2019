@@ -10,8 +10,9 @@ public:
     SquareMap(const int mapSize);
     SquareMap(FieldList&& fieldList);
 
-    char printField(const Field& field);
+    char printField(const std::unique_ptr<Field>& field);
     void updateVisilibity(const Position& playerPosition);
+    std::string getMapToPrint(const Position& playerPosition);
     bool isMovePossible(const Position&, const Direction);
 
 private:
@@ -29,6 +30,10 @@ private:
     void makeLowerRowsVisible(Position position);
     void makeLeftHandFieldsVisible(Position position);
     void makeRightHandFieldsVisible(Position position);
+    std::string getMapColumnNumbersToPrint(const unsigned int mapSize);
+    std::string getMapHorizontalFrameToPrint(const unsigned int mapSize);
+    std::string getFieldsToPrint(const unsigned int mapSize);
+    void markPlayerPosition(std::string& str, const Position& playerPosition, const unsigned int mapSize);
     const std::unique_ptr<Field>& getField(const Position& position);
     
     FieldList _fieldList;

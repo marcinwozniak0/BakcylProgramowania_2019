@@ -105,59 +105,59 @@ TEST_F(SquareMapTest, MapWithSize4ShouldContain2FightFields)
 
 TEST_F(SquareMapTest, emptyFieldVisiblePrint)
 {
-  EmptyField field;
-  field.makeVisible();
+  std::unique_ptr<Field> field = std::make_unique<EmptyField>();
+  field->makeVisible();
   ASSERT_EQ('.',map.printField(field));
 }
 
 TEST_F(SquareMapTest, fightFieldVisiblePrint)
 {
-  FightField field;
-  field.makeVisible();
+  std::unique_ptr<Field> field = std::make_unique<FightField>();
+  field->makeVisible();
   ASSERT_EQ('F',map.printField(field));
 }
 
 TEST_F(SquareMapTest, treasureFieldVisiblePrint)
 {
-  TreasureField field;
-  field.makeVisible();
+  std::unique_ptr<Field> field = std::make_unique<TreasureField>();
+  field->makeVisible();
   ASSERT_EQ('T',map.printField(field));
 }
 
 TEST_F(SquareMapTest, wallFieldVisiblePrint)
 {
-    WallField field;
-    field.makeVisible();
+    std::unique_ptr<Field> field = std::make_unique<WallField>();
+    field->makeVisible();
     ASSERT_EQ('#', map.printField(field));
 }
 TEST_F(SquareMapTest, doorFieldPrint)
 {
-    DoorField field;
-    field.makeVisible();
+    std::unique_ptr<Field> field = std::make_unique<DoorField>();
+    field->makeVisible();
     ASSERT_EQ('D', map.printField(field));
 }
 
 TEST_F(SquareMapTest, emptyFieldInvisiblePrint)
 {
-  EmptyField field;
+  std::unique_ptr<Field> field = std::make_unique<EmptyField>();
   ASSERT_EQ(' ',map.printField(field));
 }
 
 TEST_F(SquareMapTest, fightFieldInvisiblePrint)
 {
-  FightField field;
+  std::unique_ptr<Field> field = std::make_unique<FightField>();
   ASSERT_EQ(' ',map.printField(field));
 }
 
 TEST_F(SquareMapTest, treasureFieldInvisiblePrint)
 {
-  TreasureField field;
+  std::unique_ptr<Field> field = std::make_unique<TreasureField>();
   ASSERT_EQ(' ',map.printField(field));
 }
 
 TEST_F(SquareMapTest, wallFieldInvisiblePrint)
 {
-  WallField field;
+  std::unique_ptr<Field> field = std::make_unique<WallField>();
   ASSERT_EQ(' ',map.printField(field));
 }
 
@@ -270,6 +270,179 @@ TEST_F(SquareMapTest, seenDoorsAndWallsShouldStayVisible)
     ASSERT_EQ(expectedNumberOfVisibleFields, numberOfVisibleFields);
 }
 
+FieldList buildSimple5x5Map()
+{
+    FieldList fieldList;
+    std::vector<std::unique_ptr<Field>> column;
+
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+    
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<FightField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+    
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<DoorField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<DoorField>());
+    column.emplace_back(std::make_unique<WallField>());
+    fieldList.emplace_back(std::move(column));
+
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<TreasureField>());
+    fieldList.emplace_back(std::move(column));
+
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<TreasureField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+
+    return fieldList;
+}
+
+TEST_F(SquareMapTest, mapPrint5x5_1)
+{
+    SquareMap map(buildSimple5x5Map());
+
+    map.updateVisilibity(Position(3,1));
+	
+    ASSERT_EQ(map.getMapToPrint(Position(3,1)),"    1 2 3 4 5\n"
+                                               "  #############\n"
+                                               "1 #     # . . #\n"
+                                               "2 #     D P . #\n"
+                                               "3 #     #######\n"
+                                               "4 #           #\n"
+                                               "5 #           #\n"
+                                               "  #############\n"
+    );
+}
+
+TEST_F(SquareMapTest, mapPrint5x5_2)
+{
+    SquareMap map(buildSimple5x5Map());
+
+    map.updateVisilibity(Position(0,0));
+	
+    ASSERT_EQ(map.getMapToPrint(Position(0,0)),"    1 2 3 4 5\n"
+                                               "  #############\n"
+                                               "1 # P . #     #\n"
+                                               "2 # . . D     #\n"
+                                               "3 # . . #     #\n"
+                                               "4 # . F D     #\n"
+                                               "5 # . . #     #\n"
+                                               "  #############\n"
+    );
+}
+
+TEST_F(SquareMapTest, mapPrint5x5_3)
+{
+    SquareMap map(buildSimple5x5Map());
+
+    map.updateVisilibity(Position(3,3));
+	
+    ASSERT_EQ(map.getMapToPrint(Position(3,3)),"    1 2 3 4 5\n"
+                                               "  #############\n"
+                                               "1 #           #\n"
+                                               "2 #           #\n"
+                                               "3 #     #######\n"
+                                               "4 #     D P T #\n"
+                                               "5 #     # T . #\n"
+                                               "  #############\n"
+    );
+}
+
+FieldList buildSimple4x4Map()
+{
+    FieldList fieldList;
+    std::vector<std::unique_ptr<Field>> column;
+
+    column.emplace_back(std::make_unique<TreasureField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+    
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<TreasureField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+    
+    column.emplace_back(std::make_unique<DoorField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<FightField>());
+    fieldList.emplace_back(std::move(column));
+
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<FightField>());
+    column.emplace_back(std::make_unique<DoorField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+
+
+    return fieldList;
+}
+
+TEST_F(SquareMapTest, mapPrint4x4_1)
+{
+    SquareMap map(buildSimple4x4Map());
+
+    map.updateVisilibity(Position(0,3));
+    
+    ASSERT_EQ(map.getMapToPrint(Position(0,3)),"    1 2 3 4\n"
+                                               "  ###########\n"
+                                               "1 #         #\n"
+                                               "2 #         #\n"
+                                               "3 ########D##\n"
+                                               "4 # P . F . #\n"
+                                               "  ###########\n"
+    );
+}
+
+TEST_F(SquareMapTest, mapPrint4x4_2)
+{
+    SquareMap map(buildSimple4x4Map());
+
+    map.updateVisilibity(Position(1,0));
+    
+    ASSERT_EQ(map.getMapToPrint(Position(1,0)),"    1 2 3 4\n"
+                                               "  ###########\n"
+                                               "1 # T P D   #\n"
+                                               "2 # . T #   #\n"
+                                               "3 #######   #\n"
+                                               "4 #         #\n"
+                                               "  ###########\n"
+    );
+}
+
+TEST_F(SquareMapTest, mapPrint4x4_3)
+{
+    SquareMap map(buildSimple4x4Map());
+
+    map.updateVisilibity(Position(3,0));
+    
+    ASSERT_EQ(map.getMapToPrint(Position(3,0)),"    1 2 3 4\n"
+                                               "  ###########\n"
+                                               "1 #     D P #\n"
+                                               "2 #     # F #\n"
+                                               "3 #     ##D##\n"
+                                               "4 #         #\n"
+                                               "  ###########\n"
+    );
 TEST_F(SquareMapTest, isMoveRightPossibleShouldReturnTrue)
 {
     SquareMap map(4);

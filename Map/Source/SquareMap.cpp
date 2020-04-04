@@ -6,36 +6,139 @@
 #include <memory>
 #include <stdexcept>
 #include <vector>
+#include <sstream>
 
 const FieldList& SquareMap::getFields()
 {
     return _fieldList;
 }
 
-char SquareMap::printField(const Field& field)
+char SquareMap::printField(const std::unique_ptr<Field>& field)
 {
-  if(field.isVisible())
-  {
-    FieldType type = field.getType();
-    switch (type) {
-      case FieldType::Empty:
-        return '.';
-      case FieldType::Wall:
-        return '#';
-      case FieldType::Fight:
-        return 'F';
-      case FieldType::Treasure:
-        return 'T';
-      case FieldType::Door:
-        return 'D';
-      default:
-        return '?';
+    if(field->isVisible())
+    {
+        FieldType type = field->getType();
+        switch (type) {
+            case FieldType::Empty:
+                return '.';
+            case FieldType::Wall:
+                return '#';
+            case FieldType::Fight:
+                return 'F';
+            case FieldType::Treasure:
+                return 'T';
+            case FieldType::Door:
+                return 'D';
+            default:
+                return '?';
+        }
     }
-  }
-  else
-  {
-    return ' ';
-  }
+    else
+    {
+        return ' ';
+    }
+}
+
+std::string SquareMap::getMapToPrint(const Position& playerPosition)
+{
+    std::stringstream output;
+    
+    const unsigned int mapSize = _fieldList.size();
+    
+    output << getMapColumnNumbersToPrint(mapSize);
+    
+    output << getMapHorizontalFrameToPrint(mapSize);
+    
+    output << getFieldsToPrint(mapSize);
+    
+    output << getMapHorizontalFrameToPrint(mapSize);
+    
+    std::string outputString = output.str();
+    
+    markPlayerPosition(outputString, playerPosition, mapSize);
+    
+    return outputString;
+}
+
+std::string SquareMap::getMapColumnNumbersToPrint(const unsigned int mapSize)
+{
+    std::stringstream str;
+    
+    str << "   ";
+    for(unsigned int ite = 0; ite < mapSize; ++ite)
+    {
+        str << ' ' << (ite + 1) % 10;
+    }
+    str << '\n';
+    
+    return str.str();
+}
+
+std::string SquareMap::getMapHorizontalFrameToPrint(const unsigned int mapSize)
+{
+    std::stringstream str;
+    
+    const auto mapFrameWidth = mapSize * 2 + 3;
+    
+    str << "  ";
+    for(unsigned int ite = 0; ite < mapFrameWidth; ++ite)
+    {
+        str << '#';
+    }
+    str << '\n';
+    
+    return str.str();
+}
+
+std::string SquareMap::getFieldsToPrint(const unsigned int mapSize)
+{
+    std::stringstream str;
+    
+    for(unsigned int row = 0; row < mapSize; ++row)
+    {
+        str << (row + 1) % 10 << " #";
+        for(unsigned int column = 0; column < mapSize; ++column)
+        {
+            if(isFieldBarrier(Position(column,row)) && _fieldList.at(column).at(row)->isVisible())
+            {
+                if(column == 0)
+                {
+                    str << '#' << printField(_fieldList.at(column).at(row));
+                }
+                else if(isFieldBarrier(Position(column - 1,row)) && getField(Position(column - 1,row))->isVisible())
+                {
+                    str << '#' << printField(_fieldList.at(column).at(row));
+                }
+                else
+                {
+                    str << ' ' << printField(_fieldList.at(column).at(row));
+                }
+            }
+            else
+            {
+                str << ' ' << printField(_fieldList.at(column).at(row));
+            }
+        }
+        if(isFieldBarrier(Position(mapSize - 1,row)) && getField(Position(mapSize - 1,row))->isVisible())
+        {
+            str << "##\n";
+        }
+        else
+        {
+            str << " #\n";
+        }
+    }
+    
+    return str.str();
+}
+
+void SquareMap::markPlayerPosition(std::string& str, const Position& playerPosition, const unsigned int mapSize)
+{
+    const auto leadingCharsCount = 14u + mapSize * 4u;
+    const auto rowCharCount = 6u + mapSize * 2u;
+    constexpr auto fieldWidth = 2u;
+    const auto playerPosOnScreen = leadingCharsCount + playerPosition._y * rowCharCount + fieldWidth * playerPosition._x;
+    str.at(playerPosOnScreen) = 'P';
 }
 
 SquareMap::SquareMap(const int mapSize)
