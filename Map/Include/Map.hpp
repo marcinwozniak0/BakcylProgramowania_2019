@@ -6,6 +6,14 @@
 
 using FieldList = std::vector<std::vector<std::unique_ptr<Field>>>;
 
+enum class Direction
+{
+    Up,
+    Down,
+    Left,
+    Right
+};
+
 class Map
 {
 public:

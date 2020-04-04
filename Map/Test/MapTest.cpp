@@ -443,4 +443,58 @@ TEST_F(SquareMapTest, mapPrint4x4_3)
                                                "4 #         #\n"
                                                "  ###########\n"
     );
+TEST_F(SquareMapTest, isMoveRightPossibleShouldReturnTrue)
+{
+    SquareMap map(4);
+    Position position(0, 0);
+    ASSERT_EQ(true, map.isMovePossible(position, Direction::Right));
+}
+
+TEST_F(SquareMapTest, isMoveRightPossibleShouldReturnFalse)
+{
+    SquareMap map(4);
+    Position position(3, 0);
+    ASSERT_EQ(false, map.isMovePossible(position, Direction::Right));
+}
+
+TEST_F(SquareMapTest, isMoveLeftPossibleShouldReturnTrue)
+{
+    SquareMap map(4);
+    Position position(1, 1);
+    ASSERT_EQ(true, map.isMovePossible(position, Direction::Left));
+}
+
+TEST_F(SquareMapTest, isMoveLeftPossibleShouldReturnFalse)
+{
+    SquareMap map(4);
+    Position position(0, 0);
+    ASSERT_EQ(false, map.isMovePossible(position, Direction::Left));
+}
+
+TEST_F(SquareMapTest, isMoveUpPossibleShouldReturnTrue)
+{
+    SquareMap map(4);
+    Position position(2, 2);
+    ASSERT_EQ(true, map.isMovePossible(position, Direction::Up));
+}
+
+TEST_F(SquareMapTest, isMoveUpPossibleShouldReturnFalse)
+{
+    SquareMap map(4);
+    Position position(0, 0);
+    ASSERT_EQ(false, map.isMovePossible(position, Direction::Up));
+}
+
+TEST_F(SquareMapTest, isMoveDownPossibleShouldReturnTrue)
+{
+    SquareMap map(4);
+    Position position(2, 2);
+    ASSERT_EQ(true, map.isMovePossible(position, Direction::Down));
+}
+
+TEST_F(SquareMapTest, isMoveDownPossibleShouldReturnFalse)
+{
+    SquareMap map(4);
+    Position position(3, 3);
+    ASSERT_EQ(false, map.isMovePossible(position, Direction::Down));
 }
