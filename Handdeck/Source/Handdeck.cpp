@@ -29,23 +29,21 @@ maxSize(_maxSize)
 
 }
 
-Card Deck::addCard(Card cardToAdd)
+void Deck::addCard(Card cardToAdd)
 {
   Cards.push_back(cardToAdd);
-  return cardToAdd;
 }
 
-Card HandDeck::drawCard(PullDeck pullDeck)
+void HandDeck::drawCard(PullDeck &pullDeck)
 {
   srand( time( NULL ) );
   rng = ( std::rand() % pullDeck.Cards.size());
   Cards.push_back(pullDeck.Cards.at(rng));
   pullDeck.Cards.erase(pullDeck.Cards.begin() + rng);
-  return pullDeck.Cards.at(rng);
 }
 
 
-Card HandDeck::discardCard(DiscardDeck discarddeck, Card cardToDiscard)
+void HandDeck::discardCard(DiscardDeck &discarddeck, Card cardToDiscard)
 {
   for(uint i = 0; i < Cards.size(); ++i)
   {
@@ -55,10 +53,9 @@ Card HandDeck::discardCard(DiscardDeck discarddeck, Card cardToDiscard)
       Cards.erase(Cards.begin() + i);
     }
   }
-  return cardToDiscard;
 }
 
-Card HandDeck::playCard(TableDeck tableDeck, Card cardToPlay)
+void HandDeck::playCard(TableDeck &tableDeck, Card cardToPlay)
 {
   for(uint i = 0; i < Cards.size(); ++i)
   {
@@ -68,6 +65,4 @@ Card HandDeck::playCard(TableDeck tableDeck, Card cardToPlay)
       Cards.erase(Cards.begin() + i);
     }
   }
-
-  return cardToPlay;
 }

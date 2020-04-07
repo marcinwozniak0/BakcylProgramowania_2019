@@ -14,7 +14,7 @@ class Deck
 {
 public:
   std::vector<Card> Cards;
-  Card addCard(Card cardToAdd);
+  void addCard(Card cardToAdd);
 };
 
 class DiscardDeck :public Deck
@@ -24,14 +24,14 @@ public:
   DiscardDeck(int _maxSize);
 };
 
-class PullDeck :public Deck    //33 karty w sumie
+class PullDeck :public Deck
 {
 public:
   int maxSize;
   PullDeck(int _maxSize);
 };
 
-class TableDeck :public Deck    //33 karty w sumie
+class TableDeck :public Deck
 {
 public:
   int tableSize;
@@ -44,7 +44,7 @@ class HandDeck :public Deck
   int rng = 0;
 public:
   HandDeck(int _startSize);
-  Card drawCard(PullDeck pullDeck);
-  Card playCard(TableDeck tableDeck, Card cardToPlay);
-  Card discardCard(DiscardDeck discardDeck, Card cardToDiscard);
+  void drawCard(PullDeck &pullDeck);
+  void playCard(TableDeck &tableDeck, Card cardToPlay);
+  void discardCard(DiscardDeck &discardDeck, Card cardToDiscard);
 };

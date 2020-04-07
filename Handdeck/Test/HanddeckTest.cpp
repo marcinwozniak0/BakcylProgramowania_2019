@@ -20,15 +20,16 @@ TEST(CardIsDrawnProperly, ItShouldDrawCards)
   HandDeck handeck1(111);
   handeck1.drawCard(pulldeck1);
 
-  bool isOk = true;
-  if(handeck1.Cards.at(0) != "card1" && handeck1.Cards.at(0) != "card2")
+  bool isOk = false;
+  if(handeck1.Cards.at(0) == "card1" || handeck1.Cards.at(0) == "card2")
   {
-    isOk = false;
+    isOk = true;
   }
   EXPECT_TRUE(isOk);
+  ASSERT_EQ(1, pulldeck1.Cards.size());
 }
 
-TEST(CardIsDisardedroperly, ItShouldDiscardCards)
+TEST(CardIsDisardedProperly, ItShouldDiscardCards)
 {
   DiscardDeck discarddeck1(100);
   PullDeck pulldeck1(33);
@@ -39,7 +40,7 @@ TEST(CardIsDisardedroperly, ItShouldDiscardCards)
   handeck1.drawCard(pulldeck1);
   handeck1.discardCard(discarddeck1, "card1");
 
-  ASSERT_EQ(1, pulldeck1.Cards.size()+1);
+  ASSERT_EQ(0, pulldeck1.Cards.size());
   ASSERT_EQ(1, handeck1.Cards.size());
   ASSERT_EQ(1, discarddeck1.Cards.size());
 }
