@@ -20,7 +20,8 @@ public:
 class DiscardDeck :public Deck
 {
 public:
-  DiscardDeck();
+  int maxSize;
+  DiscardDeck(int _maxSize);
 };
 
 class PullDeck :public Deck    //33 karty w sumie
@@ -40,7 +41,7 @@ public:
 class HandDeck :public Deck
 {
   int startSize;
-  int rng;
+  int rng = 0;
 public:
   HandDeck(int _startSize);
   Card drawCard(PullDeck pullDeck);

@@ -14,6 +14,13 @@ tableSize(_tableSize)
 
 }
 
+DiscardDeck::DiscardDeck(int _maxSize)
+:
+maxSize(_maxSize)
+{
+
+}
+
 
 PullDeck::PullDeck(int _maxSize)
 :
@@ -38,13 +45,13 @@ Card HandDeck::drawCard(PullDeck pullDeck)
 }
 
 
-Card HandDeck::discardCard(DiscardDeck discardDeck, Card cardToDiscard)
+Card HandDeck::discardCard(DiscardDeck discarddeck, Card cardToDiscard)
 {
   for(uint i = 0; i < Cards.size(); ++i)
   {
     if(Cards.at(i) == cardToDiscard)
     {
-      discardDeck.Cards.push_back(Cards.at(i));
+      discarddeck.Cards.push_back(Cards.at(i));
       Cards.erase(Cards.begin() + i);
     }
   }
