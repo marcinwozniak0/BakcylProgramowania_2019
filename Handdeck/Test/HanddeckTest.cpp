@@ -38,11 +38,16 @@ TEST(CardIsDisardedProperly, ItShouldDiscardCards)
   HandDeck handeck1(111);
   handeck1.drawCard(pulldeck1);
   handeck1.drawCard(pulldeck1);
-  handeck1.discardCard(discarddeck1, "card1");
+  TableDeck tabledeck1(10);
+  handeck1.playCard(tabledeck1, "card1");
+  handeck1.playCard(tabledeck1, "card2");
+  tabledeck1.discardCard(discarddeck1, "card1");
+  tabledeck1.discardCard(discarddeck1, "card2");
 
   ASSERT_EQ(0, pulldeck1.Cards.size());
-  ASSERT_EQ(1, handeck1.Cards.size());
-  ASSERT_EQ(1, discarddeck1.Cards.size());
+  ASSERT_EQ(0, handeck1.Cards.size());
+  ASSERT_EQ(0, tabledeck1.Cards.size());
+  ASSERT_EQ(2, discarddeck1.Cards.size());
 }
 
 TEST(CardIsPlayedProperly, ItShouldPlayCards)

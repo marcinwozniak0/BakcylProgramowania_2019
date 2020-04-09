@@ -36,6 +36,7 @@ class TableDeck :public Deck
 public:
   int tableSize;
   TableDeck(int _tableSize);
+  void discardCard(DiscardDeck &discardDeck, Card cardToDiscard);
 };
 
 class HandDeck :public Deck
@@ -46,5 +47,5 @@ public:
   HandDeck(int _startSize);
   void drawCard(PullDeck &pullDeck);
   void playCard(TableDeck &tableDeck, Card cardToPlay);
-  void discardCard(DiscardDeck &discardDeck, Card cardToDiscard);
+
 };

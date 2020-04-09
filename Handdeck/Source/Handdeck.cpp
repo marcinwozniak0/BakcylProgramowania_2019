@@ -43,7 +43,7 @@ void HandDeck::drawCard(PullDeck &pullDeck)
 }
 
 
-void HandDeck::discardCard(DiscardDeck &discarddeck, Card cardToDiscard)
+void TableDeck::discardCard(DiscardDeck &discarddeck, Card cardToDiscard)
 {
   for(uint i = 0; i < Cards.size(); ++i)
   {
