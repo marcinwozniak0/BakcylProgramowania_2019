@@ -1,68 +1,45 @@
 #include "Handdeck.hpp"
 
-HandDeck::HandDeck(int _startSize)
-:
-startSize(_startSize)
-{
-
-}
-
-TableDeck::TableDeck(int _tableSize)
-:
-tableSize(_tableSize)
-{
-
-}
-
-DiscardDeck::DiscardDeck(int _maxSize)
-:
-maxSize(_maxSize)
-{
-
-}
-
-
-PullDeck::PullDeck(int _maxSize)
-:
-maxSize(_maxSize)
+HandDeck::HandDeck(int maxSize)
+:_maxSize(maxSize)
 {
 
 }
 
 void Deck::addCard(Card cardToAdd)
 {
-  Cards.push_back(cardToAdd);
+  _cards.push_back(cardToAdd);
 }
 
-void HandDeck::drawCard(PullDeck &pullDeck)
+void Deck::shuffleCards()
 {
-  srand( time( NULL ) );
-  rng = ( std::rand() % pullDeck.Cards.size());
-  Cards.push_back(pullDeck.Cards.at(rng));
-  pullDeck.Cards.erase(pullDeck.Cards.begin() + rng);
+  std::random_shuffle (_cards.begin(), _cards.end());
 }
 
-
-void TableDeck::discardCard(DiscardDeck &discarddeck, Card cardToDiscard)
+void HandDeck::drawCard(Deck &deck)
 {
-  for(uint i = 0; i < Cards.size(); ++i)
+  if(_size >= _maxSize)
   {
-    if(Cards.at(i) == cardToDiscard)
-    {
-      discarddeck.Cards.push_back(Cards.at(i));
-      Cards.erase(Cards.begin() + i);
-    }
+    std::cout << "Vaše ruka je plná" << std::endl;
+  }
+  else
+  {
+    _cards.push_back(deck._cards.at(0));
+    deck._cards.erase(deck._cards.begin());
+    ++_size;
   }
 }
 
-void HandDeck::playCard(TableDeck &tableDeck, Card cardToPlay)
+
+Card Deck::discardCard(Deck &deck, Card cardToDiscard)
 {
-  for(uint i = 0; i < Cards.size(); ++i)
+  for(uint i = 0; i < _cards.size(); ++i)
   {
-    if(Cards.at(i) == cardToPlay)
+    if(_cards.at(i) == cardToDiscard)
     {
-      tableDeck.Cards.push_back(Cards.at(i));
-      Cards.erase(Cards.begin() + i);
+      deck._cards.push_back(_cards.at(i));
+      _cards.erase(_cards.begin() + i);
     }
   }
+  return cardToDiscard;
 }

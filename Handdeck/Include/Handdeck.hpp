@@ -6,46 +6,24 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
-
+#include <algorithm>
 
 using Card = std::string;
 
 class Deck
 {
 public:
-  std::vector<Card> Cards;
+  std::vector<Card> _cards;
   void addCard(Card cardToAdd);
+  Card discardCard(Deck &deck, Card cardToDiscard);
+  void shuffleCards();
 };
 
-class DiscardDeck :public Deck
+class HandDeck : public Deck
 {
+  int _maxSize;
+  int _size = 0;
 public:
-  int maxSize;
-  DiscardDeck(int _maxSize);
-};
-
-class PullDeck :public Deck
-{
-public:
-  int maxSize;
-  PullDeck(int _maxSize);
-};
-
-class TableDeck :public Deck
-{
-public:
-  int tableSize;
-  TableDeck(int _tableSize);
-  void discardCard(DiscardDeck &discardDeck, Card cardToDiscard);
-};
-
-class HandDeck :public Deck
-{
-  int startSize;
-  int rng = 0;
-public:
-  HandDeck(int _startSize);
-  void drawCard(PullDeck &pullDeck);
-  void playCard(TableDeck &tableDeck, Card cardToPlay);
-
+  HandDeck(int maxSize);
+  void drawCard(Deck &deck);
 };
