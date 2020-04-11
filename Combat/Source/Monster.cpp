@@ -2,14 +2,13 @@
 #include "Points.hpp"
 #include <iostream>
 
-Monster::Monster(Points hp, Points strength, uint manaCost)
+Monster::Monster(Points hp, Points strength, std::string name, std::string description, uint manaCost, uint cardID)
 :
+Card(name, description, manaCost, cardID),
 _hp(hp),
 _strength(strength),
 _state(State::inactive)
-{
-   _manaCost = manaCost;
-}
+{}
 
 void Monster::activateCard()
 {
