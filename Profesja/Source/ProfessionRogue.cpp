@@ -14,8 +14,7 @@ void Rogue :: useUlt(std::optional<Player>& player1, std::optional<Player>& play
     throw std::out_of_range("Invalid value");
   }
 }
-
-catch(const std::out_of_range& exception)
+catch (std::out_of_range& exception)
 {
   std::cout << exception.what();
 }
