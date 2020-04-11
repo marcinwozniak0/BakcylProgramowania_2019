@@ -7,6 +7,7 @@ class Player
 {
 public:
   Points _hp;
+  Points _mp;
   std::vector<std::string> handdeck;
-  Player(Points hp);
+  Player(Points hp, Points mp);
 };

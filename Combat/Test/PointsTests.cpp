@@ -8,16 +8,16 @@ TEST(PointsTest, Constructor_AssignsValues)
 {
     Points p(100);
     ASSERT_EQ(p._maxPoints, 100);
-    ASSERT_EQ(p._currentPoints, 100);
+    ASSERT_EQ(p.getCurrentPoints(), 100);
     p = Points(200, 10);
     ASSERT_EQ(p._maxPoints, 200);
-    ASSERT_EQ(p._currentPoints, 10);
+    ASSERT_EQ(p.getCurrentPoints(), 10);
 }
 
 TEST(PointsTest, Constructor_DoesNotAllowCurrentpointsGreaterThanMaxpoints)
 {
     Points p(10, 15);
-    ASSERT_EQ(p._currentPoints, 10);
+    ASSERT_EQ(p.getCurrentPoints(), 10);
 }
 
 TEST(PointsTest, EqualOperator_ReturnsTrueWhenAreTheSame)
@@ -26,7 +26,6 @@ TEST(PointsTest, EqualOperator_ReturnsTrueWhenAreTheSame)
     Points p2(100);
     ASSERT_TRUE(p1 == p2);
 }
-
 
 TEST(PointsTest, EqualOperator_ReturnsFalseWhenAreNotTheSame)
 {
@@ -42,7 +41,6 @@ TEST(PointsTest, NotEqualOperator_ReturnsTrueWhenAreNotTheSame)
     ASSERT_TRUE(p1 != p2);
 }
 
-
 TEST(PointsTest, NotEqualOperator_ReturnsFalseWhenAreTheSame)
 {
     Points p1(100);
@@ -55,7 +53,7 @@ TEST(PointsTest, AddOperator_AddsCurrentpoints)
     Points p1(100, 20);
     Points p2(100, 30);
     auto result = p1 + p2;
-    ASSERT_EQ(result._currentPoints, 50);
+    ASSERT_EQ(result.getCurrentPoints(), 50);
 }
 
 TEST(PointsTest, SubtractOperator_SubtractsCurrentpoints)
@@ -63,7 +61,7 @@ TEST(PointsTest, SubtractOperator_SubtractsCurrentpoints)
    Points p1(150, 100);
    Points p2(60, 40);
    auto result = p1 - p2;
-   ASSERT_EQ(result._currentPoints, 60);
+   ASSERT_EQ(result.getCurrentPoints(), 60);
 }
 
 TEST(PointsTest, SubtractOperator_SetsCurrentpointsToZeroWhenNeeded)
@@ -71,7 +69,7 @@ TEST(PointsTest, SubtractOperator_SetsCurrentpointsToZeroWhenNeeded)
    Points p1(100, 10);
    Points p2(50, 40);
    auto result = p1 - p2;
-   ASSERT_EQ(result._currentPoints, 0);
+   ASSERT_EQ(result.getCurrentPoints(), 0);
 }
 
 TEST(PointsTest, GreaterThanOperator_ReturnsTrueWhenCurrentPointsAreGreater)
@@ -149,28 +147,28 @@ TEST(PointsTest, AddMethod_AddsCurrentPoints)
 {
   Points p1(100, 40);
   p1.add(50);
-  ASSERT_EQ(p1._currentPoints, 90);
+  ASSERT_EQ(p1.getCurrentPoints(), 90);
 }
 
 TEST(PointsTest, AddMethod_DoesNotAllowCurrentPointsGreaterThanMaxPoints)
 {
   Points p1(100, 60);
   p1.add(50);
-  ASSERT_EQ(p1._currentPoints, 100);
+  ASSERT_EQ(p1.getCurrentPoints(), 100);
 }
 
 TEST(PointsTest, RemoveMethod_RemovesCurrentPoints)
 {
   Points p1(100, 70);
   p1.remove(50);
-  ASSERT_EQ(p1._currentPoints, 20);
+  ASSERT_EQ(p1.getCurrentPoints(), 20);
 }
 
 TEST(PointsTest, RemoveMethod_DoesNotAllowCurrentPointsLowerThan0)
 {
   Points p1(100, 30);
   p1.remove(50);
-  ASSERT_EQ(p1._currentPoints, 0);
+  ASSERT_EQ(p1.getCurrentPoints(), 0);
 }
 
 TEST(PointsTest, ResetCurrent_ResetsCurrentPoints)
@@ -178,7 +176,7 @@ TEST(PointsTest, ResetCurrent_ResetsCurrentPoints)
    Points p1(100);
    p1.remove(50);
    p1.resetCurrent();
-   ASSERT_EQ(p1._currentPoints, 100);
+   ASSERT_EQ(p1.getCurrentPoints(), 100);
 }
 
 TEST(PointsTest, SetMaxTo_AllighnsMaxPointsToValue)
@@ -186,4 +184,17 @@ TEST(PointsTest, SetMaxTo_AllighnsMaxPointsToValue)
   Points p1(100);
   p1.setMaxTo(150);
   ASSERT_EQ(p1._maxPoints, 150);
+}
+
+TEST(PointsTest, getCurrentPoints_ReturnsCurrentPoints)
+{
+   Points p1(100);
+   ASSERT_EQ(p1.getCurrentPoints(), 100);
+}
+
+TEST(PointsTest, setCurrentPoints_SetsCurrentPointsValue)
+{
+  Points p1(100);
+  p1.setCurrentPoints(20);
+  ASSERT_EQ(p1.getCurrentPoints(), 20);
 }

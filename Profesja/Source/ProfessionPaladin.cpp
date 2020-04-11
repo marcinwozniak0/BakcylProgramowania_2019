@@ -5,7 +5,7 @@ void Paladin :: useUlt(std::optional<Player>& player1, std::optional<Player>& pl
   if(player1.has_value())
   {
     constexpr uint healPower = 1;
-    player1.value()._hp._currentPoints += healPower;
+    player1.value()._hp.add(healPower);
   }
   else
   {
