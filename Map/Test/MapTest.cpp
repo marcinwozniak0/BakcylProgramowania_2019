@@ -443,6 +443,8 @@ TEST_F(SquareMapTest, mapPrint4x4_3)
                                                "4 #         #\n"
                                                "  ###########\n"
     );
+}
+
 TEST_F(SquareMapTest, isMoveRightPossibleShouldReturnTrue)
 {
     SquareMap map(4);
