@@ -1,11 +1,12 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "Points.hpp"
 
 class Player
 {
 public:
-  uint currentHp;
+  Points _hp;
   std::vector<std::string> handdeck;
-  Player(uint Hp);
+  Player(Points hp);
 };

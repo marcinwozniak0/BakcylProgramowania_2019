@@ -5,14 +5,13 @@ void Paladin :: useUlt(std::optional<Player>& player1, std::optional<Player>& pl
   if(player1.has_value())
   {
     constexpr uint healPower = 1;
-    player1.value().currentHp += healPower;
+    player1.value()._hp._currentPoints += healPower;
   }
   else
   {
     throw std::out_of_range("Invalid value");
   }
 }
-
 catch (std::out_of_range& exception)
 {
   std::cout << exception.what();
