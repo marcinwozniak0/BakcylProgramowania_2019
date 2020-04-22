@@ -78,7 +78,7 @@ TEST(DrawCardsMaxSize, ItShouldDrawCards)
   ASSERT_EQ(2, pulldeck1._cards.size());
 }
 
-TEST(DiscardCardsProperly, ItShouldDiscardCards)
+TEST(MoveCardsProperly, ItShouldMoveCards)
 {
   Deck pulldeck1;
   Deck discarddeck1;
@@ -88,7 +88,7 @@ TEST(DiscardCardsProperly, ItShouldDiscardCards)
   pulldeck1.addCard("card3");
   handdeck1.drawCard(pulldeck1);
   handdeck1.drawCard(pulldeck1);
-  handdeck1.discardCard(discarddeck1, "card1");
+  handdeck1.moveCard(discarddeck1, "card1");
 
   ASSERT_EQ("card2", handdeck1._cards.at(0));
   ASSERT_EQ("card1", discarddeck1._cards.at(0));
