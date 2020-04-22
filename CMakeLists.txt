@@ -22,6 +22,8 @@ include_directories(Combat/Include)
 add_subdirectory(Combat/Source)
 include_directories(Profesja/Include)
 add_subdirectory(Profesja/Source)
+include_directories(Decks/Include)
+add_subdirectory(Decks/Source)
 
 # TEST
 include_directories(Map/Test)
@@ -30,6 +32,8 @@ include_directories(Combat/Test)
 add_subdirectory(Combat/Test)
 include_directories(Profesja/Test)
 add_subdirectory(Profesja/Test)
+include_directories(Decks/Test)
+add_subdirectory(Decks/Test)
 
 add_library(source_objects_lib OBJECT ${SOURCES})
 
