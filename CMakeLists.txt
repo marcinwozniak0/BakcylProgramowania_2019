@@ -41,3 +41,7 @@ target_link_libraries(bakcyl_programowania_UT 	${GTEST_MAIN_LIBRARY}
                                        		${GTEST_LIBRARY}
                                        		${GMOCK_MAIN_LIBRARY}
                                        		${GMOCK_LIBRARY})
+
+find_package(Curses REQUIRED)
+include_directories(${CURSES_INCLUDE_DIR})
+target_link_libraries(bakcyl_programowania ${CURSES_LIBRARIES})
