@@ -8,4 +8,5 @@ class HandDeck : public Deck
 public:
   HandDeck(int maxSize);
   void drawCard(Deck &deck);
+  //void throwCard();  TODO 8============3
 };
