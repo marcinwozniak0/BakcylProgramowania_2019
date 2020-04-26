@@ -8,5 +8,13 @@ class HandDeck : public Deck
 public:
   HandDeck(int maxSize);
   void drawCard(Deck &deck);
-  //void throwCard();  TODO 8============3
+};
+
+class TableDeck : public Deck
+{
+  int _maxSize;
+  int _size = 0;
+public:
+  TableDeck(int maxSize);
+  //void throwCard(handDeck &deck, Card CardToThrow);
 };
