@@ -45,54 +45,73 @@ void Points::setMaxTo (const uint amount)
    _maxPoints = amount;
 }
 
+uint Points::getMaxPoints() const
+{
+    return _maxPoints;
+}
+
 void Points::resetCurrent()
 {
    _currentPoints = _maxPoints;
 }
 
-const bool operator == (const Points& lhs, const Points& rhs)
+void Points::setCurrentPoints(const uint newValue)
 {
-   return lhs._currentPoints == rhs._currentPoints;
+  _currentPoints = newValue;
+  if(_currentPoints > _maxPoints)
+  {
+     _currentPoints = _maxPoints;
+  }
 }
 
-const bool operator != (const Points& lhs, const Points& rhs)
+uint Points::getCurrentPoints() const
+{
+  return _currentPoints;
+}
+
+const bool operator== (const Points& lhs, const Points& rhs)
+{
+   return lhs.getCurrentPoints() == rhs.getCurrentPoints();
+}
+
+const bool operator!= (const Points& lhs, const Points& rhs)
 {
    return !(lhs == rhs);
 }
 
-const bool operator > (const Points& lhs, const Points& rhs)
+const bool operator> (const Points& lhs, const Points& rhs)
 {
-   return lhs._currentPoints > rhs._currentPoints;
+   return lhs.getCurrentPoints() > rhs.getCurrentPoints();
 }
 
-const bool operator >= (const Points& lhs, const Points& rhs)
+const bool operator>= (const Points& lhs, const Points& rhs)
 {
-   return lhs._currentPoints >= rhs._currentPoints;
+   return lhs.getCurrentPoints() >= rhs.getCurrentPoints();
 }
 
-const bool operator < (const Points& lhs, const Points& rhs)
+const bool operator< (const Points& lhs, const Points& rhs)
 {
    return !(lhs >= rhs);
 }
 
-const bool operator <= (const Points& lhs, const Points& rhs)
+const bool operator<= (const Points& lhs, const Points& rhs)
 {
    return !(lhs > rhs);
 }
 
-const Points operator + (const Points& lhs, const Points& rhs)
+const Points operator+ (const Points& lhs, const Points& rhs)
 {
-   return Points(lhs._currentPoints + rhs._currentPoints);
+   return Points(lhs.getCurrentPoints() + rhs.getCurrentPoints());
 }
 
-const Points operator - (const Points& lhs, const Points& rhs)
+const Points operator- (const Points& lhs, const Points& rhs)
 {
    uint currentPoints = 0;
 
-   if(lhs._currentPoints > rhs._currentPoints)
+   if(lhs.getCurrentPoints() > rhs.getCurrentPoints())
    {
-      currentPoints = lhs._currentPoints - rhs._currentPoints;
+      currentPoints = lhs.getCurrentPoints() - rhs.getCurrentPoints();
    }
 
-   return Points(lhs._maxPoints, currentPoints);
+   return Points(lhs.getMaxPoints(), currentPoints);
 }
