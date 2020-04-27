@@ -7,10 +7,10 @@ using namespace ::testing;
 TEST(PointsTest, Constructor_AssignsValues)
 {
     Points p(100);
-    ASSERT_EQ(p._maxPoints, 100);
+    ASSERT_EQ(p.getMaxPoints(), 100);
     ASSERT_EQ(p.getCurrentPoints(), 100);
     p = Points(200, 10);
-    ASSERT_EQ(p._maxPoints, 200);
+    ASSERT_EQ(p.getMaxPoints(), 200);
     ASSERT_EQ(p.getCurrentPoints(), 10);
 }
 
@@ -183,7 +183,7 @@ TEST(PointsTest, SetMaxTo_AllighnsMaxPointsToValue)
 {
   Points p1(100);
   p1.setMaxTo(150);
-  ASSERT_EQ(p1._maxPoints, 150);
+  ASSERT_EQ(p1.getMaxPoints(), 150);
 }
 
 TEST(PointsTest, getCurrentPoints_ReturnsCurrentPoints)

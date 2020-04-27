@@ -1,10 +1,9 @@
 #pragma once
 #include <cstdlib>
 
-struct Points
+class Points
 {
    uint _maxPoints;
-private:
    uint _currentPoints;
 public:
    Points(const uint maxPoints);
@@ -12,6 +11,7 @@ public:
    void remove(const uint amountToRemove);
    void add(const uint amountToAdd);
    void setMaxTo (const uint newValue);
+   uint getMaxPoints() const;
    void resetCurrent();
    void setCurrentPoints(const uint newValue);
    uint getCurrentPoints() const;
