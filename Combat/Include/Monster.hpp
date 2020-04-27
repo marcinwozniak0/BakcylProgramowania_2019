@@ -3,16 +3,19 @@
 #include "Points.hpp"
 #include <string>
 
+enum class State {active, inactive};
 
 class Monster: public Card
 {
-public:
    Points _hp;
    Points _strength;
-   enum class State {active, inactive};
    State _state;
-
-   Monster(Points hp, Points strength, std::string name = "", std::string description = "", uint manaCost = 0, uint cardID = 00);
+ public:
+   Monster(Points hp, Points strength, std::string name, std::string description, uint manaCost);
    void activateCard();
-   void dealDamage(Points& hp1, uint amount);
+   State getState() const;
+   Points getHp() const;
+   void setHp(Points hp);
+   Points getStrength() const;
+   void setStrength(Points strength);
 };

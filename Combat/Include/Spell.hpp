@@ -4,8 +4,10 @@
 
 class Spell : public Card
 {
-   public:
-      uint power;
-      virtual void useCard() = 0;
+protected:
+   uint _power;
+   //virtual void useCard() = 0;
+public:
+   Spell(uint power, std::string name, std::string description, uint manaCost);
+   uint getPower() const;
 };
-//TODO write subclasses (damageSpell, healingSpell ...)

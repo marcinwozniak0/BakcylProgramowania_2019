@@ -2,12 +2,11 @@
 #include "Points.hpp"
 #include <iostream>
 
-Monster::Monster(Points hp, Points strength, std::string name, std::string description, uint manaCost, uint cardID)
-:
-Card(name, description, manaCost, cardID),
-_hp(hp),
-_strength(strength),
-_state(State::inactive)
+Monster::Monster(Points hp, Points strength, std::string name, std::string description, uint manaCost)
+   :Card(name, description, manaCost)
+   ,_hp(hp)
+   ,_strength(strength)
+   ,_state(State::inactive)
 {}
 
 void Monster::activateCard()
@@ -15,7 +14,27 @@ void Monster::activateCard()
    _state = State::active;
 }
 
-void Monster::dealDamage(Points& hp1, uint amount)
+State Monster::getState() const
 {
-    hp1.remove(amount);
+   return _state;
+}
+
+Points Monster::getHp() const
+{
+   return _hp;
+}
+
+void Monster::setHp(Points hp)
+{
+   _hp = hp;
+}
+
+Points Monster::getStrength() const
+{
+  return _strength;
+}
+
+void Monster::setStrength(Points strength)
+{
+  _strength = strength;
 }
