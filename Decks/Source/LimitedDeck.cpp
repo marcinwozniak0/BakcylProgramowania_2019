@@ -26,4 +26,22 @@ void HandDeck::drawCard(Deck &deck)
   }
 }
 
-//void Tabledeck::throwCard
+void TableDeck::playCard(HandDeck &deck, TableDeck &toThistable, Card CardToThrow)
+{
+  if(_size >= _maxSize)
+  {
+    std::cout << "Váš stůl je již plný" << std::endl;
+  }
+  else
+  {
+    for(uint i = 0; i < deck._cards.size(); ++i)
+    {
+      if(deck._cards.at(i) == CardToThrow)
+      {
+        toThistable._cards.push_back(_cards.at(i));
+        toThistable._cards.erase(_cards.begin() + i);
+      }
+    }
+    ++_size;
+  }
+}
