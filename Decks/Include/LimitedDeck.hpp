@@ -16,5 +16,5 @@ class TableDeck : public Deck
   int _size = 0;
 public:
   TableDeck(int maxSize);
-  void playCard(HandDeck &deck, TableDeck &toThistable, Card CardToThrow);
+  void playCard(HandDeck &deck, TableDeck &toThisDeck, Card CardToThrow);
 };

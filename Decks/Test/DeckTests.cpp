@@ -67,15 +67,13 @@ TEST(DrawCardsMaxSize, ItShouldDrawCards)
   pulldeck1.addCard("card1");
   pulldeck1.addCard("card2");
   pulldeck1.addCard("card3");
-  pulldeck1.addCard("card4");
   pulldeck1.shuffleCards();
-  handdeck1.drawCard(pulldeck1);
   handdeck1.drawCard(pulldeck1);
   handdeck1.drawCard(pulldeck1);
   handdeck1.drawCard(pulldeck1);
 
   ASSERT_EQ(2, handdeck1._cards.size());
-  ASSERT_EQ(2, pulldeck1._cards.size());
+  ASSERT_EQ(1, pulldeck1._cards.size());
 }
 
 TEST(MoveCardsProperly, ItShouldMoveCards)

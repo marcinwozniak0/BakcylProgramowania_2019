@@ -26,7 +26,7 @@ void HandDeck::drawCard(Deck &deck)
   }
 }
 
-void TableDeck::playCard(HandDeck &deck, TableDeck &toThistable, Card CardToThrow)
+void TableDeck::playCard(HandDeck &deck, TableDeck &toThisDeck, Card CardToThrow)
 {
   if(_size >= _maxSize)
   {
@@ -38,8 +38,8 @@ void TableDeck::playCard(HandDeck &deck, TableDeck &toThistable, Card CardToThro
     {
       if(deck._cards.at(i) == CardToThrow)
       {
-        toThistable._cards.push_back(_cards.at(i));
-        toThistable._cards.erase(_cards.begin() + i);
+        toThisDeck._cards.push_back(deck._cards.at(i));
+        deck._cards.erase(deck._cards.begin() + i);
       }
     }
     ++_size;
