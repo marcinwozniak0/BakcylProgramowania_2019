@@ -2,6 +2,7 @@
 
 #include "Map.hpp"
 #include "Position.hpp"
+#include "RoomBorders.hpp"
 
 class SquareMap : public Map
 {
@@ -23,13 +24,18 @@ private:
     bool isFieldAccessible(const Position& position);
     bool isFieldBelongToMap(const Position& position);
     bool isFieldBarrier(const Position& position);
+    bool isFieldBelongToRoom(const Position& position, const RoomBorders& roomBorders);
+    int CalculateLeftBorder(Position position);
+    int CalculateRightBorder(Position position);
+    int CalculateUpperBorder(Position position);
+    int CalculateBottomBorder(Position position);
     void makeNonBarrierFieldsInvisible();
     void makeRoomVisible(const Position& startPosition);
-    void makeRowVisible(const Position& startPosition);
-    void makeUpperRowsVisible(Position position);
-    void makeLowerRowsVisible(Position position);
-    void makeLeftHandFieldsVisible(Position position);
-    void makeRightHandFieldsVisible(Position position);
+    void makeRowVisible(const Position& startPosition, const RoomBorders& roomBorders);
+    void makeUpperRowsVisible(Position position, const RoomBorders& roomBorders);
+    void makeLowerRowsVisible(Position position, const RoomBorders& roomBorders);
+    void makeLeftHandFieldsVisible(Position position, const RoomBorders& roomBorders);
+    void makeRightHandFieldsVisible(Position position, const RoomBorders& roomBorders);
     std::string getMapColumnNumbersToPrint(const unsigned int mapSize);
     std::string getMapHorizontalFrameToPrint(const unsigned int mapSize);
     std::string getFieldsToPrint(const unsigned int mapSize);
