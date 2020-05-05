@@ -25,10 +25,10 @@ private:
     bool isFieldBelongToMap(const Position& position);
     bool isFieldBarrier(const Position& position);
     bool isFieldBelongToRoom(const Position& position, const RoomBorders& roomBorders);
-    int CalculateLeftBorder(Position position);
-    int CalculateRightBorder(Position position);
-    int CalculateUpperBorder(Position position);
-    int CalculateBottomBorder(Position position);
+    int calculateLeftBorder(Position position);
+    int calculateRightBorder(Position position);
+    int calculateUpperBorder(Position position);
+    int calculateBottomBorder(Position position);
     void makeNonBarrierFieldsInvisible();
     void makeRoomVisible(const Position& startPosition);
     void makeRowVisible(const Position& startPosition, const RoomBorders& roomBorders);

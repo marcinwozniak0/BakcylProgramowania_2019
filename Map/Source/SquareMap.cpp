@@ -344,10 +344,10 @@ void SquareMap::makeRoomVisible(const Position& startPosition)
     }
 
     RoomBorders roomBorders;
-    roomBorders.leftBorder = CalculateLeftBorder(startPosition);
-    roomBorders.rightBorder = CalculateRightBorder(startPosition);
-    roomBorders.upperBorder = CalculateUpperBorder(startPosition);
-    roomBorders.bottomBorder = CalculateBottomBorder(startPosition);
+    roomBorders.leftBorder = calculateLeftBorder(startPosition);
+    roomBorders.rightBorder = calculateRightBorder(startPosition);
+    roomBorders.upperBorder = calculateUpperBorder(startPosition);
+    roomBorders.bottomBorder = calculateBottomBorder(startPosition);
 
     makeRowVisible(startPosition, roomBorders);
 
@@ -355,7 +355,7 @@ void SquareMap::makeRoomVisible(const Position& startPosition)
     makeLowerRowsVisible(startPosition, roomBorders);
 }
 
-int SquareMap::CalculateLeftBorder(Position position)
+int SquareMap::calculateLeftBorder(Position position)
 {
     while (not isFieldBarrier(position))
     {
@@ -369,7 +369,7 @@ int SquareMap::CalculateLeftBorder(Position position)
     return position._x;
 }
 
-int SquareMap::CalculateRightBorder(Position position)
+int SquareMap::calculateRightBorder(Position position)
 {
     while (not isFieldBarrier(position))
     {
@@ -383,7 +383,7 @@ int SquareMap::CalculateRightBorder(Position position)
     return position._x;
 }
 
-int SquareMap::CalculateUpperBorder(Position position)
+int SquareMap::calculateUpperBorder(Position position)
 {
     while (not isFieldBarrier(position))
     {
@@ -397,7 +397,7 @@ int SquareMap::CalculateUpperBorder(Position position)
     return position._y;
 }
 
-int SquareMap::CalculateBottomBorder(Position position)
+int SquareMap::calculateBottomBorder(Position position)
 {
     while (not isFieldBarrier(position))
     {
