@@ -418,5 +418,5 @@ void SquareMap::makeRightHandFieldsVisible(Position position)
 
 void SquareMap::makeFieldEmpty(const Position& position)
 {
-    _fieldList.at(position._x).at(position._y) = std::make_unique<EmptyField>()
+    _fieldList.at(position._x).at(position._y) = std::make_unique<EmptyField>();
 }
