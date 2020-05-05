@@ -1,20 +1,20 @@
 #include "LimitedDeck.hpp"
 
-HandDeck::HandDeck(int maxSize)
-:_maxSize(maxSize)
+HandDeck::HandDeck(uint maxSize)
+  :_maxSize(maxSize)
 {
 
 }
 
-TableDeck::TableDeck(int maxSize)
-:_maxSize(maxSize)
+TableDeck::TableDeck(uint maxSize)
+  :_maxSize(maxSize)
 {
 
 }
 
 void HandDeck::drawCard(Deck &deck)
 {
-  if(_size >= _maxSize)
+  if(_cards.size() >= _maxSize)
   {
     std::cout << "Vaše ruka je plná" << std::endl;
   }
@@ -22,26 +22,20 @@ void HandDeck::drawCard(Deck &deck)
   {
     _cards.push_back(deck._cards.at(0));
     deck._cards.erase(deck._cards.begin());
-    ++_size;
   }
 }
 
-void TableDeck::playCard(HandDeck &deck, TableDeck &toThisDeck, Card CardToThrow)
+void HandDeck::playCard(TableDeck &toThisDeck, Card CardToThrow)
 {
-  if(_size >= _maxSize)
-  {
-    std::cout << "Váš stůl je již plný" << std::endl;
-  }
-  else
-  {
-    for(uint i = 0; i < deck._cards.size(); ++i)
-    {
-      if(deck._cards.at(i) == CardToThrow)
-      {
-        toThisDeck._cards.push_back(deck._cards.at(i));
-        deck._cards.erase(deck._cards.begin() + i);
-      }
-    }
-    ++_size;
-  }
+//   if(_cards.size() >= _maxSize)
+//   {
+//     std::cout << "Váš stůl je již plný" << std::endl;
+//   }
+//   else
+//   {
+//     uint cardIndex = findCard(CardToThrow);
+//     toThisDeck._cards.push_back(_cards.at(cardIndex));
+//     removeCard(Card cartToRemove);
+//   }
+// toThisDeck._cards.push_back(_cards.at(i));
 }

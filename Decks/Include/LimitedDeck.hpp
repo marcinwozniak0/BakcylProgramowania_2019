@@ -1,20 +1,20 @@
 #pragma once
 #include "Deck.hpp"
 
-class HandDeck : public Deck
-{
-  int _maxSize;
-  int _size = 0;
-public:
-  HandDeck(int maxSize);
-  void drawCard(Deck &deck);
-};
-
 class TableDeck : public Deck
 {
-  int _maxSize;
-  int _size = 0;
+  uint _maxSize;
+  //int _currentDeckFill = 0;
 public:
-  TableDeck(int maxSize);
-  void playCard(HandDeck &deck, TableDeck &toThisDeck, Card CardToThrow);
+  TableDeck(uint maxSize);
+};
+
+class HandDeck : public Deck
+{
+  uint _maxSize;
+  //int _currentDeckFill = 0;
+public:
+  HandDeck(uint maxSize);
+  void drawCard(Deck &deck);
+  void playCard(TableDeck &toThisDeck, Card CardToThrow);
 };
