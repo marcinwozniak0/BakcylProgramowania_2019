@@ -1,12 +1,13 @@
 #include "SquareMap.hpp"
 #include "EmptyField.hpp"
-#include "TreasureField.hpp"
-#include "FightField.hpp"
 #include "Field.hpp"
+#include "FightField.hpp"
+#include "RoomBorders.hpp"
+#include "TreasureField.hpp"
 #include <memory>
+#include <sstream>
 #include <stdexcept>
 #include <vector>
-#include <sstream>
 
 const FieldList& SquareMap::getFields()
 {
@@ -342,76 +343,139 @@ void SquareMap::makeRoomVisible(const Position& startPosition)
         return;
     }
 
-    makeRowVisible(startPosition);
+    RoomBorders roomBorders;
+    roomBorders.leftBorder = calculateLeftBorder(startPosition);
+    roomBorders.rightBorder = calculateRightBorder(startPosition);
+    roomBorders.upperBorder = calculateUpperBorder(startPosition);
+    roomBorders.bottomBorder = calculateBottomBorder(startPosition);
 
-    makeUpperRowsVisible(startPosition);
-    makeLowerRowsVisible(startPosition);
+    makeRowVisible(startPosition, roomBorders);
+
+    makeUpperRowsVisible(startPosition, roomBorders);
+    makeLowerRowsVisible(startPosition, roomBorders);
 }
 
-void SquareMap::makeUpperRowsVisible(Position position)
-{
-    while (not isFieldBarrier(position))
-    {
-        ++position._y;
-        if (not isFieldBelongToMap(position))
-        {
-            return;
-        }
-        makeRowVisible(position);
-    }
-}
-void SquareMap::makeLowerRowsVisible(Position position)
-{
-    while (not isFieldBarrier(position))
-    {
-        --position._y;
-        if (not isFieldBelongToMap(position))
-        {
-            return;
-        }
-        makeRowVisible(position);
-    }
-}
-
-void SquareMap::makeRowVisible(const Position& startPosition)
-{
-    if (not isFieldBelongToMap(startPosition))
-    {
-        return;
-    }
-
-    getField(startPosition)->makeVisible();
-    if (isFieldBarrier(startPosition))
-    {
-        return;
-    }
-
-    makeLeftHandFieldsVisible(startPosition);
-    makeRightHandFieldsVisible(startPosition);
-}
-
-void SquareMap::makeLeftHandFieldsVisible(Position position)
-{
-    while (not isFieldBarrier(position))
-    {
-        ++position._x;
-        if (not isFieldBelongToMap(position))
-        {
-            return;
-        }
-        getField(position)->makeVisible();
-    }
-}
-
-void SquareMap::makeRightHandFieldsVisible(Position position)
+int SquareMap::calculateLeftBorder(Position position)
 {
     while (not isFieldBarrier(position))
     {
         --position._x;
         if (not isFieldBelongToMap(position))
         {
-            return;
+            ++position._x;
+            break;
         }
+    }
+    return position._x;
+}
+
+int SquareMap::calculateRightBorder(Position position)
+{
+    while (not isFieldBarrier(position))
+    {
+        ++position._x;
+        if (not isFieldBelongToMap(position))
+        {
+            --position._x;
+            break;
+        }
+    }
+    return position._x;
+}
+
+int SquareMap::calculateUpperBorder(Position position)
+{
+    while (not isFieldBarrier(position))
+    {
+        ++position._y;
+        if (not isFieldBelongToMap(position))
+        {
+            --position._y;
+            break;
+        }
+    }
+    return position._y;
+}
+
+int SquareMap::calculateBottomBorder(Position position)
+{
+    while (not isFieldBarrier(position))
+    {
+        --position._y;
+        if (not isFieldBelongToMap(position))
+        {
+            ++position._y;
+            break;
+        }
+    }
+    return position._y;
+}
+
+bool SquareMap::isFieldBelongToRoom(const Position& position, const RoomBorders& roomBorders)
+{
+    if (position._x > roomBorders.rightBorder)
+    {
+        return false;
+    }
+    if (position._x < roomBorders.leftBorder)
+    {
+        return false;
+    }
+    if (position._y > roomBorders.upperBorder)
+    {
+        return false;
+    }
+    if (position._y < roomBorders.bottomBorder)
+    {
+        return false;
+    }
+    return true;
+}
+
+void SquareMap::makeUpperRowsVisible(Position position, const RoomBorders& roomBorders)
+{
+    while (isFieldBelongToRoom(position, roomBorders))
+    {
+        makeRowVisible(position, roomBorders);
+        ++position._y;
+    }
+}
+void SquareMap::makeLowerRowsVisible(Position position, const RoomBorders& roomBorders)
+{
+    while (isFieldBelongToRoom(position, roomBorders))
+    {
+        makeRowVisible(position, roomBorders);
+        --position._y;
+    }
+}
+
+void SquareMap::makeRowVisible(const Position& startPosition, const RoomBorders& roomBorders)
+{
+    if (not isFieldBelongToRoom(startPosition, roomBorders))
+    {
+        return;
+    }
+
+    getField(startPosition)->makeVisible();
+
+    makeLeftHandFieldsVisible(startPosition, roomBorders);
+    makeRightHandFieldsVisible(startPosition, roomBorders);
+}
+
+void SquareMap::makeLeftHandFieldsVisible(Position position, const RoomBorders& roomBorders)
+{
+    while (isFieldBelongToRoom(position, roomBorders))
+    {
         getField(position)->makeVisible();
+        ++position._x;
+    }
+}
+
+void SquareMap::makeRightHandFieldsVisible(Position position, const RoomBorders& roomBorders)
+{
+    while (isFieldBelongToRoom(position, roomBorders))
+    {
+        getField(position)->makeVisible();
+        --position._x;
     }
 }
