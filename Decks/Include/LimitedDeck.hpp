@@ -15,5 +15,5 @@ class HandDeck : public Deck
 public:
   HandDeck(uint maxSize);
   void drawCard(Deck &deck);
-  void playCard(TableDeck &toThisDeck, Card CardToThrow);
+  void playCard(std::shared_ptr<TableDeck> tablePointer, Card CardToThrow);
 };

@@ -1,4 +1,5 @@
 #include "LimitedDeck.hpp"
+#include "../../Table/Include/Table.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
@@ -121,3 +122,25 @@ TEST(FindsCardsProperly, ItFindsTheRighCard)
 //   EXPECT_THROW(pulldeck1.findCard(card4), std::runtime_error);
 // }
 //
+TEST(PlaysCardProperly, ItShouldPlayCards)
+{
+  Table table1;
+  HandDeck handdeck1(5);
+  handdeck1.addCard("card1");
+  handdeck1.addCard("card2");
+  handdeck1.addCard("card3");
+  handdeck1.addCard("card4");
+  handdeck1.playCard(table1.playersTableSite, "card1");
+  std::cout<<"d00psko1"<<std::endl;
+  handdeck1.playCard(table1.playersTableSite, "card4");
+  std::cout<<"d00psko2"<<std::endl;
+
+  ASSERT_EQ("card1", table1._playersTableSite._cards.at(0));
+  std::cout<<"d00psko3"<<std::endl;
+  ASSERT_EQ("card4", table1._playersTableSite._cards.at(1));
+  std::cout<<"d00psko4"<<std::endl;
+  ASSERT_EQ(2, table1._playersTableSite._cards.size());
+  std::cout<<"d00psko5"<<std::endl;
+  ASSERT_EQ(2, table1._playersTableSite._cards.size());
+
+}
