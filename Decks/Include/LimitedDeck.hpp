@@ -4,7 +4,7 @@
 class TableDeck : public Deck
 {
   uint _maxSize;
-  //int _currentDeckFill = 0;
+
 public:
   TableDeck(uint maxSize);
 };
@@ -12,7 +12,6 @@ public:
 class HandDeck : public Deck
 {
   uint _maxSize;
-  //int _currentDeckFill = 0;
 public:
   HandDeck(uint maxSize);
   void drawCard(Deck &deck);

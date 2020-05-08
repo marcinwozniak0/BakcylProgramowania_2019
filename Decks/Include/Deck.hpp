@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <algorithm>
 #include <memory>
+#include <exception>
+#include <stdexcept>
 
 using Card = std::string;
 
@@ -13,9 +15,10 @@ class Deck
 {
 public:
   std::vector<Card> _cards;
-  uint findCard(Deck deckToSearch, Card cardToFind);
+  uint findCard(Card& cardToFind);
   void addCard(Card cardToAdd);
   Card moveCard(Deck &ToThisDeck, Card cardToMove);
   void shuffleCards();
   std::unique_ptr<Card> removeCard(Card cardToRemove);
+  std::unique_ptr<Card> removeFirstCard();
 };
