@@ -121,12 +121,3 @@ TEST(FindsCardsProperly, ItFindsTheRighCard)
 //   EXPECT_THROW(pulldeck1.findCard(card4), std::runtime_error);
 // }
 //
-// // TEST(MoveCardsProperly, ItShouldMoveCards)
-// // {
-// //
-// // }
-// //
-// // TEST(MoveCardsProperly, ItShouldMoveCards)
-// // {
-// //
-// // }
