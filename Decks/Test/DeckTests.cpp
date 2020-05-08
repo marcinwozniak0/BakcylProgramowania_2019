@@ -95,17 +95,21 @@ TEST(MoveCardsProperly, ItShouldMoveCards)
   ASSERT_EQ(1, discarddeck1._cards.size());
 }
 
-TEST(FindsCardsProperly, ItFindTheRighCard)
+TEST(FindsCardsProperly, ItFindsTheRighCard)
 {
   Deck pulldeck1;
-  Card card2 = {"card2"};
-  pulldeck1.addCard("card1");
-  pulldeck1.addCard(card2);
-  pulldeck1.addCard("card3");
-  uint cardIndex = pulldeck1.findCard(card2);
-  ASSERT_EQ(1, cardIndex);
+  Card card1 = {"card1"};
+  Card card3 = {"card3"};
+  pulldeck1.addCard(card1);
+  pulldeck1.addCard("card2");
+  pulldeck1.addCard(card3);
+  uint cardIndex1 = pulldeck1.findCard(card1);
+  uint cardIndex2 = pulldeck1.findCard(card3);
+
+  ASSERT_EQ(0, cardIndex1);
+  ASSERT_EQ(2, cardIndex2);
 }
-//
+
 // TEST(ExpectThrowingException, ItShouldThrowException)
 // {
 //   Deck pulldeck1;
