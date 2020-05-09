@@ -3,17 +3,16 @@
 
 class TableDeck : public Deck
 {
-  uint _maxSize;
-
 public:
+  uint _maxSize;
   TableDeck(uint maxSize);
 };
 
 class HandDeck : public Deck
 {
-  uint _maxSize;
 public:
+  uint _maxSize;
   HandDeck(uint maxSize);
   void drawCard(Deck &deck);
-  void playCard(std::shared_ptr<TableDeck> tablePointer, Card CardToThrow);
+  void playCard(std::shared_ptr<TableDeck> tableDeckPointer, Card CardToThrow);
 };

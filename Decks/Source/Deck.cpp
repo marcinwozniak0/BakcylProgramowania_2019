@@ -24,7 +24,7 @@ void Deck::addCard(Card cardToAdd)
 
 void Deck::shuffleCards()
 {
-  std::random_shuffle (_cards.begin(), _cards.end());
+  std::random_shuffle(_cards.begin(), _cards.end());
 }
 
 Card Deck::moveCard(Deck &ToThisDeck,Card cardToMove)

@@ -25,16 +25,17 @@ void HandDeck::drawCard(Deck &deck)
   }
 }
 
-void HandDeck::playCard(std::shared_ptr<TableDeck> tablePointer, Card CardToThrow)
+void HandDeck::playCard(std::shared_ptr<TableDeck> tableDeckPointer, Card CardToThrow)
 {
-  if(tablePointer->_cards.size() >= tablePointer->_maxSize)
+  if(tableDeckPointer->_cards.size() >= tableDeckPointer->_maxSize)
   {
     std::cout << "Váš stůl je již plný" << std::endl;
   }
   else
   {
     uint cardIndex = findCard(CardToThrow);
-    tablePonter->_cards.push_back(_cards.at(cardIndex));
+    std::cout<<this->_cards.at(cardIndex)<<std::endl;
+    tableDeckPointer->_cards.push_back(this->_cards.at(cardIndex));
     removeCard(CardToThrow);
   }
 }

@@ -135,12 +135,13 @@ TEST(PlaysCardProperly, ItShouldPlayCards)
   handdeck1.playCard(table1.playersTableSite, "card4");
   std::cout<<"d00psko2"<<std::endl;
 
-  ASSERT_EQ("card1", table1._playersTableSite._cards.at(0));
+  ASSERT_EQ("card1", table1.playersTableSite->_cards.at(0));
   std::cout<<"d00psko3"<<std::endl;
-  ASSERT_EQ("card4", table1._playersTableSite._cards.at(1));
+  ASSERT_EQ("card4", table1.playersTableSite->_cards.at(1));
   std::cout<<"d00psko4"<<std::endl;
-  ASSERT_EQ(2, table1._playersTableSite._cards.size());
+  ASSERT_EQ(2, table1.playersTableSite->_cards.size());
   std::cout<<"d00psko5"<<std::endl;
-  ASSERT_EQ(2, table1._playersTableSite._cards.size());
-
+  ASSERT_EQ(2, table1.playersTableSite->_cards.size());
+ //Nie wiem czemu te testy przechodzą na wskaźnikach a na nazwach memberów już nie XD
+ //TODO ogąrnąć czemu tak nie działa?
 }
