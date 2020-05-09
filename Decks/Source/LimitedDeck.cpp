@@ -34,7 +34,6 @@ void HandDeck::playCard(std::shared_ptr<TableDeck> tableDeckPointer, Card CardTo
   else
   {
     uint cardIndex = findCard(CardToThrow);
-    std::cout<<this->_cards.at(cardIndex)<<std::endl;
     tableDeckPointer->_cards.push_back(this->_cards.at(cardIndex));
     removeCard(CardToThrow);
   }
