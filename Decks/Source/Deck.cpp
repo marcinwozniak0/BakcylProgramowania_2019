@@ -9,7 +9,7 @@ uint Deck::findCard(Card& cardToFind) try
       return i;
     }
   }
-  throw std::runtime_error("Card not found");
+  throw std::runtime_error("Card not found");;
 }
 catch (std::runtime_error& exception)
 {

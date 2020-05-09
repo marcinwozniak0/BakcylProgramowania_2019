@@ -50,6 +50,7 @@ TEST(DrawCardsProperly, ItShouldDrawCards)
 {
   Deck pulldeck1;
   HandDeck handdeck1(11);
+
   pulldeck1.addCard("card1");
   pulldeck1.addCard("card2");
 
@@ -64,10 +65,13 @@ TEST(DrawCardsMaxSize, ItShouldDrawCards)
 {
   Deck pulldeck1;
   HandDeck handdeck1(2);
+
   pulldeck1.addCard("card1");
   pulldeck1.addCard("card2");
   pulldeck1.addCard("card3");
+
   pulldeck1.shuffleCards();
+
   handdeck1.drawCard(pulldeck1);
   handdeck1.drawCard(pulldeck1);
   handdeck1.drawCard(pulldeck1);
@@ -81,6 +85,7 @@ TEST(MoveCardsProperly, ItShouldMoveCards)
   Deck pulldeck1;
   Deck discarddeck1;
   HandDeck handdeck1(11);
+
   pulldeck1.addCard("card1");
   pulldeck1.addCard("card2");
   pulldeck1.addCard("card3");
@@ -111,25 +116,28 @@ TEST(FindsCardsProperly, ItFindsTheRighCard)
   ASSERT_EQ(2, cardIndex2);
 }
 
-// TEST(ExpectThrowingException, ItShouldThrowException)
-// {
-//   Deck pulldeck1;
-//   Card card4 = {"card4"};
-//   pulldeck1.addCard("card1");
-//   pulldeck1.addCard("card2");
-//   pulldeck1.addCard("card3");
-//
-//   EXPECT_THROW(pulldeck1.findCard(card4), std::runtime_error);
-// }
-//
+TEST(ExpectThrowingException, ItShouldThrowException)
+{
+  Deck pulldeck1;
+  Card testcard = {"card69"};
+  pulldeck1.addCard("card1");
+  pulldeck1.addCard("card2");
+  pulldeck1.addCard("card3");
+
+  EXPECT_THROW(pulldeck1.findCard(testcard), std::runtime_error);
+}
+
+
 TEST(PlaysCardProperly, ItShouldPlayCards)
 {
   Table table1;
   HandDeck handdeck1(5);
+
   handdeck1.addCard("card1");
   handdeck1.addCard("card2");
   handdeck1.addCard("card3");
   handdeck1.addCard("card4");
+
   handdeck1.playCard(table1.playersTableSite, "card1");
   handdeck1.playCard(table1.playersTableSite, "card4");
 
@@ -137,6 +145,4 @@ TEST(PlaysCardProperly, ItShouldPlayCards)
   ASSERT_EQ("card4", table1.playersTableSite->_cards.at(1));
   ASSERT_EQ(2, table1.playersTableSite->_cards.size());
   ASSERT_EQ(2, handdeck1._cards.size());
- //Nie wiem czemu te testy przechodzą na wskaźnikach a na nazwach memberów już nie XD
- //TODO ogąrnąć czemu tak nie działa?
 }
