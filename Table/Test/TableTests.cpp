@@ -23,8 +23,8 @@ TEST(LimitOfCardsOnTable, ItShouldWarnPlayerAboutTryOfPassingLimitOfCardsOnTable
   handdeck1.playCard(table1.playersTableSite, "card5");
   handdeck1.playCard(table1.playersTableSite, "card6");
 
-  ASSERT_EQ(5, table1.playersTableSite->_cards.size());
-  ASSERT_EQ(1, handdeck1._cards.size());
+  ASSERT_EQ(5, table1.playersTableSite->cards->size());
+  ASSERT_EQ(1, handdeck1.cards->size());
 }
 
 TEST(TransferingCardsToDiscardDeck, ItShouldtransferCardsFromTableDeckToDiscardDeck)
@@ -43,6 +43,6 @@ TEST(TransferingCardsToDiscardDeck, ItShouldtransferCardsFromTableDeckToDiscardD
   table1.playersTableSite -> moveCard(table1._playersDiscardDeck, "card4");
   table1.playersTableSite -> moveCard(table1._playersDiscardDeck, "card5");
 
-  ASSERT_EQ(5, table1._playersDiscardDeck._cards.size());
-  ASSERT_EQ(0, table1._playersTableSite._cards.size());
+  ASSERT_EQ(5, table1._playersDiscardDeck.cards->size());
+  ASSERT_EQ(0, table1._playersTableSite.cards->size());
 }

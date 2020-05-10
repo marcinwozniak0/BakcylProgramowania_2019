@@ -10,9 +10,9 @@ TEST(AddingCardsToDeck, ItShouldAddCards)
 
   pulldeck1.addCard("card1");
   pulldeck1.addCard("card2");
-  ASSERT_EQ("card1", pulldeck1._cards.at(0));
-  ASSERT_EQ("card2", pulldeck1._cards.at(1));
-  ASSERT_EQ(2, pulldeck1._cards.size());
+  ASSERT_EQ("card1", pulldeck1.cards->at(0));
+  ASSERT_EQ("card2", pulldeck1.cards->at(1));
+  ASSERT_EQ(2, pulldeck1.cards->size());
 }
 
 TEST(SchuffleingCards, ItShouldSchuffleCards)
@@ -41,9 +41,9 @@ TEST(SchuffleingCards, ItShouldSchuffleCards)
 
   pulldeck1.shuffleCards();
 
-  ASSERT_NE(pulldeck1._cards, pulldeck2._cards);
-  ASSERT_EQ(8, pulldeck1._cards.size());
-  ASSERT_EQ(8, pulldeck2._cards.size());
+  ASSERT_NE(*pulldeck1.cards, *pulldeck2.cards);
+  ASSERT_EQ(8, pulldeck1.cards->size());
+  ASSERT_EQ(8, pulldeck2.cards->size());
 }
 
 TEST(DrawCardsProperly, ItShouldDrawCards)
@@ -56,9 +56,9 @@ TEST(DrawCardsProperly, ItShouldDrawCards)
 
   handdeck1.drawCard(pulldeck1);
 
-  ASSERT_EQ("card1", handdeck1._cards.at(0));
-  ASSERT_EQ(1, handdeck1._cards.size());
-  ASSERT_EQ(1, pulldeck1._cards.size());
+  ASSERT_EQ("card1", handdeck1.cards->at(0));
+  ASSERT_EQ(1, handdeck1.cards->size());
+  ASSERT_EQ(1, pulldeck1.cards->size());
 }
 
 TEST(DrawCardsMaxSize, ItShouldDrawCards)
@@ -76,8 +76,8 @@ TEST(DrawCardsMaxSize, ItShouldDrawCards)
   handdeck1.drawCard(pulldeck1);
   handdeck1.drawCard(pulldeck1);
 
-  ASSERT_EQ(2, handdeck1._cards.size());
-  ASSERT_EQ(1, pulldeck1._cards.size());
+  ASSERT_EQ(2, handdeck1.cards->size());
+  ASSERT_EQ(1, pulldeck1.cards->size());
 }
 
 TEST(MoveCardsProperly, ItShouldMoveCards)
@@ -93,12 +93,12 @@ TEST(MoveCardsProperly, ItShouldMoveCards)
   handdeck1.drawCard(pulldeck1);
   handdeck1.moveCard(discarddeck1, "card1");
 
-  ASSERT_EQ("card2", handdeck1._cards.at(0));
-  ASSERT_EQ("card1", discarddeck1._cards.at(0));
-  ASSERT_EQ("card3", pulldeck1._cards.at(0));
-  ASSERT_EQ(1, handdeck1._cards.size());
-  ASSERT_EQ(1, pulldeck1._cards.size());
-  ASSERT_EQ(1, discarddeck1._cards.size());
+  ASSERT_EQ("card2", handdeck1.cards->at(0));
+  ASSERT_EQ("card1", discarddeck1.cards->at(0));
+  ASSERT_EQ("card3", pulldeck1.cards->at(0));
+  ASSERT_EQ(1, handdeck1.cards->size());
+  ASSERT_EQ(1, pulldeck1.cards->size());
+  ASSERT_EQ(1, discarddeck1.cards->size());
 }
 
 TEST(FindsCardsProperly, ItFindsTheRighCard)
@@ -141,8 +141,8 @@ TEST(PlaysCardProperly, ItShouldPlayCards)
   handdeck1.playCard(table1.playersTableSite, "card1");
   handdeck1.playCard(table1.playersTableSite, "card4");
 
-  ASSERT_EQ("card1", table1.playersTableSite->_cards.at(0));
-  ASSERT_EQ("card4", table1.playersTableSite->_cards.at(1));
-  ASSERT_EQ(2, table1.playersTableSite->_cards.size());
-  ASSERT_EQ(2, handdeck1._cards.size());
+  ASSERT_EQ("card1", table1.playersTableSite->cards->at(0));
+  ASSERT_EQ("card4", table1.playersTableSite->cards->at(1));
+  ASSERT_EQ(2, table1.playersTableSite->cards->size());
+  ASSERT_EQ(2, handdeck1.cards->size());
 }
