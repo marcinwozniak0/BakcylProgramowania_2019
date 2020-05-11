@@ -27,12 +27,12 @@ void Deck::shuffleCards()
   std::random_shuffle(cards->begin(), cards->end());
 }
 
-Card Deck::moveCard(Deck &ToThisDeck,Card cardToMove)
+Card Deck::moveCard(Deck &ToThisDeck, Card cardToMove)
 {
-    uint cardIndex = findCard(cardToMove);
-    ToThisDeck.cards->push_back(this->cards->at(cardIndex));
-    removeCard(cardToMove);
-    return cardToMove;
+  uint cardIndex = findCard(cardToMove);
+  ToThisDeck.cards->push_back(this->cards->at(cardIndex));
+  removeCard(cardToMove);
+  return cardToMove;
 }
 
 std::unique_ptr<Card> Deck::removeCard(Card cardToRemove)
@@ -44,9 +44,9 @@ std::unique_ptr<Card> Deck::removeCard(Card cardToRemove)
   }
   else
   {
-      uint cardIndex = findCard(cardToRemove);
-      removedCard = std::make_unique<Card> (this->cards->at(cardIndex));
-      this->cards->erase(this->cards->begin() + cardIndex);
+    uint cardIndex = findCard(cardToRemove);
+    removedCard = std::make_unique<Card> (this->cards->at(cardIndex));
+    this->cards->erase(this->cards->begin() + cardIndex);
   }
   return removedCard;
 }

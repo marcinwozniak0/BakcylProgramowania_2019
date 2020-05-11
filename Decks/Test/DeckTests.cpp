@@ -10,6 +10,7 @@ TEST(AddingCardsToDeck, ItShouldAddCards)
 
   pulldeck1.addCard("card1");
   pulldeck1.addCard("card2");
+
   ASSERT_EQ("card1", pulldeck1.cards->at(0));
   ASSERT_EQ("card2", pulldeck1.cards->at(1));
   ASSERT_EQ(2, pulldeck1.cards->size());
@@ -120,6 +121,7 @@ TEST(ExpectThrowingException, ItShouldThrowException)
 {
   Deck pulldeck1;
   Card testcard = {"card6"};
+
   pulldeck1.addCard("card1");
   pulldeck1.addCard("card2");
   pulldeck1.addCard("card3");

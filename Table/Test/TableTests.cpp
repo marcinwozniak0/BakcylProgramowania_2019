@@ -3,7 +3,6 @@
 
 using namespace ::testing;
 
-
 TEST(LimitOfCardsOnTable, ItShouldWarnPlayerAboutTryOfPassingLimitOfCardsOnTableAndDiscardDeck)
 {
   Table table1;

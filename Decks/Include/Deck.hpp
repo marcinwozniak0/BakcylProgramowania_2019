@@ -1,9 +1,6 @@
 #pragma once
-#include <string>
 #include <iostream>
-#include <string>
 #include <vector>
-#include <cstdlib>
 #include <algorithm>
 #include <memory>
 #include <exception>
@@ -23,6 +20,5 @@ public:
   std::unique_ptr<Card> removeCard(Card cardToRemove);
   std::unique_ptr<Card> removeFirstCard();
   std::shared_ptr<std::vector<Card>> cards;
-
   Deck();
 };
