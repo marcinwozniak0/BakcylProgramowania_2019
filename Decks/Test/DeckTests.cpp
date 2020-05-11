@@ -119,7 +119,7 @@ TEST(FindsCardsProperly, ItFindsTheRighCard)
 TEST(ExpectThrowingException, ItShouldThrowException)
 {
   Deck pulldeck1;
-  Card testcard = {"card69"};
+  Card testcard = {"card6"};
   pulldeck1.addCard("card1");
   pulldeck1.addCard("card2");
   pulldeck1.addCard("card3");

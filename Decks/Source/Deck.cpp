@@ -5,7 +5,7 @@ Deck::Deck()
   cards = std::make_shared<std::vector<Card>>(_cards);
 }
 
-uint Deck::findCard(Card& cardToFind) try
+uint Deck::findCard(Card& cardToFind)
 {
   for(uint i = 0; i < this->cards->size(); ++i)
   {
@@ -15,11 +15,6 @@ uint Deck::findCard(Card& cardToFind) try
     }
   }
   throw std::runtime_error("Card not found");;
-}
-catch (std::runtime_error& exception)
-{
-  std::cout << exception.what();
-  return false;
 }
 
 void Deck::addCard(Card cardToAdd)
