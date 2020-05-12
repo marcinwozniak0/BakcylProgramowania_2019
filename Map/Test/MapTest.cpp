@@ -515,7 +515,7 @@ TEST_F(SquareMapTest, makeTreasureFieldEmpty)
 {
     SquareMap map(2);
     Position position(0, 0);
-    auto &fields = const_cast<FieldList &>(map.getFields());
+    auto& fields = const_cast<FieldList &>(map.getFields());
     fields.at(0).at(0) = std::make_unique<TreasureField>();
     map.makeFieldEmpty(position);
     ASSERT_EQ(FieldType::Empty, fields.at(0).at(0) -> getType());
