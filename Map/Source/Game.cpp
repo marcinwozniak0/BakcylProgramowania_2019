@@ -23,3 +23,14 @@ Direction Game::getDirection()
             return getDirection();
     }
 }
+
+void Game::play()
+{
+    isRunning = true;
+    
+    while(_isRunning)
+    {
+        Direction direction = getDirection();
+        makeMove(direction); //TODO - placeholder
+    }
+}
