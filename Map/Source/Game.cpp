@@ -23,3 +23,8 @@ Direction Game::getDirection()
             return getDirection();
     }
 }
+
+void Game::makeMove(const Direction& direction)
+{
+    bool isMovePossible = _map.
+}
