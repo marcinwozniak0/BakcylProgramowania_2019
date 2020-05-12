@@ -15,6 +15,7 @@ public:
     void updateVisilibity(const Position& playerPosition);
     std::string getMapToPrint(const Position& playerPosition);
     bool isMovePossible(const Position&, const Direction);
+    void makeFieldEmpty(const Position&);
 
 private:
     bool isMoveUpPossible(const Position&);

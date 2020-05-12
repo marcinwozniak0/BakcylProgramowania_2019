@@ -466,3 +466,83 @@ TEST_F(SquareMapTest, isMoveDownPossibleShouldReturnFalse)
     Position position(3, 3);
     ASSERT_EQ(false, map.isMovePossible(position, Direction::Down));
 }
+
+TEST_F(SquareMapTest, makeFightFieldEmpty1)
+{
+    SquareMap map(2);
+    Position position(0, 0);
+    auto &fields = const_cast<FieldList &>(map.getFields());
+    fields.at(0).at(0) = std::make_unique<FightField>();
+    map.makeFieldEmpty(position);
+    ASSERT_EQ(FieldType::Empty, fields.at(0).at(0) -> getType());
+}
+
+TEST_F(SquareMapTest, makeTreasureFieldEmpty)
+{
+    SquareMap map(2);
+    const Position position(0, 0);
+    auto& fields = const_cast<FieldList &>(map.getFields());
+    fields.at(0).at(0) = std::make_unique<TreasureField>();
+    map.makeFieldEmpty(position);
+    ASSERT_EQ(FieldType::Empty, fields.at(0).at(0) -> getType());
+}
+
+TEST_F(SquareMapTest, makeTreasureFieldEmpty2)
+{
+    SquareMap map(2);
+    const Position position(2, 0);
+    try
+    {
+        map.makeFieldEmpty(position);
+    }
+    catch(const std::out_of_range& err)
+    {
+        std::cout << "Out of range" << std::endl;
+    }
+    EXPECT_THROW(map.makeFieldEmpty(position), std::out_of_range);
+}
+
+TEST_F(SquareMapTest, makeTreasureFieldEmpty3)
+{
+    SquareMap map(2);
+    const Position position(0, 2);
+    try
+    {
+        map.makeFieldEmpty(position);
+    }
+    catch(const std::out_of_range& err)
+    {
+        std::cout << "Out of range" << std::endl;
+    }
+    EXPECT_THROW(map.makeFieldEmpty(position), std::out_of_range);
+}
+
+TEST_F(SquareMapTest, makeTreasureFieldEmpty4)
+{
+    SquareMap map(2);
+    const Position position(-1, 0);
+    try
+    {
+        map.makeFieldEmpty(position);
+    }
+    catch(const std::out_of_range& err)
+    {
+        std::cout << "Out of range" << std::endl;
+    }
+    EXPECT_THROW(map.makeFieldEmpty(position), std::out_of_range);
+}
+
+TEST_F(SquareMapTest, makeTreasureFieldEmpty5)
+{
+    SquareMap map(2);
+    const Position position(0, -1);
+    try
+    {
+        map.makeFieldEmpty(position);
+    }
+    catch(const std::out_of_range& err)
+    {
+        std::cout << "Out of range" << std::endl;
+    }
+    EXPECT_THROW(map.makeFieldEmpty(position), std::out_of_range);
+}
