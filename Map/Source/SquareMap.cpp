@@ -2,7 +2,6 @@
 #include "EmptyField.hpp"
 #include "Field.hpp"
 #include "FightField.hpp"
-#include "RoomBorders.hpp"
 #include "TreasureField.hpp"
 #include <memory>
 #include <sstream>
