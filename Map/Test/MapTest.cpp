@@ -161,7 +161,7 @@ TEST_F(SquareMapTest, wallFieldInvisiblePrint)
   ASSERT_EQ(' ',map.printField(field));
 }
 
-FieldList buildSimpleThreeRoomsMap()
+FieldList buildSimple5x5Map()
 {
     FieldList fieldList;
     std::vector<std::unique_ptr<Field>> column;
@@ -169,8 +169,19 @@ FieldList buildSimpleThreeRoomsMap()
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
     fieldList.emplace_back(std::move(column));
 
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<FightField>());
+    column.emplace_back(std::make_unique<EmptyField>());
+    fieldList.emplace_back(std::move(column));
+
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<DoorField>());
     column.emplace_back(std::make_unique<WallField>());
     column.emplace_back(std::make_unique<DoorField>());
     column.emplace_back(std::make_unique<WallField>());
@@ -178,26 +189,24 @@ FieldList buildSimpleThreeRoomsMap()
 
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<WallField>());
     column.emplace_back(std::make_unique<EmptyField>());
-    fieldList.emplace_back(std::move(column));
-
-    column.emplace_back(std::make_unique<WallField>());
-    column.emplace_back(std::make_unique<DoorField>());
-    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<TreasureField>());
     fieldList.emplace_back(std::move(column));
 
     column.emplace_back(std::make_unique<EmptyField>());
     column.emplace_back(std::make_unique<EmptyField>());
+    column.emplace_back(std::make_unique<WallField>());
+    column.emplace_back(std::make_unique<TreasureField>());
     column.emplace_back(std::make_unique<EmptyField>());
     fieldList.emplace_back(std::move(column));
 
     return fieldList;
-
 }
 
 TEST_F(SquareMapTest, mapShouldBeInvisibleByDefault)
 {
-    SquareMap map(buildSimpleThreeRoomsMap());
+    SquareMap map(buildSimple5x5Map());
     constexpr int expectedNumberOfVisibleFields = 0;
     auto &fieldList = map.getFields();
 
@@ -214,12 +223,12 @@ TEST_F(SquareMapTest, mapShouldBeInvisibleByDefault)
 
 TEST_F(SquareMapTest, RoomWithPlayerShouldBeVisible)
 {
-    SquareMap map(buildSimpleThreeRoomsMap());
-    constexpr int expectedNumberOfVisibleFields = 6;
+    SquareMap map(buildSimple5x5Map());
+    constexpr int expectedNumberOfVisibleFields = 9;
 
     int numberOfVisibleFields = 0;
 
-    map.updateVisilibity(Position(0,0));
+    map.updateVisilibity(Position(3, 1));
 
     auto &fieldList = map.getFields();
     for(const auto& column : fieldList)
@@ -233,12 +242,12 @@ TEST_F(SquareMapTest, RoomWithPlayerShouldBeVisible)
 
 TEST_F(SquareMapTest, WhenPlayerOnDoorBothRoomsShouldBeVisible)
 {
-    SquareMap map(buildSimpleThreeRoomsMap());
-    constexpr int expectedNumberOfVisibleFields = 12;
+    SquareMap map(buildSimple5x5Map());
+    constexpr int expectedNumberOfVisibleFields = 21;
 
     int numberOfVisibleFields = 0;
 
-    map.updateVisilibity(Position(1,1));
+    map.updateVisilibity(Position(2, 1));
 
     auto &fieldList = map.getFields();
     for(const auto& column : fieldList)
@@ -252,13 +261,13 @@ TEST_F(SquareMapTest, WhenPlayerOnDoorBothRoomsShouldBeVisible)
 
 TEST_F(SquareMapTest, seenDoorsAndWallsShouldStayVisible)
 {
-    SquareMap map(buildSimpleThreeRoomsMap());
-    constexpr int expectedNumberOfVisibleFields = 9;
+    SquareMap map(buildSimple5x5Map());
+    constexpr int expectedNumberOfVisibleFields = 17;
 
     int numberOfVisibleFields = 0;
 
+    map.updateVisilibity(Position(3, 1));
     map.updateVisilibity(Position(1,1));
-    map.updateVisilibity(Position(0,0));
 
     auto &fieldList = map.getFields();
     for(const auto& column : fieldList)
@@ -268,49 +277,6 @@ TEST_F(SquareMapTest, seenDoorsAndWallsShouldStayVisible)
     }
 
     ASSERT_EQ(expectedNumberOfVisibleFields, numberOfVisibleFields);
-}
-
-FieldList buildSimple5x5Map()
-{
-    FieldList fieldList;
-    std::vector<std::unique_ptr<Field>> column;
-
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    fieldList.emplace_back(std::move(column));
-    
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<FightField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    fieldList.emplace_back(std::move(column));
-    
-    column.emplace_back(std::make_unique<WallField>());
-    column.emplace_back(std::make_unique<DoorField>());
-    column.emplace_back(std::make_unique<WallField>());
-    column.emplace_back(std::make_unique<DoorField>());
-    column.emplace_back(std::make_unique<WallField>());
-    fieldList.emplace_back(std::move(column));
-
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<WallField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<TreasureField>());
-    fieldList.emplace_back(std::move(column));
-
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    column.emplace_back(std::make_unique<WallField>());
-    column.emplace_back(std::make_unique<TreasureField>());
-    column.emplace_back(std::make_unique<EmptyField>());
-    fieldList.emplace_back(std::move(column));
-
-    return fieldList;
 }
 
 TEST_F(SquareMapTest, mapPrint5x5_1)
