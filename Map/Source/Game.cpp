@@ -26,7 +26,7 @@ Direction Game::getDirection()
 
 void Game::play()
 {
-    isRunning = true;
+    _isRunning = true;
     
     while(_isRunning)
     {
