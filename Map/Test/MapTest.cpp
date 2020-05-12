@@ -511,17 +511,7 @@ TEST_F(SquareMapTest, makeFightFieldEmpty1)
     ASSERT_EQ(FieldType::Empty, fields.at(0).at(0) -> getType());
 }
 
-TEST_F(SquareMapTest, makeFightFieldEmpty2)
-{
-    SquareMap map(2);
-    Position position(1, 1);
-    auto &fields = const_cast<FieldList &>(map.getFields());
-    fields.at(1).at(1) = std::make_unique<FightField>();
-    map.makeFieldEmpty(position);
-    ASSERT_EQ(FieldType::Empty, fields.at(1).at(1) -> getType());
-}
-
-TEST_F(SquareMapTest, makeTreasureFieldEmpty1)
+TEST_F(SquareMapTest, makeTreasureFieldEmpty)
 {
     SquareMap map(2);
     Position position(0, 0);
@@ -529,14 +519,4 @@ TEST_F(SquareMapTest, makeTreasureFieldEmpty1)
     fields.at(0).at(0) = std::make_unique<TreasureField>();
     map.makeFieldEmpty(position);
     ASSERT_EQ(FieldType::Empty, fields.at(0).at(0) -> getType());
-}
-
-TEST_F(SquareMapTest, makeTreasureFieldEmpty2)
-{
-    SquareMap map(2);
-    Position position(1, 1);
-    auto &fields = const_cast<FieldList &>(map.getFields());
-    fields.at(1).at(1) = std::make_unique<TreasureField>();
-    map.makeFieldEmpty(position);
-    ASSERT_EQ(FieldType::Empty, fields.at(1).at(1) -> getType());
 }
