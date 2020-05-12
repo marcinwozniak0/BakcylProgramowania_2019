@@ -6,7 +6,7 @@ class Game
 {
 public:
     Game(Map& map) : _map(map) {}
-    Map::Direction getDirection();
+    Direction getDirection();
 
 private:
     Map& _map;

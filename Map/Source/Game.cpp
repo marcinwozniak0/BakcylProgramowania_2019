@@ -1,25 +1,25 @@
 #include "Game.hpp"
 
-Map::Direction Game::getDirection()
+Direction Game::getDirection()
 {
     initscr();
     noecho();
     char direction = getch();
-    switch(direction)
+    switch(std::tolower(direction))
     {
-        case 'W':
         case 'w':
-            return Map::Direction::Up;
-        case 'A':
+            endwin();
+            return Direction::Up;
         case 'a':
-            return Map::Direction::Left;
-        case 'S':
+            endwin();
+            return Direction::Left;
         case 's':
-            return Map::Direction::Down;
-        case 'D':
+            endwin();
+            return Direction::Down;
         case 'd':
-            return Map::Direction::Right;
+            endwin();
+            return Direction::Right;
         default:
-            break;
+            return getDirection();
     }
 }
