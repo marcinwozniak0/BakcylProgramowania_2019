@@ -5,16 +5,18 @@ Deck::Deck()
   cards = std::make_shared<std::vector<Card>>(_cards);
 }
 
+
 uint Deck::findCard(Card& cardToFind)
 {
-  for(uint i = 0; i < this->cards->size(); ++i)
+  std::vector<Card>::iterator it = std::find(this->cards->begin(), this->cards->end(), cardToFind);
+  if(it != this->cards->end())
   {
-    if(this->cards->at(i) == cardToFind)
-    {
-      return i;
-    }
+    return std::distance(this->cards->begin(), it);
   }
-  throw std::runtime_error("Card not found");;
+  else
+  {
+    throw std::out_of_range("Card not found");
+  }
 }
 
 void Deck::addCard(Card cardToAdd)
@@ -29,7 +31,16 @@ void Deck::shuffleCards()
 
 Card Deck::moveCard(Deck &ToThisDeck, Card cardToMove)
 {
-  uint cardIndex = findCard(cardToMove);
+  std::vector<Card>::iterator it = std::find(this->cards->begin(), this->cards->end(), cardToMove);
+  uint cardIndex = 0;
+  if(it != this->cards->end())
+  {
+    cardIndex = std::distance(this->cards->begin(), it);
+  }
+  else
+  {
+    std::cout<<"Card not found"<<std::endl;
+  }
   ToThisDeck.cards->push_back(this->cards->at(cardIndex));
   removeCard(cardToMove);
   return cardToMove;

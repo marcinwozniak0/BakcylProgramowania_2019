@@ -126,7 +126,7 @@ TEST(ExpectThrowingException, ItShouldThrowException)
   pulldeck1.addCard("card2");
   pulldeck1.addCard("card3");
 
-  EXPECT_THROW(pulldeck1.findCard(testcard), std::runtime_error);
+  EXPECT_THROW(pulldeck1.findCard(testcard), std::out_of_range);
 }
 
 

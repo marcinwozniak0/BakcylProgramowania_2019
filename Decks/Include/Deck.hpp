@@ -5,6 +5,7 @@
 #include <memory>
 #include <exception>
 #include <stdexcept>
+#include <string>
 
 using Card = std::string;
 
