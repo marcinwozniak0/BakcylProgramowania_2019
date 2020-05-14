@@ -3,6 +3,7 @@
 Deck::Deck()
 {
   cards = std::make_shared<std::vector<Card>>(_cards);
+  _maxSize = UINT_MAX;
 }
 
 

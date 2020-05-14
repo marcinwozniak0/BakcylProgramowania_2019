@@ -1,16 +1,15 @@
 #include "LimitedDeck.hpp"
 
 HandDeck::HandDeck(uint maxSize)
-  :_maxSize(maxSize)
 {
-
+  _maxSize = maxSize;
 }
 
 TableDeck::TableDeck(uint maxSize)
-  :_maxSize(maxSize)
 {
-
+  _maxSize = maxSize;
 }
+
 
 void HandDeck::drawCard(Deck &deck)
 {

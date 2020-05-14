@@ -5,7 +5,7 @@
 #include <memory>
 #include <exception>
 #include <stdexcept>
-#include <string>
+#include <climits>
 
 using Card = std::string;
 
@@ -21,5 +21,6 @@ public:
   std::unique_ptr<Card> removeCard(Card cardToRemove);
   std::unique_ptr<Card> removeFirstCard();
   std::shared_ptr<std::vector<Card>> cards;
+  uint _maxSize;
   Deck();
 };
