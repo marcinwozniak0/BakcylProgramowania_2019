@@ -1,41 +1,146 @@
 #include "SquareMap.hpp"
 #include "EmptyField.hpp"
-#include "TreasureField.hpp"
-#include "FightField.hpp"
 #include "Field.hpp"
+#include "FightField.hpp"
+#include "TreasureField.hpp"
 #include <memory>
+#include <sstream>
 #include <stdexcept>
 #include <vector>
+#include <sstream>
+#include <iostream>
 
 const FieldList& SquareMap::getFields()
 {
     return _fieldList;
 }
 
-char SquareMap::printField(const Field& field)
+char SquareMap::printField(const std::unique_ptr<Field>& field)
 {
-  if(field.isVisible())
-  {
-    FieldType type = field.getType();
-    switch (type) {
-      case FieldType::Empty:
-        return '.';
-      case FieldType::Wall:
-        return '#';
-      case FieldType::Fight:
-        return 'F';
-      case FieldType::Treasure:
-        return 'T';
-      case FieldType::Door:
-        return 'D';
-      default:
-        return '?';
+    if(field->isVisible())
+    {
+        FieldType type = field->getType();
+        switch (type) {
+            case FieldType::Empty:
+                return '.';
+            case FieldType::Wall:
+                return '#';
+            case FieldType::Fight:
+                return 'F';
+            case FieldType::Treasure:
+                return 'T';
+            case FieldType::Door:
+                return 'D';
+            default:
+                return '?';
+        }
     }
-  }
-  else
-  {
-    return ' ';
-  }
+    else
+    {
+        return ' ';
+    }
+}
+
+std::string SquareMap::getMapToPrint(const Position& playerPosition)
+{
+    std::stringstream output;
+    
+    const unsigned int mapSize = _fieldList.size();
+    
+    output << getMapColumnNumbersToPrint(mapSize);
+    
+    output << getMapHorizontalFrameToPrint(mapSize);
+    
+    output << getFieldsToPrint(mapSize);
+    
+    output << getMapHorizontalFrameToPrint(mapSize);
+    
+    std::string outputString = output.str();
+    
+    markPlayerPosition(outputString, playerPosition, mapSize);
+    
+    return outputString;
+}
+
+std::string SquareMap::getMapColumnNumbersToPrint(const unsigned int mapSize)
+{
+    std::stringstream str;
+    
+    str << "   ";
+    for(unsigned int ite = 0; ite < mapSize; ++ite)
+    {
+        str << ' ' << (ite + 1) % 10;
+    }
+    str << '\n';
+    
+    return str.str();
+}
+
+std::string SquareMap::getMapHorizontalFrameToPrint(const unsigned int mapSize)
+{
+    std::stringstream str;
+    
+    const auto mapFrameWidth = mapSize * 2 + 3;
+    
+    str << "  ";
+    for(unsigned int ite = 0; ite < mapFrameWidth; ++ite)
+    {
+        str << '#';
+    }
+    str << '\n';
+    
+    return str.str();
+}
+
+std::string SquareMap::getFieldsToPrint(const unsigned int mapSize)
+{
+    std::stringstream str;
+    
+    for(unsigned int row = 0; row < mapSize; ++row)
+    {
+        str << (row + 1) % 10 << " #";
+        for(unsigned int column = 0; column < mapSize; ++column)
+        {
+            if(isFieldBarrier(Position(column,row)) && _fieldList.at(column).at(row)->isVisible())
+            {
+                if(column == 0)
+                {
+                    str << '#' << printField(_fieldList.at(column).at(row));
+                }
+                else if(isFieldBarrier(Position(column - 1,row)) && getField(Position(column - 1,row))->isVisible())
+                {
+                    str << '#' << printField(_fieldList.at(column).at(row));
+                }
+                else
+                {
+                    str << ' ' << printField(_fieldList.at(column).at(row));
+                }
+            }
+            else
+            {
+                str << ' ' << printField(_fieldList.at(column).at(row));
+            }
+        }
+        if(isFieldBarrier(Position(mapSize - 1,row)) && getField(Position(mapSize - 1,row))->isVisible())
+        {
+            str << "##\n";
+        }
+        else
+        {
+            str << " #\n";
+        }
+    }
+    
+    return str.str();
+}
+
+void SquareMap::markPlayerPosition(std::string& str, const Position& playerPosition, const unsigned int mapSize)
+{
+    const auto leadingCharsCount = 14u + mapSize * 4u;
+    const auto rowCharCount = 6u + mapSize * 2u;
+    constexpr auto fieldWidth = 2u;
+    const auto playerPosOnScreen = leadingCharsCount + playerPosition._y * rowCharCount + fieldWidth * playerPosition._x;
+    str.at(playerPosOnScreen) = 'P';
 }
 
 SquareMap::SquareMap(const int mapSize)
@@ -65,11 +170,11 @@ SquareMap::SquareMap(const int mapSize)
     }
 }
 
-bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKey)
+bool SquareMap::isMovePossible(const Position& coordinates, const Direction direction)
 {
-    switch(pressedKey)
+    switch(direction)
     {
-        case 'w':
+        case Direction::Up:
         {
             if(isMoveUpPossible(coordinates))
             {
@@ -77,7 +182,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
             };
             break;
         }
-        case 'a':
+        case Direction::Left:
         {
             if(isMoveLeftPossible(coordinates))
             {
@@ -85,7 +190,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
             };
             break;
         }
-        case 's':
+        case Direction::Down:
         {
             if(isMoveDownPossible(coordinates))
             {
@@ -93,7 +198,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
             }
             break;
         }
-        case 'd':
+        case Direction::Right:
         {
             if(isMoveRightPossible(coordinates))
             {
@@ -107,19 +212,7 @@ bool SquareMap::isMovePossible(const Position& coordinates, const char pressedKe
 
 bool SquareMap::isMoveUpPossible(const Position& coordinates)
 {
-    if(coordinates._y + 1u < _fieldList.size())
-    {
-        if(_fieldList.at(coordinates._x).at(coordinates._y + 1) -> getType() != FieldType::Wall)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool SquareMap::isMoveDownPossible(const Position& coordinates)
-{
-    if(coordinates._y - 1 >= 0)
+    if(coordinates._y > 0)
     {
         if(_fieldList.at(coordinates._x).at(coordinates._y - 1) -> getType() != FieldType::Wall)
         {
@@ -129,9 +222,21 @@ bool SquareMap::isMoveDownPossible(const Position& coordinates)
     return false;
 }
 
+bool SquareMap::isMoveDownPossible(const Position& coordinates)
+{
+    if(coordinates._y + 1 < _fieldList.size())
+    {
+        if(_fieldList.at(coordinates._x).at(coordinates._y + 1) -> getType() != FieldType::Wall)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool SquareMap::isMoveRightPossible(const Position& coordinates)
 {
-    if(coordinates._x + 1u < _fieldList.size())
+    if(coordinates._x + 1 < _fieldList.size())
     {
         if(_fieldList.at(coordinates._x + 1).at(coordinates._y) -> getType() != FieldType::Wall)
         {
@@ -143,7 +248,7 @@ bool SquareMap::isMoveRightPossible(const Position& coordinates)
 
 bool SquareMap::isMoveLeftPossible(const Position& coordinates)
 {
-    if(coordinates._x - 1 >= 0)
+    if(coordinates._x > 0)
     {
         if(_fieldList.at(coordinates._x - 1).at(coordinates._y) -> getType() != FieldType::Wall)
         {
@@ -159,27 +264,38 @@ SquareMap::SquareMap(FieldList&& fieldList) : _fieldList(std::move(fieldList))
 
 bool SquareMap::isFieldAccessible(const Position& position)
 {
-    if (not isField(position) or getField(position)->getType() == FieldType::Wall)
+    if (not isFieldBelongToMap(position) or getField(position)->getType() == FieldType::Wall)
     {
         return false;
     }
     return true;
 }
 
-bool SquareMap::isField(const Position& position)
+bool SquareMap::isFieldBelongToMap(const Position& position)
+try
 {
-    try
+    if (getField(position))
     {
-        if (getField(position))
-        {
-            return true;
-        }
+        return true;
+    }
+    return false;
+}
+catch (std::out_of_range&)
+{
+    return false;
+}
+
+bool SquareMap::isFieldBarrier(const Position& position)
+{
+    if (not isFieldBelongToMap(position))
+    {
         return false;
     }
-    catch (std::out_of_range&)
+    else if (getField(position)->getType() != FieldType::Wall and getField(position)->getType() != FieldType::Door)
     {
         return false;
     }
+    return true;
 }
 
 const std::unique_ptr<Field>& SquareMap::getField(const Position& position)
@@ -223,61 +339,154 @@ void SquareMap::makeNonBarrierFieldsInvisible()
 
 void SquareMap::makeRoomVisible(const Position& startPosition)
 {
-    if (not isField(startPosition))
+    if (not isFieldBelongToMap(startPosition))
     {
         return;
     }
 
-    Position tempPosition = startPosition;
-    makeRowVisible(tempPosition);
+    RoomBorders roomBorders;
+    roomBorders.leftBorder = calculateLeftBorder(startPosition);
+    roomBorders.rightBorder = calculateRightBorder(startPosition);
+    roomBorders.upperBorder = calculateUpperBorder(startPosition);
+    roomBorders.bottomBorder = calculateBottomBorder(startPosition);
 
-    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
+    makeRowVisible(startPosition, roomBorders);
+
+    makeUpperRowsVisible(startPosition, roomBorders);
+    makeLowerRowsVisible(startPosition, roomBorders);
+}
+
+int SquareMap::calculateLeftBorder(Position position)
+{
+    while (not isFieldBarrier(position))
     {
-        ++tempPosition._y;
-        makeRowVisible(tempPosition);
+        --position._x;
+        if (not isFieldBelongToMap(position))
+        {
+            ++position._x;
+            break;
+        }
     }
+    return position._x;
+}
 
-    tempPosition = startPosition;
-
-    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
+int SquareMap::calculateRightBorder(Position position)
+{
+    while (not isFieldBarrier(position))
     {
-        --tempPosition._y;
-        makeRowVisible(tempPosition);
+        ++position._x;
+        if (not isFieldBelongToMap(position))
+        {
+            --position._x;
+            break;
+        }
+    }
+    return position._x;
+}
+
+int SquareMap::calculateUpperBorder(Position position)
+{
+    while (not isFieldBarrier(position))
+    {
+        ++position._y;
+        if (not isFieldBelongToMap(position))
+        {
+            --position._y;
+            break;
+        }
+    }
+    return position._y;
+}
+
+int SquareMap::calculateBottomBorder(Position position)
+{
+    while (not isFieldBarrier(position))
+    {
+        --position._y;
+        if (not isFieldBelongToMap(position))
+        {
+            ++position._y;
+            break;
+        }
+    }
+    return position._y;
+}
+
+bool SquareMap::isFieldBelongToRoom(const Position& position, const RoomBorders& roomBorders)
+{
+    if (position._x > roomBorders.rightBorder)
+    {
+        return false;
+    }
+    if (position._x < roomBorders.leftBorder)
+    {
+        return false;
+    }
+    if (position._y > roomBorders.upperBorder)
+    {
+        return false;
+    }
+    if (position._y < roomBorders.bottomBorder)
+    {
+        return false;
+    }
+    return true;
+}
+
+void SquareMap::makeUpperRowsVisible(Position position, const RoomBorders& roomBorders)
+{
+    while (isFieldBelongToRoom(position, roomBorders))
+    {
+        makeRowVisible(position, roomBorders);
+        ++position._y;
+    }
+}
+void SquareMap::makeLowerRowsVisible(Position position, const RoomBorders& roomBorders)
+{
+    while (isFieldBelongToRoom(position, roomBorders))
+    {
+        makeRowVisible(position, roomBorders);
+        --position._y;
     }
 }
 
-void SquareMap::makeRowVisible(const Position& startPosition)
+void SquareMap::makeRowVisible(const Position& startPosition, const RoomBorders& roomBorders)
 {
-    if (not isField(startPosition))
+    if (not isFieldBelongToRoom(startPosition, roomBorders))
     {
         return;
     }
 
     getField(startPosition)->makeVisible();
-    if (not isFieldAccessible(startPosition) or getField(startPosition)->getType() == FieldType::Door)
+
+    makeLeftHandFieldsVisible(startPosition, roomBorders);
+    makeRightHandFieldsVisible(startPosition, roomBorders);
+}
+
+void SquareMap::makeLeftHandFieldsVisible(Position position, const RoomBorders& roomBorders)
+{
+    while (isFieldBelongToRoom(position, roomBorders))
     {
-        return;
+        getField(position)->makeVisible();
+        ++position._x;
+    }
+}
+
+void SquareMap::makeRightHandFieldsVisible(Position position, const RoomBorders& roomBorders)
+{
+    while (isFieldBelongToRoom(position, roomBorders))
+    {
+        getField(position)->makeVisible();
+        --position._x;
+    }
+}
+
+void SquareMap::makeFieldEmpty(const Position& position)
+{
+    if(position._x < 0 || position._y < 0 || position._x >= _fieldList.size() || position._y >= _fieldList.size())
+    {
+        throw std::out_of_range("Out of range");
     }
 
-    Position tempPosition = startPosition;
-
-    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
-    {
-        ++tempPosition._x;
-        if (isField(tempPosition))
-        {
-            getField(tempPosition)->makeVisible();
-        }
-    }
-
-    tempPosition = startPosition;
-
-    while (isFieldAccessible(tempPosition) and getField(tempPosition)->getType() != FieldType::Door)
-    {
-        --tempPosition._x;
-        if (isField(tempPosition))
-        {
-        getField(tempPosition)->makeVisible();
-        }
-    }
+    _fieldList.at(position._x).at(position._y) = std::make_unique<EmptyField>();
 }

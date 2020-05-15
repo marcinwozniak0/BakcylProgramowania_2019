@@ -20,12 +20,20 @@ include_directories(Map/Include)
 add_subdirectory(Map/Source)
 include_directories(Combat/Include)
 add_subdirectory(Combat/Source)
+include_directories(Profesja/Include)
+add_subdirectory(Profesja/Source)
+include_directories(Decks/Include)
+add_subdirectory(Decks/Source)
 
 # TEST
 include_directories(Map/Test)
 add_subdirectory(Map/Test)
 include_directories(Combat/Test)
 add_subdirectory(Combat/Test)
+include_directories(Profesja/Test)
+add_subdirectory(Profesja/Test)
+include_directories(Decks/Test)
+add_subdirectory(Decks/Test)
 
 add_library(source_objects_lib OBJECT ${SOURCES})
 
@@ -41,3 +49,7 @@ target_link_libraries(bakcyl_programowania_UT 	${GTEST_MAIN_LIBRARY}
                                        		${GTEST_LIBRARY}
                                        		${GMOCK_MAIN_LIBRARY}
                                        		${GMOCK_LIBRARY})
+
+find_package(Curses REQUIRED)
+include_directories(${CURSES_INCLUDE_DIR})
+target_link_libraries(bakcyl_programowania ${CURSES_LIBRARIES})
