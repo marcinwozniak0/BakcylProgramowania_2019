@@ -50,42 +50,42 @@ void Points::resetCurrent()
    _currentPoints = _maxPoints;
 }
 
-const bool operator == (const Points& lhs, const Points& rhs)
+const bool operator== (const Points& lhs, const Points& rhs)
 {
    return lhs._currentPoints == rhs._currentPoints;
 }
 
-const bool operator != (const Points& lhs, const Points& rhs)
+const bool operator!= (const Points& lhs, const Points& rhs)
 {
    return !(lhs == rhs);
 }
 
-const bool operator > (const Points& lhs, const Points& rhs)
+const bool operator> (const Points& lhs, const Points& rhs)
 {
    return lhs._currentPoints > rhs._currentPoints;
 }
 
-const bool operator >= (const Points& lhs, const Points& rhs)
+const bool operator>= (const Points& lhs, const Points& rhs)
 {
    return lhs._currentPoints >= rhs._currentPoints;
 }
 
-const bool operator < (const Points& lhs, const Points& rhs)
+const bool operator< (const Points& lhs, const Points& rhs)
 {
    return !(lhs >= rhs);
 }
 
-const bool operator <= (const Points& lhs, const Points& rhs)
+const bool operator<= (const Points& lhs, const Points& rhs)
 {
    return !(lhs > rhs);
 }
 
-const Points operator + (const Points& lhs, const Points& rhs)
+const Points operator+ (const Points& lhs, const Points& rhs)
 {
    return Points(lhs._currentPoints + rhs._currentPoints);
 }
 
-const Points operator - (const Points& lhs, const Points& rhs)
+const Points operator- (const Points& lhs, const Points& rhs)
 {
    uint currentPoints = 0;
 

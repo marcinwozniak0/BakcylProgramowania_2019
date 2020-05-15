@@ -11,7 +11,7 @@ class Monster: public Card
    Points _strength;
    State _state;
  public:
-   Monster(Points hp, Points strength, std::string name, std::string description, uint manaCost);
+   Monster(Points hp, Points strength, std::string name, uint id, std::string description, uint manaCost);
    void activateCard();
    State getState() const;
    Points getHp() const;

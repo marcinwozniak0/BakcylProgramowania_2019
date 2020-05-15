@@ -1,12 +1,24 @@
 #include "Spell.hpp"
 #include <iostream>
 
-Spell::Spell(uint power, std::string name, std::string description, uint manaCost)
-   :Card(name, description, manaCost)
+Spell::Spell(int power, std::string name, uint id, std::string description, uint manaCost)
+   :Card(name, id, description, manaCost)
    ,_power(power)
 {}
 
-uint Spell::getPower() const
+void Spell::Execute(Points& other)
+{
+  if(_power == 0)
+  {
+     //  funkcyjne spelle
+  }
+  else
+  {
+     other.add(_power);
+  }
+}
+
+int Spell::getPower() const
 {
   return _power;
 }

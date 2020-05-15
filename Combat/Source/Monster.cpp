@@ -2,8 +2,8 @@
 #include "Points.hpp"
 #include <iostream>
 
-Monster::Monster(Points hp, Points strength, std::string name, std::string description, uint manaCost)
-   :Card(name, description, manaCost)
+Monster::Monster(Points hp, Points strength, std::string name, uint id, std::string description, uint manaCost)
+   :Card(name, id, description, manaCost)
    ,_hp(hp)
    ,_strength(strength)
    ,_state(State::inactive)

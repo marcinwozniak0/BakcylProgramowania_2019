@@ -1,13 +1,14 @@
 #pragma once
 #include "Card.hpp"
+#include "Points.hpp"
 #include <iostream>
 
 class Spell : public Card
 {
 protected:
-   uint _power;
-   //virtual void useCard() = 0;
+   int _power;
 public:
-   Spell(uint power, std::string name, std::string description, uint manaCost);
-   uint getPower() const;
+   void Execute(Points& other);
+   Spell(int power, std::string name, uint id, std::string description, uint manaCost);
+   int getPower() const;
 };
