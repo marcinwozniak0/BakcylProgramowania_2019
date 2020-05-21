@@ -47,33 +47,29 @@ Card Deck::moveCard(Deck &ToThisDeck, Card cardToMove)
   return cardToMove;
 }
 
-std::unique_ptr<Card> Deck::removeCard(Card cardToRemove)
+Card&& Deck::removeCard(Card &cardToRemove)
 {
-  std::unique_ptr<Card> removedCard;
   if(cards->size() <= 0)
   {
     std::cout << "Váš balíček karet je prázdný";
+    throw std::overflow_error("too smol");
   }
   else
   {
     uint cardIndex = findCard(cardToRemove);
-    removedCard = std::make_unique<Card> (this->cards->at(cardIndex));
-    this->cards->erase(this->cards->begin() + cardIndex);
+    return std::move(this->cards->at(cardIndex));
   }
-  return removedCard;
 }
 
-std::unique_ptr<Card> Deck::removeFirstCard()
+Card&& Deck::removeFirstCard()
 {
-  std::unique_ptr<Card> removedCard;
   if(cards->size() <= 0)
   {
     std::cout << "Váš balíček karet je prázdný";
+    throw std::overflow_error("too smol");
   }
   else
   {
-    removedCard = std::make_unique<Card> (this->cards->at(0));
-    this->cards->erase(this->cards->begin());
+    return std::move(this->cards->at(0));
   }
-  return removedCard;
 }

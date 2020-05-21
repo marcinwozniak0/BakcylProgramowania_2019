@@ -18,8 +18,8 @@ public:
   void addCard(Card cardToAdd);
   Card moveCard(Deck &ToThisDeck, Card cardToMove);
   void shuffleCards();
-  std::unique_ptr<Card> removeCard(Card cardToRemove);
-  std::unique_ptr<Card> removeFirstCard();
+  Card&& removeCard(Card &cardToRemove);
+  Card&& removeFirstCard();
   std::shared_ptr<std::vector<Card>> cards;
   uint _maxSize;
   Deck();
