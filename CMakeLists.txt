@@ -52,6 +52,5 @@ target_link_libraries(bakcyl_programowania_UT 	${GTEST_MAIN_LIBRARY}
                                        		${GMOCK_MAIN_LIBRARY}
                                        		${GMOCK_LIBRARY})
 
-
 target_link_libraries(bakcyl_programowania ${CURSES_LIBRARIES})
 target_link_libraries(bakcyl_programowania_UT ${CURSES_LIBRARIES})
