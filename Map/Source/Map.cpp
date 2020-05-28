@@ -1,3 +1,4 @@
+#include <EmptyField.hpp>
 #include "Map.hpp"
 
 bool Map::isMovePossible(const Position& coordinates, const Direction& direction)
@@ -86,4 +87,14 @@ bool Map::isMoveLeftPossible(const Position& coordinates)
         }
     }
     return false;
+}
+
+void Map::makeFieldEmpty(const Position& position)
+{
+    if(position._x < 0 || position._y < 0 || position._x >= getFields().size() || position._y >= getFields().size())
+    {
+        throw std::out_of_range("Out of range");
+    }
+
+    const_cast<FieldList&>(getFields()).at(position._x).at(position._y) = std::make_unique<EmptyField>();
 }

@@ -26,4 +26,5 @@ public:
     virtual bool isMoveDownPossible(const Position&) = 0;
     virtual bool isMoveRightPossible(const Position&) = 0;
     virtual bool isMoveLeftPossible(const Position&) = 0;
+    virtual void makeFieldEmpty(const Position&) = 0;
 };
