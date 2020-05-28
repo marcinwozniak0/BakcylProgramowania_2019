@@ -1,25 +1,38 @@
-#include "MonsterCard.hpp"
+#include "Monster.hpp"
+#include "Points.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
 
-
-TEST(MonsterCardTest, ItShouldReturnString_useMonsterCard)
+TEST(MonsterTest, ItShouldSetStateToActive)
 {
-    MonsterCard card2;
-	Card *cardType;
-	cardType = &card2;
-	ASSERT_EQ("useMonsterCard", cardType -> useCard());
+   Monster card(Points(1), Points(1), "", 0, "", 0);
+   card.activateCard();
+	ASSERT_EQ(State::active, card.getState());
 }
 
-TEST(MonsterCardTest, ItShouldReturnInt_15_numberOfYourHpPoints)
+TEST(MonsterTest, ItShouldReturnHp)
 {
-    MonsterCard card4;
-	ASSERT_EQ(15, card4.takeDamage(5));
+   Monster card(Points(1), Points(1), "", 0, "", 0);
+	ASSERT_EQ(1, card.getHp().getCurrentPoints());
 }
 
-TEST(MonsterCardTest, ItShouldReturnInt_10_numberOfYourHpPoints)
+TEST(MonsterTest, ItShouldSetHp)
 {
-    MonsterCard card5(25,10);
-	ASSERT_EQ(10, card5.takeDamage(15));
+   Monster card(Points(1), Points(1), "", 0, "", 0);
+   card.setHp(Points(2));
+	ASSERT_EQ(2, card.getHp().getCurrentPoints());
+}
+
+TEST(MonsterTest, ItShouldReturnStrength)
+{
+   Monster card(Points(1), Points(1), "", 0, "", 0);
+	ASSERT_EQ(1, card.getStrength().getCurrentPoints());
+}
+
+TEST(MonsterTest, ItShouldSetStrength)
+{
+   Monster card(Points(1), Points(1), "", 0, "", 0);
+   card.setStrength(Points(7));
+	ASSERT_EQ(7, card.getStrength().getCurrentPoints());
 }
