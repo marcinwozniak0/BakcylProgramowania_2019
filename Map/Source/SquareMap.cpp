@@ -392,13 +392,3 @@ void SquareMap::makeRightHandFieldsVisible(Position position, const RoomBorders&
         --position._x;
     }
 }
-
-void SquareMap::makeFieldEmpty(const Position& position)
-{
-    if(position._x < 0 || position._y < 0 || position._x >= _fieldList.size() || position._y >= _fieldList.size())
-    {
-        throw std::out_of_range("Out of range");
-    }
-
-    _fieldList.at(position._x).at(position._y) = std::make_unique<EmptyField>();
-}
