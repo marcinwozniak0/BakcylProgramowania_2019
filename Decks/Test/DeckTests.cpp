@@ -56,7 +56,10 @@ TEST(DrawCardsProperly, ItShouldDrawCards)
   pulldeck1.addCard("card2");
 
   handdeck1.drawCard(pulldeck1);
+  std::cout<<pulldeck1.cards->at(0);
 
+
+  ASSERT_EQ("card2", pulldeck1.cards->at(0));
   ASSERT_EQ("card1", handdeck1.cards->at(0));
   ASSERT_EQ(1, handdeck1.cards->size());
   ASSERT_EQ(1, pulldeck1.cards->size());
