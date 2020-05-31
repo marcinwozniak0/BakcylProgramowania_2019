@@ -47,7 +47,7 @@ Card Deck::moveCard(Deck &ToThisDeck, Card cardToMove)
   return cardToMove;
 }
 
-Card&& Deck::removeCard(Card &cardToRemove)
+std::shared_ptr<Card> Deck::removeCard(Card &cardToRemove)
 {
   if(cards->size() <= 0)
   {
@@ -57,11 +57,13 @@ Card&& Deck::removeCard(Card &cardToRemove)
   else
   {
     uint cardIndex = findCard(cardToRemove);
-    return std::move(this->cards->at(cardIndex));
+    std::shared_ptr<Card> ptr = std::make_shared<Card>(std::move(this->cards->at(cardIndex)));
+    this->cards->erase(this->cards->begin() + cardIndex);
+    return ptr;
   }
 }
 
-Card&& Deck::removeFirstCard()
+std::shared_ptr<Card> Deck::removeFirstCard()
 {
   if(cards->size() <= 0)
   {
@@ -70,6 +72,8 @@ Card&& Deck::removeFirstCard()
   }
   else
   {
-    return std::move(this->cards->at(0));
+    std::shared_ptr<Card> ptr = std::make_shared<Card>(std::move(this->cards->at(0)));
+    this->cards->erase(this->cards->begin());
+    return ptr;
   }
 }
