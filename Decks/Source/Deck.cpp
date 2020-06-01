@@ -9,7 +9,7 @@ Deck::Deck()
 
 uint Deck::findCard(Card& cardToFind)
 {
-  std::vector<Card>::iterator it = std::find(this->cards->begin(), this->cards->end(), cardToFind);
+  auto it = std::find(this->cards->begin(), this->cards->end(), cardToFind);
   if(it != this->cards->end())
   {
     return std::distance(this->cards->begin(), it);
@@ -32,7 +32,7 @@ void Deck::shuffleCards()
 
 Card Deck::moveCard(Deck &ToThisDeck, Card cardToMove)
 {
-  std::vector<Card>::iterator it = std::find(this->cards->begin(), this->cards->end(), cardToMove);
+  auto it = std::find(this->cards->begin(), this->cards->end(), cardToMove);
   uint cardIndex = 0;
   if(it != this->cards->end())
   {
