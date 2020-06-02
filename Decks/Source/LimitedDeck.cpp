@@ -26,7 +26,7 @@ void HandDeck::drawCard(Deck &deck)
 
 void HandDeck::playCard(std::shared_ptr<TableDeck> tableDeckPointer, Card CardToThrow)
 {
-  if(tableDeckPointer->cards->size() >= tableDeckPointer->_maxSize)
+  if(tableDeckPointer->cards->size() >= tableDeckPointer->getMaxSize())
   {
     std::cout << "Váš stůl je již plný" << std::endl;
   }

@@ -13,6 +13,7 @@ class Deck
 {
 protected:
   std::vector<Card> _cards;
+  uint _maxSize;
 public:
   uint findCard(Card& cardToFind);
   void addCard(Card cardToAdd);
@@ -21,6 +22,6 @@ public:
   std::shared_ptr<Card> removeCard(Card &cardToRemove);
   std::shared_ptr<Card> removeFirstCard();
   std::shared_ptr<std::vector<Card>> cards;
-  uint _maxSize;
+  uint getMaxSize();
   Deck();
 };

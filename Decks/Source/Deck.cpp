@@ -1,7 +1,7 @@
 #include "Deck.hpp"
 
 Deck::Deck()
-  : cards(std::make_shared<std::vector<Card>>(_cards)), _maxSize(UINT_MAX)
+  : _maxSize(UINT_MAX), cards(std::make_shared<std::vector<Card>>(_cards))
 {
 
 }
@@ -52,7 +52,7 @@ std::shared_ptr<Card> Deck::removeCard(Card &cardToRemove)
   if(cards->size() <= 0)
   {
     std::cout << "Váš balíček karet je prázdný";
-    throw std::overflow_error("too smol");
+    throw std::overflow_error("too small");
   }
   else
   {
@@ -68,7 +68,7 @@ std::shared_ptr<Card> Deck::removeFirstCard()
   if(cards->size() <= 0)
   {
     std::cout << "Váš balíček karet je prázdný";
-    throw std::overflow_error("too smol");
+    throw std::overflow_error("too small");
   }
   else
   {
@@ -76,4 +76,9 @@ std::shared_ptr<Card> Deck::removeFirstCard()
     this->cards->erase(this->cards->begin());
     return ptr;
   }
+}
+
+uint Deck::getMaxSize()
+{
+ return this->_maxSize;
 }
