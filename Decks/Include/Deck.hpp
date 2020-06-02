@@ -1,20 +1,27 @@
 #pragma once
-#include <vector>
-#include <string>
 #include <iostream>
-#include <string>
 #include <vector>
-#include <cstdlib>
-#include <ctime>
 #include <algorithm>
+#include <memory>
+#include <exception>
+#include <stdexcept>
+#include <climits>
 
 using Card = std::string;
 
 class Deck
 {
-public:
+protected:
   std::vector<Card> _cards;
+  uint _maxSize;
+public:
+  uint findCard(Card& cardToFind);
   void addCard(Card cardToAdd);
   Card moveCard(Deck &ToThisDeck, Card cardToMove);
   void shuffleCards();
+  std::shared_ptr<Card> removeCard(Card &cardToRemove);
+  std::shared_ptr<Card> removeFirstCard();
+  std::shared_ptr<std::vector<Card>> cards;
+  uint getMaxSize();
+  Deck();
 };

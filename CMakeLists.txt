@@ -24,6 +24,8 @@ include_directories(Profesja/Include)
 add_subdirectory(Profesja/Source)
 include_directories(Decks/Include)
 add_subdirectory(Decks/Source)
+include_directories(Table/Include)
+add_subdirectory(Table/Source)
 
 # TEST
 include_directories(Map/Test)
@@ -34,6 +36,8 @@ include_directories(Profesja/Test)
 add_subdirectory(Profesja/Test)
 include_directories(Decks/Test)
 add_subdirectory(Decks/Test)
+include_directories(Table/Test)
+add_subdirectory(Table/Test)
 
 add_library(source_objects_lib OBJECT ${SOURCES})
 
