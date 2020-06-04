@@ -14,6 +14,8 @@ public:
     char printField(const std::unique_ptr<Field>& field);
     void updateVisilibity(const Position& playerPosition);
     std::string getMapToPrint(const Position& playerPosition);
+    bool isMovePossible(const Position&, const Direction&);
+    void makeFieldEmpty(const Position&);
 
 private:
     bool isFieldAccessible(const Position& position);
@@ -36,6 +38,10 @@ private:
     std::string getFieldsToPrint(const unsigned int mapSize);
     void markPlayerPosition(std::string& str, const Position& playerPosition, const unsigned int mapSize);
     const std::unique_ptr<Field>& getField(const Position& position);
-    
+    bool isMoveUpPossible(const Position&);
+    bool isMoveDownPossible(const Position&);
+    bool isMoveRightPossible(const Position&);
+    bool isMoveLeftPossible(const Position&);
+
     FieldList _fieldList;
 };

@@ -27,9 +27,9 @@ Direction Game::getDirection()
 
 void Game::makeMove(const Direction& direction)
 {
-    bool movePossible = _map.isMovePossible(_player.getCurrentPosition(), direction);
+    bool canMove = _map.isMovePossible(_player.getCurrentPosition(), direction);
 
-    if(movePossible)
+    if(canMove)
     {
         Position newPosition = _player.getCurrentPosition();
 
