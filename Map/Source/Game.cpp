@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Game.hpp"
 
 Direction Game::getDirection()
@@ -21,5 +22,46 @@ Direction Game::getDirection()
             return Direction::Right;
         default:
             return getDirection();
+    }
+}
+
+void Game::makeMove(const Direction& direction)
+{
+    bool canMove = _map.isMovePossible(_player.getCurrentPosition(), direction);
+
+    if(canMove)
+    {
+        Position newPosition = _player.getCurrentPosition();
+
+        switch(direction)
+        {
+            case Direction::Up:
+            {
+                ++newPosition._y;
+                break;
+            }
+            case Direction::Down:
+            {
+                --newPosition._y;
+                break;
+            }
+
+            case Direction::Left:
+            {
+                --newPosition._x;
+                break;
+            }
+            case Direction::Right:
+            {
+                ++newPosition._x;
+                break;
+            }
+        }
+
+        _player.setNewPosition(newPosition);
+        _map.getFields().at(newPosition._x).at(newPosition._y) -> action();
+        _map.makeFieldEmpty(newPosition);
+        std::string map = _map.getMapToPrint(newPosition);
+        std::cout << map << std::endl;
     }
 }
