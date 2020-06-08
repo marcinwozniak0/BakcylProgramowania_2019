@@ -7,13 +7,16 @@ using namespace ::testing;
 namespace
 {
     constexpr auto mapSize = 8u;
+    constexpr auto hp = 8u;
+    constexpr auto mp = 8u;
     SquareMap map(mapSize);
+    Player player(hp, mp);
 }
 
 class GameTest : public Test
 {
 protected:
-    GameTest() : game(map) {}
+    GameTest() : game(map, player) {}
     Game game;
 };
 
