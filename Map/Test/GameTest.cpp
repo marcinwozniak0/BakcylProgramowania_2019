@@ -25,6 +25,7 @@ TEST_F(GameTest, isBuildingWell)
     ASSERT_TRUE(true);
 }
 
+/*
 TEST_F(GameTest, getDirectionShouldReturnUp)
 {
     std::istringstream stream("w");
@@ -80,3 +81,4 @@ TEST_F(GameTest, getDirectionForUppercaseShouldReturnRight)
     std::cin.rdbuf(stream.rdbuf());
     ASSERT_EQ(Direction::Right, game.getDirection());
 }
+*/
