@@ -32,16 +32,7 @@ void Deck::shuffleCards()
 
 Card Deck::moveCard(Deck &ToThisDeck, Card cardToMove)
 {
-  auto it = std::find(this->cards->begin(), this->cards->end(), cardToMove);
-  uint cardIndex = 0;
-  if(it != this->cards->end())
-  {
-    cardIndex = std::distance(this->cards->begin(), it);
-  }
-  else
-  {
-    std::cout<<"Card not found"<<std::endl;
-  }
+  uint cardIndex = findCard(cardToMove);
   ToThisDeck.cards->push_back(this->cards->at(cardIndex));
   removeCard(cardToMove);
   return cardToMove;
