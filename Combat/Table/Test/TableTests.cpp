@@ -1,31 +1,36 @@
-// #include "Table.hpp"
-// #include <gtest/gtest.h>
-//
-// using namespace ::testing;
-//
+#include "Table.hpp"
+#include <gtest/gtest.h>
+#include "CardPool.hpp"
+
+using namespace ::testing;
+
+static CardPool cardpoolTEST;
+
 // TEST(LimitOfCardsOnTable, ItShouldWarnPlayerAboutTryOfPassingLimitOfCardsOnTableAndDiscardDeck)
 // {
 //   Table table1;
 //   HandDeck handdeck1(10);
+//   Deck pulldeck1;
 //
-//   handdeck1.addCard("card1");
-//   handdeck1.addCard("card2");
-//   handdeck1.addCard("card3");
-//   handdeck1.addCard("card4");
-//   handdeck1.addCard("card5");
-//   handdeck1.addCard("card6");
-//
-//   handdeck1.playCard(table1.playersTableSite, "card1");
-//   handdeck1.playCard(table1.playersTableSite, "card2");
-//   handdeck1.playCard(table1.playersTableSite, "card3");
-//   handdeck1.playCard(table1.playersTableSite, "card4");
-//   handdeck1.playCard(table1.playersTableSite, "card5");
-//   handdeck1.playCard(table1.playersTableSite, "card6");
+//   pulldeck1.addCard(cardpoolTEST._monsterCardPool[0]);
+//   pulldeck1.addCard(cardpoolTEST._monsterCardPool[1]);
+//   pulldeck1.addCard(cardpoolTEST._monsterCardPool[2]);
+//   pulldeck1.addCard(cardpoolTEST._monsterCardPool[3]);
+//   pulldeck1.addCard(cardpoolTEST._monsterCardPool[4]);
+//   pulldeck1.addCard(cardpoolTEST._monsterCardPool[5]);
+//   std::cout<<"log1"<<std::endl;
+//   handdeck1.playCard(table1.playersTableSite, pulldeck1.cards->at(0));
+//   std::cout<<"log2"<<std::endl;
+//   handdeck1.playCard(table1.playersTableSite, pulldeck1.cards->at(1));
+//   handdeck1.playCard(table1.playersTableSite, pulldeck1.cards->at(2));
+//   handdeck1.playCard(table1.playersTableSite, pulldeck1.cards->at(3));
+//   handdeck1.playCard(table1.playersTableSite, pulldeck1.cards->at(4));
+//   handdeck1.playCard(table1.playersTableSite, pulldeck1.cards->at(5));
 //
 //   ASSERT_EQ(5, table1.playersTableSite->cards->size());
 //   ASSERT_EQ(1, handdeck1.cards->size());
 // }
-//
+
 // TEST(TransferingCardsToDiscardDeck, ItShouldtransferCardsFromTableDeckToDiscardDeck)
 // {
 //   Table table1;
