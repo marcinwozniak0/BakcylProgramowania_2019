@@ -46,9 +46,9 @@ set(TEST_BINARY_FILES $<TARGET_OBJECTS:source_objects_lib>
 
 add_executable(bakcyl_programowania_UT ${TEST_BINARY_FILES})
 target_link_libraries(bakcyl_programowania_UT 	${GTEST_MAIN_LIBRARY}
-                                       		${GTEST_LIBRARY}
-                                       		${GMOCK_MAIN_LIBRARY}
-                                       		${GMOCK_LIBRARY})
+                                                ${GTEST_LIBRARY}
+                                                ${GMOCK_MAIN_LIBRARY}
+                                                ${GMOCK_LIBRARY})
 
 set(CURSES_BUNDLE_DIR "${PROJECT_BINARY_DIR}/ncurses-prefix/src/ncurses")
 set(CURSES_INCLUDE_DIR "${CURSES_BUNDLE_DIR}/include/")
@@ -56,17 +56,17 @@ set(CURSES_LIBRARIES "${CURSES_BUNDLE_DIR}/lib/libncurses.a")
 message(STATUS "Using bundled ncurses in '${CURSES_BUNDLE_DIR}'")
 
 ExternalProject_Add(
-		ncurses
-		URL "https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.2.tar.gz"
-		URL_MD5 "e812da327b1c2214ac1aed440ea3ae8d"
-		CONFIGURE_COMMAND ./configure --without-cxx --without-cxx-binding --without-ada --without-manpages --without-progs --without-tests --with-terminfo-dirs=/etc/terminfo:/lib/terminfo:/usr/share/terminfo
-		BUILD_COMMAND ${CMD_MAKE}
-		BUILD_IN_SOURCE 1
-		INSTALL_COMMAND "")
+                ncurses
+                URL "https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.2.tar.gz"
+                URL_MD5 "e812da327b1c2214ac1aed440ea3ae8d"
+                CONFIGURE_COMMAND ./configure --without-cxx --without-cxx-binding --without-ada --without-manpages --without-progs --without-tests --with-terminfo-dirs=/etc/terminfo:/lib/terminfo:/usr/share/terminfo
+                BUILD_COMMAND ${CMD_MAKE}
+                BUILD_IN_SOURCE 1
+                INSTALL_COMMAND "")
 
 ExternalProject_Get_Property(ncurses source_dir)
 set(CURSES_INCLUDE_DIRS ${source_dir}/ncurses/include)
 
 target_link_libraries(bakcyl_programowania ${CURSES_LIBRARIES})
 target_link_libraries(bakcyl_programowania_UT ${CURSES_LIBRARIES})
-add_dependencies(bakcyl_programowania_UT ncurses)
+add_dependencies(bakcyl_programowania ncurses)
