@@ -8,8 +8,8 @@ using namespace ::testing;
 static CardPool cardpoolTEST;
 
 //Test will be using copied Card examples from basic Card Pool
-//TODO Try testing == Card operator
-//Czy findCard() wykorzystuje teen operator poprawnie
+//and '==' Card operator
+
 TEST(AddingCardsToDeck, ItShouldAddCards)
 {
   Deck pulldeck1;
@@ -17,8 +17,8 @@ TEST(AddingCardsToDeck, ItShouldAddCards)
   pulldeck1.addCard(cardpoolTEST._monsterCardPool[0]);
   pulldeck1.addCard(cardpoolTEST._SpellCardPool[0]);
 
-  ASSERT_EQ("Goblin", pulldeck1.cards->at(0).getName());
-  ASSERT_EQ("Fire slap", pulldeck1.cards->at(1).getName());
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[0], pulldeck1.cards->at(0));
+  ASSERT_EQ(cardpoolTEST._SpellCardPool[0], pulldeck1.cards->at(1));
   ASSERT_EQ(2, pulldeck1.cards->size());
 }
 
@@ -63,8 +63,8 @@ TEST(DrawCardsProperly, ItShouldDrawCards)
 
   handdeck1.drawCard(pulldeck1);
 
-  ASSERT_EQ("Fire slap", pulldeck1.cards->at(0).getName());
-  ASSERT_EQ("Goblin", handdeck1.cards->at(0).getName());
+  ASSERT_EQ(cardpoolTEST._SpellCardPool[0], pulldeck1.cards->at(0));
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[0], handdeck1.cards->at(0));
   ASSERT_EQ(1, handdeck1.cards->size());
   ASSERT_EQ(1, pulldeck1.cards->size());
 }
@@ -101,9 +101,9 @@ TEST(MoveCardsProperly, ItShouldMoveCards)
   handdeck1.drawCard(pulldeck1);
   handdeck1.moveCard(discarddeck1, cardpoolTEST._monsterCardPool[0]);
 
-  ASSERT_EQ("Spider", handdeck1.cards->at(0).getName());
-  ASSERT_EQ("Goblin", discarddeck1.cards->at(0).getName());
-  ASSERT_EQ("Hamster", pulldeck1.cards->at(0).getName());
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[1], handdeck1.cards->at(0));
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[0], discarddeck1.cards->at(0));
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[2], pulldeck1.cards->at(0));
   ASSERT_EQ(1, handdeck1.cards->size());
   ASSERT_EQ(1, pulldeck1.cards->size());
   ASSERT_EQ(1, discarddeck1.cards->size());
@@ -148,8 +148,8 @@ TEST(PlaysCardProperly, ItShouldPlayCards)
   handdeck1.addCard(cardpoolTEST._monsterCardPool[2]);
   handdeck1.addCard(cardpoolTEST._monsterCardPool[3]);
 
-  handdeck1.playCard(table1.playersTableSite, cardpoolTEST._monsterCardPool[0]);
-  handdeck1.playCard(table1.playersTableSite, cardpoolTEST._monsterCardPool[3]);
+  handdeck1.playCard(table1.playersTableSite, handdeck1.cards->at(0));
+  handdeck1.playCard(table1.playersTableSite, handdeck1.cards->at(2));
 
   ASSERT_EQ(cardpoolTEST._monsterCardPool[0], table1.playersTableSite->cards->at(0));
   ASSERT_EQ(cardpoolTEST._monsterCardPool[3], table1.playersTableSite->cards->at(1));

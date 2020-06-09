@@ -39,11 +39,11 @@ TEST(TransferingCardsToDiscardDeck, ItShouldtransferCardsFromTableDeckToDiscardD
   table1.playersTableSite -> addCard(cardpoolTEST._monsterCardPool[3]);
   table1.playersTableSite -> addCard(cardpoolTEST._monsterCardPool[4]);
 
-  table1.playersTableSite -> moveCard(table1._playersDiscardDeck, cardpoolTEST._monsterCardPool[0]);
-  table1.playersTableSite -> moveCard(table1._playersDiscardDeck, cardpoolTEST._monsterCardPool[1]);
-  table1.playersTableSite -> moveCard(table1._playersDiscardDeck, cardpoolTEST._monsterCardPool[2]);
-  table1.playersTableSite -> moveCard(table1._playersDiscardDeck, cardpoolTEST._monsterCardPool[3]);
-  table1.playersTableSite -> moveCard(table1._playersDiscardDeck, cardpoolTEST._monsterCardPool[4]);
+  table1.playersTableSite -> moveCard(table1._playersDiscardDeck, table1.playersTableSite->cards->at(0));
+  table1.playersTableSite -> moveCard(table1._playersDiscardDeck, table1.playersTableSite->cards->at(0));
+  table1.playersTableSite -> moveCard(table1._playersDiscardDeck, table1.playersTableSite->cards->at(0));
+  table1.playersTableSite -> moveCard(table1._playersDiscardDeck, table1.playersTableSite->cards->at(0));
+  table1.playersTableSite -> moveCard(table1._playersDiscardDeck, table1.playersTableSite->cards->at(0));
 
   ASSERT_EQ(5, table1._playersDiscardDeck.cards->size());
   ASSERT_EQ(0, table1._playersTableSite.cards->size());
