@@ -1,18 +1,24 @@
 #include "LimitedDeck.hpp"
-#include "../../Table/Include/Table.hpp"
+#include "Table.hpp"
+#include "CardPool.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
+
+static CardPool cardpoolTEST;
+
+//Test will be using copied Card examples from basic Card Pool
+//and '==' Card operator
 
 TEST(AddingCardsToDeck, ItShouldAddCards)
 {
   Deck pulldeck1;
 
-  pulldeck1.addCard("card1");
-  pulldeck1.addCard("card2");
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[0]);
+  pulldeck1.addCard(cardpoolTEST._SpellCardPool[0]);
 
-  ASSERT_EQ("card1", pulldeck1.cards->at(0));
-  ASSERT_EQ("card2", pulldeck1.cards->at(1));
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[0], pulldeck1.cards->at(0));
+  ASSERT_EQ(cardpoolTEST._SpellCardPool[0], pulldeck1.cards->at(1));
   ASSERT_EQ(2, pulldeck1.cards->size());
 }
 
@@ -20,25 +26,25 @@ TEST(SchuffleingCards, ItShouldSchuffleCards)
 {
   Deck pulldeck1;
 
-  pulldeck1.addCard("card1");
-  pulldeck1.addCard("card2");
-  pulldeck1.addCard("card3");
-  pulldeck1.addCard("card4");
-  pulldeck1.addCard("card5");
-  pulldeck1.addCard("card6");
-  pulldeck1.addCard("card7");
-  pulldeck1.addCard("card8");
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[0]);
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[1]);
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[2]);
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[3]);
+  pulldeck1.addCard(cardpoolTEST._SpellCardPool[0]);
+  pulldeck1.addCard(cardpoolTEST._SpellCardPool[1]);
+  pulldeck1.addCard(cardpoolTEST._SpellCardPool[2]);
+  pulldeck1.addCard(cardpoolTEST._SpellCardPool[3]);
 
   Deck pulldeck2;
 
-  pulldeck2.addCard("card1");
-  pulldeck2.addCard("card2");
-  pulldeck2.addCard("card3");
-  pulldeck2.addCard("card4");
-  pulldeck2.addCard("card5");
-  pulldeck2.addCard("card6");
-  pulldeck2.addCard("card7");
-  pulldeck2.addCard("card8");
+  pulldeck2.addCard(cardpoolTEST._monsterCardPool[0]);
+  pulldeck2.addCard(cardpoolTEST._monsterCardPool[1]);
+  pulldeck2.addCard(cardpoolTEST._monsterCardPool[2]);
+  pulldeck2.addCard(cardpoolTEST._monsterCardPool[3]);
+  pulldeck2.addCard(cardpoolTEST._SpellCardPool[0]);
+  pulldeck2.addCard(cardpoolTEST._SpellCardPool[1]);
+  pulldeck2.addCard(cardpoolTEST._SpellCardPool[2]);
+  pulldeck2.addCard(cardpoolTEST._SpellCardPool[3]);
 
   pulldeck1.shuffleCards();
 
@@ -52,15 +58,13 @@ TEST(DrawCardsProperly, ItShouldDrawCards)
   Deck pulldeck1;
   HandDeck handdeck1(11);
 
-  pulldeck1.addCard("card1");
-  pulldeck1.addCard("card2");
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[0]);
+  pulldeck1.addCard(cardpoolTEST._SpellCardPool[0]);
 
   handdeck1.drawCard(pulldeck1);
-  std::cout<<pulldeck1.cards->at(0);
 
-
-  ASSERT_EQ("card2", pulldeck1.cards->at(0));
-  ASSERT_EQ("card1", handdeck1.cards->at(0));
+  ASSERT_EQ(cardpoolTEST._SpellCardPool[0], pulldeck1.cards->at(0));
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[0], handdeck1.cards->at(0));
   ASSERT_EQ(1, handdeck1.cards->size());
   ASSERT_EQ(1, pulldeck1.cards->size());
 }
@@ -70,9 +74,9 @@ TEST(DrawCardsMaxSize, ItShouldDrawCards)
   Deck pulldeck1;
   HandDeck handdeck1(2);
 
-  pulldeck1.addCard("card1");
-  pulldeck1.addCard("card2");
-  pulldeck1.addCard("card3");
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[0]);
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[1]);
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[2]);
 
   pulldeck1.shuffleCards();
 
@@ -90,16 +94,16 @@ TEST(MoveCardsProperly, ItShouldMoveCards)
   Deck discarddeck1;
   HandDeck handdeck1(11);
 
-  pulldeck1.addCard("card1");
-  pulldeck1.addCard("card2");
-  pulldeck1.addCard("card3");
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[0]);
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[1]);
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[2]);
   handdeck1.drawCard(pulldeck1);
   handdeck1.drawCard(pulldeck1);
-  handdeck1.moveCard(discarddeck1, "card1");
+  handdeck1.moveCard(discarddeck1, cardpoolTEST._monsterCardPool[0]);
 
-  ASSERT_EQ("card2", handdeck1.cards->at(0));
-  ASSERT_EQ("card1", discarddeck1.cards->at(0));
-  ASSERT_EQ("card3", pulldeck1.cards->at(0));
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[1], handdeck1.cards->at(0));
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[0], discarddeck1.cards->at(0));
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[2], pulldeck1.cards->at(0));
   ASSERT_EQ(1, handdeck1.cards->size());
   ASSERT_EQ(1, pulldeck1.cards->size());
   ASSERT_EQ(1, discarddeck1.cards->size());
@@ -108,10 +112,11 @@ TEST(MoveCardsProperly, ItShouldMoveCards)
 TEST(FindsCardsProperly, ItFindsTheRighCard)
 {
   Deck pulldeck1;
-  Card card1 = {"card1"};
-  Card card3 = {"card3"};
+  Card card1 = cardpoolTEST._monsterCardPool[0];
+  Card card2 = cardpoolTEST._monsterCardPool[1];
+  Card card3 = cardpoolTEST._monsterCardPool[2];
   pulldeck1.addCard(card1);
-  pulldeck1.addCard("card2");
+  pulldeck1.addCard(card2);
   pulldeck1.addCard(card3);
   uint cardIndex1 = pulldeck1.findCard(card1);
   uint cardIndex2 = pulldeck1.findCard(card3);
@@ -123,11 +128,11 @@ TEST(FindsCardsProperly, ItFindsTheRighCard)
 TEST(ExpectThrowingException, ItShouldThrowException)
 {
   Deck pulldeck1;
-  Card testcard = {"card6"};
+  Card testcard = cardpoolTEST._monsterCardPool[8];
 
-  pulldeck1.addCard("card1");
-  pulldeck1.addCard("card2");
-  pulldeck1.addCard("card3");
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[0]);
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[1]);
+  pulldeck1.addCard(cardpoolTEST._monsterCardPool[2]);
 
   EXPECT_THROW(pulldeck1.findCard(testcard), std::out_of_range);
 }
@@ -138,16 +143,16 @@ TEST(PlaysCardProperly, ItShouldPlayCards)
   Table table1;
   HandDeck handdeck1(5);
 
-  handdeck1.addCard("card1");
-  handdeck1.addCard("card2");
-  handdeck1.addCard("card3");
-  handdeck1.addCard("card4");
+  handdeck1.addCard(cardpoolTEST._monsterCardPool[0]);
+  handdeck1.addCard(cardpoolTEST._monsterCardPool[1]);
+  handdeck1.addCard(cardpoolTEST._monsterCardPool[2]);
+  handdeck1.addCard(cardpoolTEST._monsterCardPool[3]);
 
-  handdeck1.playCard(table1.playersTableSite, "card1");
-  handdeck1.playCard(table1.playersTableSite, "card4");
+  handdeck1.playCard(table1.playersTableSite, handdeck1.cards->at(0));
+  handdeck1.playCard(table1.playersTableSite, handdeck1.cards->at(2));
 
-  ASSERT_EQ("card1", table1.playersTableSite->cards->at(0));
-  ASSERT_EQ("card4", table1.playersTableSite->cards->at(1));
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[0], table1.playersTableSite->cards->at(0));
+  ASSERT_EQ(cardpoolTEST._monsterCardPool[3], table1.playersTableSite->cards->at(1));
   ASSERT_EQ(2, table1.playersTableSite->cards->size());
   ASSERT_EQ(2, handdeck1.cards->size());
 }
