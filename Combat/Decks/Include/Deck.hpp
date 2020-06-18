@@ -6,8 +6,7 @@
 #include <exception>
 #include <stdexcept>
 #include <climits>
-
-using Card = std::string;
+#include "Card.hpp"
 
 class Deck
 {
