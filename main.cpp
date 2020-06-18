@@ -22,6 +22,12 @@ struct Player
 
 int main()
 {
+  /*
+  GameControler game;
+  game.init();
+  game.action();
+  game.cleanup();
+  */
    Player p1(100, 100, 5);
 
    std::cout << "Kaczka!" << std::endl;
