@@ -23,10 +23,7 @@ struct Player
 int main()
 {
   /*
-  GameControler game;
-  game.init();
-  game.action();
-  game.cleanup();
+  Fight fight;
   */
    Player p1(100, 100, 5);
 

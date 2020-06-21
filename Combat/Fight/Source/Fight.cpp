@@ -1,15 +1,51 @@
 #include "Fight.hpp"
 
-void Fight::printEndGame() const
+Fight::Fight(Player p1, Player p2)
 {
-  //TODO NCURSES
+
 }
 
-// void Fight::printFight(Player* p1, Player* p2) const
-// {
-//   while(*p1.życie > 0 || *p2.życie > 0)
-//   {
-//     //TODO NCURSES
-//   }
-//   printEndGame();
-// }
+void printFight()
+{
+  //Printowanie ncurses menu
+}
+
+void handleInput()
+{
+  //zbieranie inputu z klawiatury gracza
+}
+
+void splitDamage()
+{
+
+}
+
+void continueFight()
+{
+ printFight();
+ handleInput();
+ splitDamage();
+ //metoda wywołująca się co turę
+}
+
+void splitRewards()
+{
+
+}
+
+void deleteFightObjects()
+{
+  // destruktory obiektów, czyszczenie decków, stółu
+}
+
+void printEndGame()
+{
+
+}
+
+void cleanFight()
+{
+ splitRewards();
+ deleteFightObjects();
+ printEndGame();
+}
