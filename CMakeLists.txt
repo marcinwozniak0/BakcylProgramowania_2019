@@ -26,6 +26,8 @@ include_directories(Combat/Decks/Include)
 add_subdirectory(Combat/Decks/Source)
 include_directories(Combat/Table/Include)
 add_subdirectory(Combat/Table/Source)
+include_directories(Combat/Fight/Include)
+add_subdirectory(Combat/Fight/Source)
 
 # TEST
 include_directories(Map/Test)
@@ -38,6 +40,8 @@ include_directories(Combat/Decks/Test)
 add_subdirectory(Combat/Decks/Test)
 include_directories(Combat/Table/Test)
 add_subdirectory(Combat/Table/Test)
+include_directories(Combat/Fight/Test)
+add_subdirectory(Combat/Fight/Test)
 
 add_library(source_objects_lib OBJECT ${SOURCES})
 

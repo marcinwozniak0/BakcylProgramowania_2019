@@ -1,10 +1,11 @@
 #include "Player.hpp"
 
-Player::Player(Points hp, Points mp, int _xCoordinate, int _yCoordinate)
-    : _hp(hp), _mp(mp), _position(_xCoordinate, _yCoordinate)
-{
-  handdeck = {"karta1", "karta2", "karta3"};
-}
+Player::Player(Points HP, Points MP, int Handdeck_size, int _xCoordinate, int _yCoordinate)
+    :  _HP(HP),
+       _MP(MP),
+       _playersHanddeck(Handdeck_size),
+       _position(_xCoordinate, _yCoordinate)
+{}
 
 const Position& Player::getCurrentPosition()
 {
