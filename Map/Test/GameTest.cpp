@@ -9,8 +9,9 @@ namespace
     constexpr auto mapSize = 8u;
     constexpr auto hp = 8u;
     constexpr auto mp = 8u;
+    constexpr auto handdeckSize = 10u;
     SquareMap map(mapSize);
-    Player player(hp, mp);
+    Player player(hp, mp, handdeckSize);
 }
 
 class GameTest : public Test

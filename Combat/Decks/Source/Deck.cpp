@@ -73,3 +73,8 @@ uint Deck::getMaxSize()
 {
  return this->_maxSize;
 }
+
+uint Deck::getSize()
+{
+ return this->cards->size();
+}

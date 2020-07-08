@@ -5,7 +5,7 @@ void Mage :: useUlt(std::optional<Player>& player1, std::optional<Player>& playe
   if(player2.has_value())
   {
     constexpr uint damagePower = 1;
-    player2.value()._hp.remove(damagePower);
+    player2.value()._HP.remove(damagePower);
   }
   else
   {
