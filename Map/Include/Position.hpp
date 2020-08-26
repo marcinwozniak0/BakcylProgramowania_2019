@@ -1,8 +1,8 @@
 #pragma once
 struct Position
 {
-    unsigned int _x;
-    unsigned int _y;
+    int _x;
+    int _y;
     Position(int x, int y);
 };
 

@@ -116,7 +116,7 @@ bool SquareMap::isMoveUpPossible(const Position& coordinates)
 
 bool SquareMap::isMoveDownPossible(const Position& coordinates)
 {
-    if(coordinates._y + 1 < getFields().size())
+    if (coordinates._y + 1 < (int)getFields().size())
     {
         if(getFields().at(coordinates._x).at(coordinates._y + 1) -> getType() != FieldType::Wall)
         {
@@ -128,7 +128,7 @@ bool SquareMap::isMoveDownPossible(const Position& coordinates)
 
 bool SquareMap::isMoveRightPossible(const Position& coordinates)
 {
-    if(coordinates._x + 1 < getFields().size())
+    if (coordinates._x + 1 < (int)getFields().size())
     {
         if(getFields().at(coordinates._x + 1).at(coordinates._y) -> getType() != FieldType::Wall)
         {
@@ -152,7 +152,8 @@ bool SquareMap::isMoveLeftPossible(const Position& coordinates)
 
 void SquareMap::makeFieldEmpty(const Position& position)
 {
-    if(position._x < 0 || position._y < 0 || position._x >= getFields().size() || position._y >= getFields().size())
+    if (position._x < 0 || position._y < 0 || position._x >= (int)getFields().size() ||
+        position._y >= (int)getFields().size())
     {
         throw std::out_of_range("Out of range");
     }

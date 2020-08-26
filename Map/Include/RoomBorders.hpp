@@ -1,7 +1,8 @@
+#pragma once
 struct RoomBorders
 {
-    uint leftBorder;
-    uint rightBorder;
-    uint upperBorder;
-    uint bottomBorder;
+    int leftBorder;
+    int rightBorder;
+    int upperBorder;
+    int bottomBorder;
 };
