@@ -152,7 +152,7 @@ bool SquareMap::isMoveLeftPossible(const Position& coordinates)
 
 void SquareMap::makeFieldEmpty(const Position& position)
 {
-    if(position._x < 0 || position._y < 0 || position._x >= getFields().size() || position._y >= getFields().size())
+    if(position._x >= getFields().size() || position._y >= getFields().size())
     {
         throw std::out_of_range("Out of range");
     }
